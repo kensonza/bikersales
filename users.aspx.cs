@@ -33,6 +33,9 @@ public partial class _Default : System.Web.UI.Page {
             GVbind();
         }
 
+        // Validation Script (New User)
+        btnAddUser.Attributes.Add("onclick", "javascript:return validationCheck()");
+
     }
 
     protected void btnLogout_Click(object sender, EventArgs e) {
@@ -45,7 +48,7 @@ public partial class _Default : System.Web.UI.Page {
     }
 
 
-
+    // Add User
     protected void btnAddUser_Click(object sender, EventArgs e) {
 
         // SQL Connection
@@ -53,76 +56,92 @@ public partial class _Default : System.Web.UI.Page {
         con.Open();
 
         // upload image
-        string folderPath = Server.MapPath("~/img/users/");
+        //string folderPath = Server.MapPath("~/img/users/");
 
         //Check whether Directory (Folder) exists.
-        if (!Directory.Exists(folderPath)) {
-            //If Directory (Folder) does not exists Create it.
-            Directory.CreateDirectory(folderPath);
-        }
+        //if (!Directory.Exists(folderPath)) {
+        //If Directory (Folder) does not exists Create it.
+        //    Directory.CreateDirectory(folderPath);
+        //}
 
         //Save the File to the Directory (Folder).
-        fileUploadImageUser.SaveAs(folderPath + Path.GetFileName(fileUploadImageUser.FileName));
+        //fileUploadImageUser.SaveAs(folderPath + Path.GetFileName(fileUploadImageUser.FileName));
 
         //Display the Picture in Image control.
         //Image1.ImageUrl = "~/img/users" + Path.GetFileName(fileUploadImageUser.FileName);
 
-        String userIMG = "";
+        //String userIMG = "";
 
-        userIMG = fileUploadImageUser.FileName;
+        //userIMG = fileUploadImageUser.FileName;
 
+        if (fileUploadImageUser.PostedFile.ContentType == "image/jpeg" || fileUploadImageUser.PostedFile.ContentType == "image/png") {
 
-        // set password to md5() Encrypted data
-        String pw = "";
-        String password = TxtPassword.Text;
-        MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-        byte[] encrypt;
-        UTF8Encoding encode = new UTF8Encoding();
-        //encrypt the given password string into Encrypted data  
-        encrypt = md5.ComputeHash(encode.GetBytes(password));
-        StringBuilder encryptdata = new StringBuilder();
-        //Create a new string by using the encrypted data  
-        for (int i = 0; i < encrypt.Length; i++) {
-            encryptdata.Append(encrypt[i].ToString());
-        }
-        pw = encryptdata.ToString();
+            // Create random(token_id) for users
+            String randToken = "";
+            Random r = new Random();
+            int num = r.Next();
+            randToken = num.ToString();
 
-        // create random() token_id for users
-        String randToken = "";
-        Random r = new Random();
-        int num = r.Next();
-        randToken = num.ToString();
+            //Image Path
+            String imagepath = "~/img/users/" + fileUploadImageUser.PostedFile.FileName;
+            fileUploadImageUser.SaveAs(Server.MapPath(imagepath));
+            
+            // Image Details
+            String imageName = fileUploadImageUser.PostedFile.FileName;
+            //String imageType = fileUploadImageUser.PostedFile.ContentType;
+            String imageSize = fileUploadImageUser.PostedFile.ContentLength.ToString();
 
+            // Insert User Image
+            String queryImage = "INSERT INTO bs_users_image (token_id, image, size, date_created) VALUES(@tokenID, @image, @Size, getdate())";
+            SqlCommand cmdUsersImage = new SqlCommand(queryImage, con);
 
-        // insert users
-        String query = "INSERT INTO bs_users (token_id, fname, lname, email, username, password, status, date_created, role) VALUES(@tokenID, '" + txtFname.Text + "', '" + txtLname.Text + "', '" + txtEmail.Text + "', '" + txtUsername.Text + "', @password, 'active', getdate(), '" + DropDownListRole.Text + "')";
-        SqlCommand cmdUsers = new SqlCommand(query, con);
+            cmdUsersImage.Parameters.AddWithValue("@tokenID", randToken);
+            cmdUsersImage.Parameters.AddWithValue("@image", imageName);
+            cmdUsersImage.Parameters.AddWithValue("@size", imageSize);
 
-        cmdUsers.Parameters.AddWithValue("@tokenID", randToken);
-        cmdUsers.Parameters.AddWithValue("@password", pw);
-
-        int x = cmdUsers.ExecuteNonQuery();
-        if (x > 0) {
-            Response.Write("<script>alert('Success!');</script>");
-            GridViewUsers.EditIndex = +1;
-            GVbind();
-        }
+            int y = cmdUsersImage.ExecuteNonQuery();
+            if (y > 0)
+            {
+                //Response.Write('<script>alert("Save Successfully")</script>');    
+            }
 
 
-        // insert users image
-        String queryImage = "INSERT INTO bs_users_image (token_id, image, size, date_created) VALUES(@tokenID, @image, '', getdate())";
-        SqlCommand cmdUsersImage = new SqlCommand(queryImage, con);
+            // set password to md5() Encrypted data
+            String pw = "";
+            String password = txtPassword.Text;
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            byte[] encrypt;
+            UTF8Encoding encode = new UTF8Encoding();
+            //encrypt the given password string into Encrypted data  
+            encrypt = md5.ComputeHash(encode.GetBytes(password));
+            StringBuilder encryptdata = new StringBuilder();
+            //Create a new string by using the encrypted data  
+            for (int i = 0; i < encrypt.Length; i++)
+            {
+                encryptdata.Append(encrypt[i].ToString());
+            }
+            pw = encryptdata.ToString();
 
-        cmdUsersImage.Parameters.AddWithValue("@tokenID", randToken);
-        cmdUsersImage.Parameters.AddWithValue("@image", userIMG);
 
-        int y = cmdUsersImage.ExecuteNonQuery();
-        if (y > 0) {
-            //Response.Write('<script>alert("Save Successfully")</script>');    
+            // Insert Users
+            String query = "INSERT INTO bs_users (token_id, fname, lname, email, username, password, status, date_created, role) VALUES(@tokenID, '" + txtFname.Text + "', '" + txtLname.Text + "', '" + txtEmail.Text + "', '" + txtUsername.Text + "', @password, 'active', getdate(), '" + DropDownListRole.Text + "')";
+            SqlCommand cmdUsers = new SqlCommand(query, con);
+
+            cmdUsers.Parameters.AddWithValue("@tokenID", randToken);
+            cmdUsers.Parameters.AddWithValue("@password", pw);
+
+            int x = cmdUsers.ExecuteNonQuery();
+            if (x > 0) {
+                Response.Write("<script>alert('Success!');</script>");
+                GridViewUsers.EditIndex = +1;
+                GVbind();
+            }
+
+        } else {
+            Response.Write("<script>alert('Invalid Image file')</script>"); 
         }
 
         con.Close();
-
     }
 
     // View Users table

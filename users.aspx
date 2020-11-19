@@ -363,7 +363,7 @@
                 <div class="modal-body">
                 
                 <div class="form-group row">
-                    <label for="inputFirstName" class="col-sm-5 col-form-label">First name</label>
+                    <label for="inputFirstName" class="col-sm-5 col-form-label">First Name</label>
                         <div class="col-sm-12">
                             <!-- <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com"> -->
                             <!-- <input type="password" class="form-control" id="inputPassword"> -->
@@ -371,7 +371,7 @@
                         </div>
                 </div>
                 <div class="form-group row">
-                    <label for="inputLastName" class="col-sm-5 col-form-label">Last name</label>
+                    <label for="inputLastName" class="col-sm-5 col-form-label">Last Name</label>
                         <div class="col-sm-12">
                             <!-- <input type="password" class="form-control" id="inputPassword"> -->
                             <asp:TextBox ID="txtLname" class="form-control" runat="server"></asp:TextBox>
@@ -414,7 +414,14 @@
                     <label for="inputPassword" class="col-sm-5 col-form-label">Password</label>
                         <div class="col-sm-12">
                             <!-- <input type="password" class="form-control" id="inputPassword"> -->
-                            <asp:TextBox ID="TxtPassword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtPassword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
+                        </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-5 col-form-label">Confirm Password</label>
+                        <div class="col-sm-12">
+                            <!-- <input type="password" class="form-control" id="inputPassword"> -->
+                            <asp:TextBox ID="txtCPassword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
                         </div>
                 </div>
 
@@ -466,6 +473,132 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+    <!-- New User Form Validation -->
+     <script language="javascript" type="text/javascript">
+        function validationCheck() {
+            var summary = "";
+            summary += isvalidfname();
+            summary += isvalidlname();
+            summary += isvalidemail();
+            summary += isvalidrole();
+            summary += isvalidupload();
+            summary += isvaliduser();
+            summary += isvalidpassword();
+            summary += isvalidcpassword();
+
+            if (summary != "") {
+                alert(summary);
+                return false;
+            } else {
+                return true;
+            }
+
+        }
+
+        function isvalidfname() {
+            var id;
+            var temp = document.getElementById("<%=txtFname.ClientID %>");
+            id = temp.value;
+
+            if (id == "") {
+                return ("*Please Enter First Name" + "\n");
+            } else {
+                return "";
+            }
+         }
+
+         function isvalidlname() {
+             var id;
+             var temp = document.getElementById("<%=txtLname.ClientID %>");
+             id = temp.value;
+
+             if (id == "") {
+                 return ("*Please Enter Last Name" + "\n");
+             } else {
+                 return "";
+             }
+         }
+
+         function isvalidemail() {
+             var id;
+             var temp = document.getElementById("<%=txtEmail.ClientID %>");
+             id = temp.value;
+
+             var re = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+             if (id == "") {
+                return ("*Please Enter Email" + "\n");
+             }
+             else if (re.test(id)) {
+                return "";
+             } else {
+                return ("*Email should be in the form ex: juan.delacruz@xyz.com" + "\n");
+             }
+         }
+
+         function isvalidrole() {
+             var id;
+             var temp = document.getElementById("<%=DropDownListRole.ClientID %>");
+             id = temp.value;
+
+             if (id == "") {
+                 return ("*Please Enter Role" + "\n");
+             } else {
+                 return "";
+             }
+         }
+
+         function isvalidupload() {
+             var id;
+             var temp = document.getElementById("<%=fileUploadImageUser.ClientID %>");
+             id = temp.value;
+
+             if (id == "") {
+                 return ("*Please Upload file" + "\n");
+             } else {
+                 return "";
+             }
+         }
+
+         function isvaliduser() {
+             var id;
+             var temp = document.getElementById("<%=txtUsername.ClientID %>");
+             id = temp.value;
+
+             if (id == "") {
+                 return ("*Please Enter Username" + "\n");
+             } else {
+                 return "";
+             }
+         }
+
+         function isvalidpassword() {
+             var id;
+             var temp = document.getElementById("<%=txtPassword.ClientID %>");
+             id = temp.value;
+
+             if (id == "") {
+                 return ("*Please Enter Password" + "\n");
+             } else {
+                 return "";
+             }
+         }
+
+         function isvalidcpassword() {
+             var uidpwd;
+             var uidcnmpwd;
+             var tempcnmpwd = document.getElementById("<%=txtCPassword.ClientID %>");
+             uidcnmpwd = tempcnmpwd.value;
+             var temppwd = document.getElementById("<%=txtPassword.ClientID %>");
+             uidpwd = temppwd.value;
+
+             if (uidcnmpwd == "" || uidcnmpwd != uidpwd) {
+                 return ("*Please Re-enter Password to confirm" + "\n");
+             } else {
+                 return "";
+             }
+         }
+    </script>
   
 
     
