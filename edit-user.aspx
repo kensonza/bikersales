@@ -354,7 +354,7 @@
                 <div class="modal-body">
                 
                 <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-5 col-form-label">Upload Image</label>
+                    <label class="col-sm-5 col-form-label">Upload Image</label>
                         <div class="col-sm-12">
                             <!-- asp:TextBox ID="TextBox1" class="form-control" TextMode="Password"></!-->
                             <asp:FileUpload ID="FileUploadImage" runat="server" />
@@ -363,7 +363,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <asp:Button ID="btnImage" class="btn btn-primary" runat="server" Text="Save"/>
+                    <asp:Button ID="btnImage" class="btn btn-primary" runat="server" Text="Save" OnClick="btnImage_Click"/>                
                 </div>
             </div>
         </div>
@@ -469,6 +469,35 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+    <!-- New User Form Validation -->
+     <script language="javascript" type="text/javascript">
+        function validationCheck() {
+            var summary = "";
+            summary += isvalidupload();
+            
+            if (summary != "") {
+                alert(summary);
+                return false;
+            } else {
+                return true;
+            }
+
+        }
+
+        function isvalidupload() {
+             var id;
+             var temp = document.getElementById("<%=FileUploadImage.ClientID %>");
+             id = temp.value;
+
+             if (id == "") {
+                 return ("*Please Upload file" + "\n");
+             } else {
+                 return "";
+             }
+        }
+
+     </script>
      
 </body>
 

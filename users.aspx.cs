@@ -46,7 +46,14 @@ public partial class _Default : System.Web.UI.Page {
     }
 
     protected void btnSearch_Click(object sender, EventArgs e) {
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
+        con.Open();
 
+        String query  = new SqlDataAdapter("SELECT * FROM bs_users WHERE fname LIKE '" + btnSearch.Text + "%'", con);
+        dt = new DataTable();
+        adapt.Fill(qeury);
+        GVbind.DataSource = dt;
+        con.Close();
     }
 
 
@@ -102,8 +109,7 @@ public partial class _Default : System.Web.UI.Page {
             cmdUsersImage.Parameters.AddWithValue("@size", imageSize);
 
             int y = cmdUsersImage.ExecuteNonQuery();
-            if (y > 0)
-            {
+            if (y > 0) {
                 //Response.Write('<script>alert("Save Successfully")</script>');    
             }
 

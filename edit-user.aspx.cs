@@ -27,7 +27,8 @@ public partial class _Default : System.Web.UI.Page {
             viewEdit();
         }
 
-        
+        // Validation Script (Image)
+        btnImage.Attributes.Add("onclick", "javascript:return validationCheck()");
 
     }
 
@@ -83,6 +84,7 @@ public partial class _Default : System.Web.UI.Page {
     }
 
 
+    // User Change Password
     protected void btnCP_Click(object sender, EventArgs e) {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
         con.Open();
@@ -121,17 +123,71 @@ public partial class _Default : System.Web.UI.Page {
                 //Response.Write("<script>alert('Success!')</script>");
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','" + Request.QueryString["tokenid"] + " Password has been updated successfully','success')", true);
             }
+
+            // Update user date modify
+            String queryUpdateUser = "UPDATE bs_users SET date_modify = getdate() WHERE token_id =" + Request.QueryString["tokenid"];
+            SqlCommand cmdUpdateUser = new SqlCommand(queryUpdateUser, con);
+            int x = cmdUpdateUser.ExecuteNonQuery();
+            if (x > 0) {
+
+            }
         }
 
         con.Close();
     }
 
-protected void btnEditUserCancel_Click(object sender, EventArgs e) {
+    // Edit User Cancel
+    protected void btnEditUserCancel_Click(object sender, EventArgs e) {
         Response.Redirect("~/users.aspx");
     }
 
+    // Logout Session
     protected void btnLogout_Click(object sender, EventArgs e) {
         Session.Remove("User");
         Response.Redirect("~/login.aspx");
+    }
+
+    // Update User Image
+    protected void btnImage_Click(object sender, EventArgs e) {
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
+        con.Open();
+
+
+        if (FileUploadImage.PostedFile.ContentType == "image/jpeg" || FileUploadImage.PostedFile.ContentType == "image/png") {
+
+            //Image Path
+            String imagepath = "~/img/users/" + FileUploadImage.PostedFile.FileName;
+            FileUploadImage.SaveAs(Server.MapPath(imagepath));
+
+            // Image Details
+            String imageName = FileUploadImage.PostedFile.FileName;
+            //String imageType = FileUploadImage.PostedFile.ContentType;
+            String imageSize = FileUploadImage.PostedFile.ContentLength.ToString();
+
+            // Update user image
+            String query = "UPDATE bs_users_image SET image = @image, size = @size, date_modify = getdate() WHERE token_id =" + Request.QueryString["tokenid"];
+            SqlCommand cmd = new SqlCommand(query, con);
+
+            cmd.Parameters.AddWithValue("@image", imageName);
+            cmd.Parameters.AddWithValue("@size", imageSize);
+
+            int y = cmd.ExecuteNonQuery();
+            if (y > 0) {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','Record " + Request.QueryString["tokenid"] + " has been updated successfully','success')", true);
+            }
+
+            // Update user date modify
+            String queryUpdateUser = "UPDATE bs_users SET date_modify = getdate() WHERE token_id =" + Request.QueryString["tokenid"];
+            SqlCommand cmdUpdateUser = new SqlCommand(queryUpdateUser, con);
+            int x = cmdUpdateUser.ExecuteNonQuery();
+            if (x > 0) {
+
+            }
+
+        } else {
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Cancelled','Invalid image file.','error')", true);
+            //Response.Write("<script>alert('Invalid Image file')</script>");
+        }
+        con.Close();
     }
 }

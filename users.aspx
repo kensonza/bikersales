@@ -191,6 +191,31 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
+                        <!-- Nav Item - (Mobile) User Information Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa fa-ellipsis-v"></i>
+                            </a>
+                            <!-- Dropdown - (Mobile) User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="profile.aspx">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <a class="dropdown-item" href="settings.aspx">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Settings
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
 
 
 
@@ -238,7 +263,7 @@
                 <div class="input-group">
                     <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..."></asp:TextBox>
                         <div class="input-group-append">
-                            <button runat="server" id="btnSearch" class="btn btn-secondary" onserverclick="btnSearch_Click"><i class="fa fa-search"></i></button>
+                            <button runat="server" id="btnSearch" class="btn btn-secondary" OnClick="btnSearch_Click"><i class="fa fa-search"></i></button>
                         </div>
                         <div>
                             &nbsp;
@@ -452,7 +477,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                    <asp:Button ID="btnAddUser" class="btn btn-primary" runat="server" Text="Save changes" OnClick="btnAddUser_Click"/>
+                    <asp:Button ID="btnAddUser" class="btn btn-primary" runat="server" Text="Save" OnClick="btnAddUser_Click"/>
                 </div>
             </div>
         </div>
@@ -497,7 +522,7 @@
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
 
-    <!-- New User Form Validation -->
+     <!-- New User Form Validation -->
      <script language="javascript" type="text/javascript">
         function validationCheck() {
             var summary = "";
