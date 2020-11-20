@@ -119,7 +119,7 @@ public partial class _Default : System.Web.UI.Page {
             int y = cmd.ExecuteNonQuery();
             if (y > 0) {
                 //Response.Write("<script>alert('Success!')</script>");
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','" + Request.QueryString["tokenid"] + " password has been updated successfully','success')", true);
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','" + Request.QueryString["tokenid"] + " Password has been updated successfully','success')", true);
             }
         }
 
