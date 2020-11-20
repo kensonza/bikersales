@@ -21,6 +21,7 @@ public partial class _Default : System.Web.UI.Page {
     //Connection String
     //SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
 
+
     protected void Page_Load(object sender, EventArgs e) {
         if (Session["User"] == null) {
             Response.Redirect("~/login.aspx");
@@ -37,6 +38,7 @@ public partial class _Default : System.Web.UI.Page {
         btnAddUser.Attributes.Add("onclick", "javascript:return validationCheck()");
 
     }
+
 
     protected void btnLogout_Click(object sender, EventArgs e) {
         Session.Remove("User");
@@ -112,12 +114,13 @@ public partial class _Default : System.Web.UI.Page {
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
             byte[] encrypt;
             UTF8Encoding encode = new UTF8Encoding();
+            
             //encrypt the given password string into Encrypted data  
             encrypt = md5.ComputeHash(encode.GetBytes(password));
             StringBuilder encryptdata = new StringBuilder();
+            
             //Create a new string by using the encrypted data  
-            for (int i = 0; i < encrypt.Length; i++)
-            {
+            for (int i = 0; i < encrypt.Length; i++) {
                 encryptdata.Append(encrypt[i].ToString());
             }
             pw = encryptdata.ToString();
@@ -132,23 +135,24 @@ public partial class _Default : System.Web.UI.Page {
 
             int x = cmdUsers.ExecuteNonQuery();
             if (x > 0) {
-                Response.Write("<script>alert('Success!');</script>");
-                GridViewUsers.EditIndex = +1;
+                //Response.Write("<script>alert('Success!');</script>");
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','Record " + randToken + " has been added','success')", true);
+                //GridViewUsers.EditIndex = +1;
                 GVbind();
             }
 
         } else {
-            Response.Write("<script>alert('Invalid Image file')</script>"); 
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Cancelled','Invalid image file.','error')", true);
+            //Response.Write("<script>alert('Invalid Image file')</script>"); 
         }
 
         con.Close();
     }
 
-    // View Users table
-    protected void GVbind()
-    {
-        //SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
+    
 
+    // View Users table
+    protected void GVbind() {
         using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString())) {
             con.Open();
             String query = "SELECT * FROM bs_users";
@@ -183,7 +187,8 @@ public partial class _Default : System.Web.UI.Page {
 
             int t = cmd.ExecuteNonQuery();
             if (t > 0) {
-                Response.Write("<script>alert('" + token_id + "')</script>");
+                //Response.Write("<script>alert('" + token_id + "')</script>");
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Deleted!','Record " + token_id + " has been deleted','success')", true);
                 GridViewUsers.EditIndex = -1;
                 GVbind();
             }

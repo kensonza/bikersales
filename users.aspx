@@ -15,15 +15,40 @@
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Bikersales CSS customize template -->
     <link href="css/bikersales.css" rel="stylesheet">
+
+   <!-- Sweet alert bootstrap -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js" type="text/javascript"></script>
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css" rel="stylesheet" />
+
+    <script>
+        var object = { status: false, ele: null };
+        function confirmDelete(ev) {
+            if (object.status) { return true; };
+                swal({
+                    title: "Are you sure?",
+                    text: "Your will not be able to recover this record!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: true
+                },
+                function () {
+                    object.status = true;
+                    object.ele = ev;
+                    object.ele.click();
+
+                    });
+            return false;
+        }
+</script>
 
 </head>
 
@@ -92,8 +117,6 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">User Settings:</h6>
                             <a class="collapse-item active" href="users.aspx">Users</a>
-                            <a class="collapse-item" href="profile.aspx">Profile</a>
-                            <a class="collapse-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
                         </div>
                     </div>
                 </li>
@@ -148,7 +171,7 @@
                 </div>
 
             </ul>
-            <!-- End of Sidebar -->
+       <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -282,7 +305,7 @@
                         
                         <asp:TemplateField>
 	                    <ItemTemplate>
-                            <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Remove" ControlStyle-CssClass="btn btn-success" ShowDeleteButton="True" OnClientClick="return confirm('Are you sure you want to delete this user?');" />
+                            <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Remove" ControlStyle-CssClass="btn btn-success" ShowDeleteButton="True" OnClientClick="return confirmDelete(this);" />
 	                    </ItemTemplate>
                         </asp:TemplateField>
                         
@@ -599,6 +622,8 @@
              }
          }
     </script>
+
+    
   
 
     

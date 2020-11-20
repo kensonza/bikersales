@@ -76,7 +76,8 @@ public partial class _Default : System.Web.UI.Page {
 
         int y = cmdUpdate.ExecuteNonQuery();
         if (y > 0) {
-            Response.Write("<script>alert('Success!')</script>");
+            //Response.Write("<script>alert('Success!')</script>");
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','Record " + Request.QueryString["tokenid"] + " has been updated successfully','success')", true);
         }
         con.Close();
     }
@@ -117,7 +118,8 @@ public partial class _Default : System.Web.UI.Page {
 
             int y = cmd.ExecuteNonQuery();
             if (y > 0) {
-                Response.Write("<script>alert('Success!')</script>");
+                //Response.Write("<script>alert('Success!')</script>");
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','" + Request.QueryString["tokenid"] + " password has been updated successfully','success')", true);
             }
         }
 
