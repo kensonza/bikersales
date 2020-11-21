@@ -263,7 +263,9 @@
                 <div class="input-group">
                     <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..."></asp:TextBox>
                         <div class="input-group-append">
-                            <button runat="server" id="btnSearch" class="btn btn-secondary" OnClick="btnSearch_Click"><i class="fa fa-search"></i></button>
+                            
+                            <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-secondary" OnClick="btnSearch_Click"><i class="fa fa-search"></i></asp:LinkButton>
+                            
                         </div>
                         <div>
                             &nbsp;
@@ -282,7 +284,7 @@
     <div class="row">  
         <div class="col-lg-12 ">  
             <div class="table-responsive">
-                <asp:GridView ID="GridViewUsers" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" AutoGenerateColumns="False" DataKeyNames="token_id" OnSelectedIndexChanged="GridViewUsers_SelectedIndexChanged" OnRowDeleting="GridViewUsers_RowDeleting">
+                <asp:GridView ID="GridViewUsers" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="token_id" OnSelectedIndexChanged="GridViewUsers_SelectedIndexChanged" OnRowDeleting="GridViewUsers_RowDeleting">
                     <Columns>
                         <asp:BoundField DataField="token_id" HeaderText="Token ID" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
 <HeaderStyle CssClass="visible-lg"></HeaderStyle>

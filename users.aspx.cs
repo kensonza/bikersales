@@ -36,7 +36,7 @@ public partial class _Default : System.Web.UI.Page {
 
         // Validation Script (New User)
         btnAddUser.Attributes.Add("onclick", "javascript:return validationCheck()");
-
+        btnLogout.Attributes.Add("onclick", "javascript:return validationCheck()");
     }
 
 
@@ -45,20 +45,40 @@ public partial class _Default : System.Web.UI.Page {
         Response.Redirect("~/login.aspx");
     }
 
+    //Search Users   
     protected void btnSearch_Click(object sender, EventArgs e) {
+        
+        if(txtSearch.Text == "") {
+            GVbind();
+        } else { 
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
         con.Open();
+        SqlCommand sqlcomm = new SqlCommand();
 
-        String query  = new SqlDataAdapter("SELECT * FROM bs_users WHERE fname LIKE '" + btnSearch.Text + "%'", con);
-        dt = new DataTable();
-        adapt.Fill(qeury);
-        GVbind.DataSource = dt;
+        // search user
+        String query = "SELECT * FROM bs_users WHERE fname LIKE '%" + txtSearch.Text + "%' OR lname LIKE '%" + txtSearch.Text + "%' OR username LIKE '%" + txtSearch.Text + "%'";
+        SqlCommand cmd = new SqlCommand(query, con);
+
+        DataTable dt = new DataTable();
+
+        SqlDataAdapter sda = new SqlDataAdapter(cmd);
+        sda.Fill(dt);
+        GridViewUsers.DataSource = dt;
+        GridViewUsers.DataBind();
+
+            if (dt.Rows.Count == 0) {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Warning','No Data found','error')", true);
+                GVbind();
+            }
+        //Response.Write("<script>alert('" + x + "');</script>");
+
         con.Close();
+        }
     }
 
 
-    // Add User
-    protected void btnAddUser_Click(object sender, EventArgs e) {
+        // Add User
+        protected void btnAddUser_Click(object sender, EventArgs e) {
 
         // SQL Connection
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
@@ -195,7 +215,7 @@ public partial class _Default : System.Web.UI.Page {
             if (t > 0) {
                 //Response.Write("<script>alert('" + token_id + "')</script>");
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Deleted!','Record " + token_id + " has been deleted','success')", true);
-                GridViewUsers.EditIndex = -1;
+                //GridViewUsers.EditIndex = -1;
                 GVbind();
             }
 
