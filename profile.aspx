@@ -238,7 +238,9 @@
     <form id="form1" runat="server">
                 <div class="form-row">
                     <div class="col-md-2 mb-2">
-                        <img src="../img/image-200x200.png" alt="user-image" class="img-thumbnail" width="300">
+                        <!-- <img src="../img/users/ken_2x2.jpg" alt="user-image" class="img-thumbnail" width="300"> -->
+                        <asp:Image ID="Image1" runat="server" alt="user-image" class="img-thumbnail" width="300"/>
+                        
                             <div class="valid-feedback">
                                 Looks good!
                             </div>

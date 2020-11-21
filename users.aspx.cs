@@ -18,10 +18,7 @@ using System.Configuration;
 
 public partial class _Default : System.Web.UI.Page {
 
-    //Connection String
-    //SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
-
-
+    
     protected void Page_Load(object sender, EventArgs e) {
         if (Session["User"] == null) {
             Response.Redirect("~/login.aspx");
@@ -30,16 +27,16 @@ public partial class _Default : System.Web.UI.Page {
         // Get Session Name
         getSession.Text = Session["User"].ToString();
 
+        // Post GridVIew
         if (!IsPostBack) {
             GVbind();
         }
 
         // Validation Script (New User)
-        btnAddUser.Attributes.Add("onclick", "javascript:return validationCheck()");
-        btnLogout.Attributes.Add("onclick", "javascript:return validationCheck()");
+        btnAddUser.Attributes.Add("onclick", "javascript:return validationCheck()"); 
     }
 
-
+    // Logout
     protected void btnLogout_Click(object sender, EventArgs e) {
         Session.Remove("User");
         Response.Redirect("~/login.aspx");
@@ -51,57 +48,53 @@ public partial class _Default : System.Web.UI.Page {
         if(txtSearch.Text == "") {
             GVbind();
         } else { 
-        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
-        con.Open();
-        SqlCommand sqlcomm = new SqlCommand();
+            // SQL Connection
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
+            con.Open();
+        
+            SqlCommand sqlcomm = new SqlCommand();
 
-        // search user
-        String query = "SELECT * FROM bs_users WHERE fname LIKE '%" + txtSearch.Text + "%' OR lname LIKE '%" + txtSearch.Text + "%' OR username LIKE '%" + txtSearch.Text + "%'";
-        SqlCommand cmd = new SqlCommand(query, con);
+            // Search User Query
+            String query = "SELECT * FROM bs_users WHERE fname LIKE '%" + txtSearch.Text + "%' OR lname LIKE '%" + txtSearch.Text + "%' OR username LIKE '%" + txtSearch.Text + "%'";
+            SqlCommand cmd = new SqlCommand(query, con);
 
-        DataTable dt = new DataTable();
+            DataTable dt = new DataTable();
 
-        SqlDataAdapter sda = new SqlDataAdapter(cmd);
-        sda.Fill(dt);
-        GridViewUsers.DataSource = dt;
-        GridViewUsers.DataBind();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            sda.Fill(dt);
+            GridViewUsers.DataSource = dt;
+            GridViewUsers.DataBind();
 
             if (dt.Rows.Count == 0) {
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Warning','No Data found','error')", true);
                 GVbind();
             }
-        //Response.Write("<script>alert('" + x + "');</script>");
-
-        con.Close();
+        
+            con.Close();
         }
     }
 
+    // View Users Gridview (Table)
+    protected void GVbind() {
+        using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString())) {
+            con.Open();
+            String query = "SELECT * FROM bs_users ORDER BY role ASC ";
+            SqlCommand cmd = new SqlCommand(query, con);
+            SqlDataReader dr = cmd.ExecuteReader();
+                if (dr.HasRows == true) {
+                    GridViewUsers.DataSource = dr;
+                    GridViewUsers.DataBind();
+                }
+        }
 
-        // Add User
-        protected void btnAddUser_Click(object sender, EventArgs e) {
 
+    }
+
+    // Add User
+    protected void btnAddUser_Click(object sender, EventArgs e) {
         // SQL Connection
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
         con.Open();
-
-        // upload image
-        //string folderPath = Server.MapPath("~/img/users/");
-
-        //Check whether Directory (Folder) exists.
-        //if (!Directory.Exists(folderPath)) {
-        //If Directory (Folder) does not exists Create it.
-        //    Directory.CreateDirectory(folderPath);
-        //}
-
-        //Save the File to the Directory (Folder).
-        //fileUploadImageUser.SaveAs(folderPath + Path.GetFileName(fileUploadImageUser.FileName));
-
-        //Display the Picture in Image control.
-        //Image1.ImageUrl = "~/img/users" + Path.GetFileName(fileUploadImageUser.FileName);
-
-        //String userIMG = "";
-
-        //userIMG = fileUploadImageUser.FileName;
 
         if (fileUploadImageUser.PostedFile.ContentType == "image/jpeg" || fileUploadImageUser.PostedFile.ContentType == "image/png") {
 
@@ -134,7 +127,7 @@ public partial class _Default : System.Web.UI.Page {
             }
 
 
-            // set password to md5() Encrypted data
+            // Set Password to md5() Encrypted data
             String pw = "";
             String password = txtPassword.Text;
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
@@ -152,7 +145,7 @@ public partial class _Default : System.Web.UI.Page {
             pw = encryptdata.ToString();
 
 
-            // Insert Users
+            // Insert Users Query
             String query = "INSERT INTO bs_users (token_id, fname, lname, email, username, password, status, date_created, role) VALUES(@tokenID, '" + txtFname.Text + "', '" + txtLname.Text + "', '" + txtEmail.Text + "', '" + txtUsername.Text + "', @password, 'active', getdate(), '" + DropDownListRole.Text + "')";
             SqlCommand cmdUsers = new SqlCommand(query, con);
 
@@ -161,7 +154,6 @@ public partial class _Default : System.Web.UI.Page {
 
             int x = cmdUsers.ExecuteNonQuery();
             if (x > 0) {
-                //Response.Write("<script>alert('Success!');</script>");
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','Record " + randToken + " has been added','success')", true);
                 //GridViewUsers.EditIndex = +1;
                 GVbind();
@@ -175,30 +167,11 @@ public partial class _Default : System.Web.UI.Page {
         con.Close();
     }
 
-    
-
-    // View Users table
-    protected void GVbind() {
-        using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString())) {
-            con.Open();
-            String query = "SELECT * FROM bs_users";
-            SqlCommand cmd = new SqlCommand(query, con);
-            SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.HasRows == true) {
-                GridViewUsers.DataSource = dr;
-                GridViewUsers.DataBind();
-            }
-        }
-
-
-    }
-
     //Edit User
     protected void GridViewUsers_SelectedIndexChanged(object sender, EventArgs e) {
         String id = GridViewUsers.SelectedRow.Cells[0].Text;
         Response.Redirect("edit-user.aspx?tokenid=" + id);
     }
-
 
     // Delete User
     protected void GridViewUsers_RowDeleting(object sender, GridViewDeleteEventArgs e) {
@@ -213,7 +186,6 @@ public partial class _Default : System.Web.UI.Page {
 
             int t = cmd.ExecuteNonQuery();
             if (t > 0) {
-                //Response.Write("<script>alert('" + token_id + "')</script>");
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Deleted!','Record " + token_id + " has been deleted','success')", true);
                 //GridViewUsers.EditIndex = -1;
                 GVbind();

@@ -48,16 +48,14 @@
                     });
             return false;
         }
-</script>
+    </script>
 
 </head>
 
 <body id="page-top">
 
-    
-
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -129,7 +127,7 @@
                     Addons
                 </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+                <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                        aria-expanded="true" aria-controls="collapsePages">
@@ -165,16 +163,16 @@
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
-            <!-- Sidebar Toggler (Sidebar) -->
+                <!-- Sidebar Toggler (Sidebar) -->
                 <div class="text-center d-none d-md-inline">
                     <button class="rounded-circle border-0" id="sidebarToggle"></button>
                 </div>
 
             </ul>
-       <!-- End of Sidebar -->
+            <!-- End of Sidebar -->
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
@@ -187,7 +185,6 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -216,11 +213,7 @@
                             </div>
                         </li>
 
-
-
-
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
+                       <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
@@ -263,9 +256,7 @@
                 <div class="input-group">
                     <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..."></asp:TextBox>
                         <div class="input-group-append">
-                            
                             <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-secondary" OnClick="btnSearch_Click"><i class="fa fa-search"></i></asp:LinkButton>
-                            
                         </div>
                         <div>
                             &nbsp;
@@ -277,104 +268,72 @@
                         </div>
                 </div>
                 
-        
                 <br />
 
-    <!-- table grid views -->
-    <div class="row">  
-        <div class="col-lg-12 ">  
-            <div class="table-responsive">
-                <asp:GridView ID="GridViewUsers" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="token_id" OnSelectedIndexChanged="GridViewUsers_SelectedIndexChanged" OnRowDeleting="GridViewUsers_RowDeleting">
-                    <Columns>
-                        <asp:BoundField DataField="token_id" HeaderText="Token ID" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
-<HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                <!-- table grid views -->
+                <div class="row">  
+                    <div class="col-lg-12 ">  
+                        <div class="table-responsive">
+                            <asp:GridView ID="GridViewUsers" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="token_id" OnSelectedIndexChanged="GridViewUsers_SelectedIndexChanged" OnRowDeleting="GridViewUsers_RowDeleting">
+                                <Columns>
+                                    <asp:BoundField DataField="token_id" HeaderText="Token ID" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+            <HeaderStyle CssClass="visible-lg"></HeaderStyle>
 
-<ItemStyle CssClass="visible-lg"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField DataField="fname" HeaderText="First name" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
-<HeaderStyle CssClass="visible-xs"></HeaderStyle>
+            <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="fname" HeaderText="First name" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
+            <HeaderStyle CssClass="visible-xs"></HeaderStyle>
 
-<ItemStyle CssClass="visible-xs"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField DataField="lname" HeaderText="Last name" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-md">
-<HeaderStyle CssClass="visible-md"></HeaderStyle>
+            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="lname" HeaderText="Last name" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-md">
+            <HeaderStyle CssClass="visible-md"></HeaderStyle>
 
-<ItemStyle CssClass="visible-xs"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField DataField="email" HeaderText="Email" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-lg">
-<HeaderStyle CssClass="visible-lg"></HeaderStyle>
+            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="email" HeaderText="Email" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-lg">
+            <HeaderStyle CssClass="visible-lg"></HeaderStyle>
 
-<ItemStyle CssClass="visible-xs"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField DataField="username" HeaderText="Username" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
-<HeaderStyle CssClass="visible-xs"></HeaderStyle>
+            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="username" HeaderText="Username" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
+            <HeaderStyle CssClass="visible-xs"></HeaderStyle>
 
-<ItemStyle CssClass="visible-xs"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField DataField="status" HeaderText="Status" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-md">
-<HeaderStyle CssClass="visible-md"></HeaderStyle>
+            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="status" HeaderText="Status" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-md">
+            <HeaderStyle CssClass="visible-md"></HeaderStyle>
 
-<ItemStyle CssClass="visible-xs"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField DataField="role" HeaderText="Role" />
-                        <asp:BoundField DataField="date_created" HeaderText="Date Created" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
-<HeaderStyle CssClass="visible-xs"></HeaderStyle>
+            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="role" HeaderText="Role" />
+                                    <asp:BoundField DataField="date_created" HeaderText="Date Created" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
+            <HeaderStyle CssClass="visible-xs"></HeaderStyle>
 
-<ItemStyle CssClass="visible-xs"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:BoundField DataField="date_modify" HeaderText="Date Modified" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-md">
-<HeaderStyle CssClass="visible-md"></HeaderStyle>
-<ItemStyle CssClass="visible-xs"></ItemStyle>
-                        </asp:BoundField>
-                        <asp:CommandField ControlStyle-CssClass="btn btn-success" ShowSelectButton="True" SelectText="Edit" >
-                        <ControlStyle CssClass="btn btn-success"></ControlStyle>
-                        </asp:CommandField>
+            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="date_modify" HeaderText="Date Modified" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-md">
+            <HeaderStyle CssClass="visible-md"></HeaderStyle>
+            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
+                                    <asp:CommandField ControlStyle-CssClass="btn btn-success" ShowSelectButton="True" SelectText="Edit" >
+                                    <ControlStyle CssClass="btn btn-success"></ControlStyle>
+                                    </asp:CommandField>
                         
-                        <asp:TemplateField>
-	                    <ItemTemplate>
-                            <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Remove" ControlStyle-CssClass="btn btn-success" ShowDeleteButton="True" OnClientClick="return confirmDelete(this);" />
-	                    </ItemTemplate>
-                        </asp:TemplateField>
+                                    <asp:TemplateField>
+	                                <ItemTemplate>
+                                        <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Remove" ControlStyle-CssClass="btn btn-success" ShowDeleteButton="True" OnClientClick="return confirmDelete(this);" />
+	                                </ItemTemplate>
+                                    </asp:TemplateField>
                         
-                    </Columns>
-                    <HeaderStyle CssClass="table table-hover" />
-                </asp:GridView>
-            </div>
-        </div>
-    </div>
-
-
-
-         
-
-
-
-
-
-
-
-
-
-
-
-              
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                </Columns>
+                                <HeaderStyle CssClass="table table-hover" />
+                            </asp:GridView>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.container-fluid -->
+            </div>
+            <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
@@ -486,12 +445,12 @@
     </div>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel2">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -649,11 +608,6 @@
              }
          }
     </script>
-
-    
-  
-
-    
 
 </body>
 

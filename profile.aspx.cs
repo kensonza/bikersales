@@ -29,22 +29,28 @@ public partial class _Default : System.Web.UI.Page {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
         con.Open();
 
-        String query = "SELECT * FROM bs_users WHERE username = '" + getSession.Text + "'";
+        String query = "SELECT * FROM bs_users bsu LEFT JOIN bs_users_image bsui ON bsu.token_id = bsui.token_id WHERE bsu.username = '" + getSession.Text + "'";
         SqlCommand cmd = new SqlCommand(query, con);
 
         // Set String for Concatinate Name
-        string fname = "";
-        string lname = "";
+        String fname = "";
+        String lname = "";
+        String imageName = "";
+        
 
         SqlDataReader reader = cmd.ExecuteReader();
         while (reader.Read()) {
+            imageName = reader["image"].ToString();
             fname = reader["fname"].ToString();
             lname = reader["lname"].ToString();
             txtEmail.Text = reader["email"].ToString();
             txtPassword.Text = reader["password"].ToString();
             txtStatus.Text = reader["status"].ToString();
         }
- 
+
+        // View Profile Image
+        Image1.ImageUrl = "~/img/users/" + imageName;
+
         txtFName.Text = fname + " " + lname;
         con.Close();
 

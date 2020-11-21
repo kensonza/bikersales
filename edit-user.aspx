@@ -30,10 +30,8 @@
 
 <body id="page-top">
 
-    
-
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
 
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -81,7 +79,7 @@
                     </div>
                 </li> -->
 
-            <!-- Nav Item - Settings/Utilities Collapse Menu -->
+                <!-- Nav Item - Settings/Utilities Collapse Menu -->
                 <li class="nav-item active">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                        aria-expanded="true" aria-controls="collapseUtilities">
@@ -105,7 +103,7 @@
                     Addons
                 </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
+                <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                        aria-expanded="true" aria-controls="collapsePages">
@@ -141,13 +139,13 @@
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
 
-            <!-- Sidebar Toggler (Sidebar) -->
+                <!-- Sidebar Toggler (Sidebar) -->
                 <div class="text-center d-none d-md-inline">
                     <button class="rounded-circle border-0" id="sidebarToggle"></button>
                 </div>
 
             </ul>
-       <!-- End of Sidebar -->
+            <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -163,7 +161,6 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
@@ -241,217 +238,176 @@
                      </div>
                 </div>
 
-                    
-
-                        
-
-
-
-    <form id="form1" runat="server">
+                <form id="form1" runat="server">
        
-        
-        <!-- edit user form -->
-        <form id="viewEdit">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>First name</label>
-                <!-- <input type="text" class="form-control" id="inputEmail4" placeholder="First name"> -->
-                <asp:TextBox ID="txtFname" class="form-control" runat="server"></asp:TextBox>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Last name</label>
-                <!-- <input type="password" class="form-control" id="inputPassword4" placeholder="Last name"> -->
-                <asp:TextBox ID="txtLname" class="form-control" runat="server"></asp:TextBox>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Email</label>
-                <!-- <input type="text" class="form-control" id="inputEmail4" placeholder="Email"> -->
-                <asp:TextBox ID="txtEmail" class="form-control" runat="server"></asp:TextBox>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Status</label>
-                <!-- <input type="text" class="form-control" id="inputPassword4" placeholder="Status"> -->
-                <!-- <asp:TextBox ID="txtStatus" class="form-control" runat="server"></asp:TextBox> -->
-                <asp:DropDownList ID="DropDownListStatus" class="form-control" runat="server">
-                    <asp:ListItem>active</asp:ListItem>
-                    <asp:ListItem>inactive</asp:ListItem>
-                </asp:DropDownList>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Username</label>
-                <!-- <input type="text" class="form-control" id="inputEmail4" placeholder="Username"> -->
-                <asp:TextBox ID="txtUsername" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
-            </div>
-            <div class="form-group col-md-6">
-                <label>Role</label>
-                <!-- <input type="text" id="txtPW" class="form-control"> -->
-                <!-- <asp:TextBox ID="txtPassword" class="form-control" runat="server" TextMode="SingleLine" readonly></asp:TextBox> -->
-                <asp:DropDownList ID="DropDownListRole" class="form-control" runat="server">
-                    <asp:ListItem>admin</asp:ListItem>
-                    <asp:ListItem>member</asp:ListItem>
-                </asp:DropDownList>
-            </div>
-        </div>
-        
-        <asp:Button ID="btnEditUserCancel" class="btn btn-secondary" runat="server" Text="Cancel" OnClick="btnEditUserCancel_Click"/> <asp:Button ID="btnEditUserSave" class="btn btn-primary" runat="server" Text="Save" OnClick="btnEditUser_Click"/>
-        
-        
-       <!-- Change Password Modal -->
-    <div class="modal fade" id="exampleModalCP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <!-- edit user form -->
+                <form id="viewEdit">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>First name</label>
+                        <!-- <input type="text" class="form-control" id="inputEmail4" placeholder="First name"> -->
+                        <asp:TextBox ID="txtFname" class="form-control" runat="server"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Last name</label>
+                        <!-- <input type="password" class="form-control" id="inputPassword4" placeholder="Last name"> -->
+                        <asp:TextBox ID="txtLname" class="form-control" runat="server"></asp:TextBox>
+                    </div>
                 </div>
-                <div class="modal-body">
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Email</label>
+                        <!-- <input type="text" class="form-control" id="inputEmail4" placeholder="Email"> -->
+                        <asp:TextBox ID="txtEmail" class="form-control" runat="server"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Status</label>
+                        <!-- <input type="text" class="form-control" id="inputPassword4" placeholder="Status"> -->
+                        <!-- <asp:TextBox ID="txtStatus" class="form-control" runat="server"></asp:TextBox> -->
+                        <asp:DropDownList ID="DropDownListStatus" class="form-control" runat="server">
+                            <asp:ListItem>active</asp:ListItem>
+                            <asp:ListItem>inactive</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Username</label>
+                        <!-- <input type="text" class="form-control" id="inputEmail4" placeholder="Username"> -->
+                        <asp:TextBox ID="txtUsername" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Role</label>
+                        <!-- <input type="text" id="txtPW" class="form-control"> -->
+                        <!-- <asp:TextBox ID="txtPassword" class="form-control" runat="server" TextMode="SingleLine" readonly></asp:TextBox> -->
+                        <asp:DropDownList ID="DropDownListRole" class="form-control" runat="server">
+                            <asp:ListItem>admin</asp:ListItem>
+                            <asp:ListItem>member</asp:ListItem>
+                        </asp:DropDownList>
+                    </div>
+                </div>
+        
+                <asp:Button ID="btnEditUserCancel" class="btn btn-secondary" runat="server" Text="Cancel" OnClick="btnEditUserCancel_Click"/> <asp:Button ID="btnEditUserSave" class="btn btn-primary" runat="server" Text="Save" OnClick="btnEditUser_Click"/>
+        
+        
+                <!-- Change Password Modal -->
+                <div class="modal fade" id="exampleModalCP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
                 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-5 col-form-label">New Password</label>
-                        <div class="col-sm-12">
-                            <!-- <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com"> -->
-                            <!-- <input type="password" class="form-control" id="inputPassword"> -->
-                            <asp:TextBox ID="txtPword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-5 col-form-label">New Password</label>
+                                    <div class="col-sm-12">
+                                        <!-- <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com"> -->
+                                        <!-- <input type="password" class="form-control" id="inputPassword"> -->
+                                        <asp:TextBox ID="txtPword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
+                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-5 col-form-label">Confrim Password</label>
+                                    <div class="col-sm-12">
+                                        <!-- <input type="password" class="form-control" id="inputPassword"> -->
+                                        <asp:TextBox ID="txtCPword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
+                                    </div>
+                            </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                                <asp:Button ID="btnCP" class="btn btn-primary" runat="server" Text="Save" OnClick="btnCP_Click"/>
+                            </div>
                         </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-5 col-form-label">Confrim Password</label>
-                        <div class="col-sm-12">
-                            <!-- <input type="password" class="form-control" id="inputPassword"> -->
-                            <asp:TextBox ID="txtCPword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
-                        </div>
+                    </div>
                 </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                    <asp:Button ID="btnCP" class="btn btn-primary" runat="server" Text="Save" OnClick="btnCP_Click"/>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    
-    <!-- Upload or Change Image Modal -->
-    <div class="modal fade" id="exampleModalImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Image</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+                <!-- Upload or Change Image Modal -->
+                <div class="modal fade" id="exampleModalImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Image</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
                 
-                <div class="form-group row">
-                    <label class="col-sm-5 col-form-label">Upload Image</label>
-                        <div class="col-sm-12">
-                            <!-- asp:TextBox ID="TextBox1" class="form-control" TextMode="Password"></!-->
-                            <asp:FileUpload ID="FileUploadImage" runat="server" />
+                            <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Upload Image</label>
+                                    <div class="col-sm-12">
+                                        <!-- asp:TextBox ID="TextBox1" class="form-control" TextMode="Password"></!-->
+                                        <asp:FileUpload ID="FileUploadImage" runat="server" />
+                                    </div>
+                            </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <asp:Button ID="btnImage" class="btn btn-primary" runat="server" Text="Save" OnClick="btnImage_Click"/>                
+                            </div>
                         </div>
+                    </div>
                 </div>
+
+                <!-- Logout Modal-->
+                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel2">Ready to Leave?</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <!-- <a class="btn btn-primary" href="login.html">Logout</a> -->
+                                <asp:Button ID="btnLogout" class="btn btn-primary" runat="server" Text="Logout" OnClick="btnLogout_Click" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <asp:Button ID="btnImage" class="btn btn-primary" runat="server" Text="Save" OnClick="btnImage_Click"/>                
-                </div>
-            </div>
-        </div>
-    </div>
-        </form>
-
-
-
-
-
-
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                </form>
 
                 </div>
                 <!-- /.container-fluid -->
 
-            </div>
-            <!-- End of Main Content -->
+                </div>
+                <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Biker Sales 2020</span>
+                <!-- Footer -->
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; Biker Sales 2020</span>
+                        </div>
                     </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
+                </footer>
+                <!-- End of Footer -->
 
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-   
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <!-- <a class="btn btn-primary" href="login.html">Logout</a> -->
-                    <asp:Button ID="btnLogout" class="btn btn-primary" runat="server" Text="Logout" OnClick="btnLogout_Click" />
-                </div>
             </div>
+            <!-- End of Content Wrapper -->
+
         </div>
-    </div>
-    </form>
+        <!-- End of Page Wrapper -->
+
+                <!-- Scroll to Top Button-->
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fas fa-angle-up"></i>
+                </a>
+
+        </form>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

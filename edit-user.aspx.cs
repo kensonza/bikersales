@@ -32,6 +32,13 @@ public partial class _Default : System.Web.UI.Page {
 
     }
 
+    // Logout Session
+    protected void btnLogout_Click(object sender, EventArgs e) {
+        Session.Remove("User");
+        Response.Redirect("~/login.aspx");
+    }
+
+
     protected void viewEdit() {
         // Profile Module (Connect to DB)
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
@@ -141,11 +148,7 @@ public partial class _Default : System.Web.UI.Page {
         Response.Redirect("~/users.aspx");
     }
 
-    // Logout Session
-    protected void btnLogout_Click(object sender, EventArgs e) {
-        Session.Remove("User");
-        Response.Redirect("~/login.aspx");
-    }
+    
 
     // Update User Image
     protected void btnImage_Click(object sender, EventArgs e) {
