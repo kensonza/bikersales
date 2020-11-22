@@ -145,7 +145,7 @@ public partial class _Default : System.Web.UI.Page {
 
     // Edit User Cancel
     protected void btnEditUserCancel_Click(object sender, EventArgs e) {
-        Response.Redirect("~/users.aspx");
+        Response.Redirect("~/admin/users.aspx");
     }
 
     

@@ -21,6 +21,10 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- Sweet alert bootstrap -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js" type="text/javascript"></script>
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css" rel="stylesheet" />
+
 </head>
 
 <body class="bg-gradient-primary">
@@ -40,38 +44,39 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome to Biker Sales</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Biker Sales</h1>
                                     </div>
                                     <form id="form1" class="user" runat="server">
                                         <div class="form-group">
                                             <asp:TextBox ID="txtUsername" class="form-control form-control-user" placeholder="Username" runat="server"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
+                                            <asp:RequiredFieldValidator ID="rfvUser" ControlToValidate="txtUsername" runat="server" Display="Dynamic" CssClass="form-control is-invalid" Text="*Username is required." BorderStyle="None" forecolor="Red"/>
+                                        </div>
+                                       
+
+                                        <div class="form-group">
                                             <asp:TextBox ID="txtPassword" TextMode="Password" class="form-control form-control-user" placeholder="Password" runat="server"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
+                                            <asp:RequiredFieldValidator ID="rfvPword" ControlToValidate="txtPassword" runat="server" Display="Dynamic" CssClass="form-control is-invalid" Text="*Password is required." BorderStyle="None" forecolor="Red"/>
+                                        </div>
+                                        
+                                        <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
+                                                <label class="custom-control-label" for="customCheck">Remember Me</label>
                                             </div>
                                         </div>
                                         <asp:Button ID="btnLogin" class="btn btn-primary btn-user btn-block" runat="server" Text="Login" OnClick="btnLogin_Click" />
-                                        <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
-                                        <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                                        </a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        <span>Copyright &copy; Biker Sales 2020</span>
                                     </div>
-                                    <!-- <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
-                                    </div> -->
+                                     <div class="text-center">
+                                        &nbsp;
+                                    </div>                                     
                                 </div>
                             </div>
                         </div>
