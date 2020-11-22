@@ -245,10 +245,11 @@
                      </div>
                 </div>
 
-                <form id="form1" runat="server">
+  
        
                 <!-- edit user form -->
-                <form id="viewEdit">
+                <!-- <form id="viewEdit"> -->
+                <form id="form1" runat="server">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>First name</label>
@@ -296,7 +297,7 @@
                     </div>
                 </div>
         
-                <asp:Button ID="btnEditUserCancel" class="btn btn-secondary" runat="server" Text="Cancel" OnClick="btnEditUserCancel_Click"/> <asp:Button ID="btnEditUserSave" class="btn btn-primary" runat="server" Text="Save" OnClick="btnEditUser_Click"/>
+                <asp:Button ID="btnEditUserCancel" class="btn btn-info" runat="server" Text="Cancel" OnClick="btnEditUserCancel_Click" ToolTip="Cancel"/> <asp:Button ID="btnEditUserSave" class="btn btn-primary" runat="server" Text="Save" OnClick="btnEditUser_Click" ToolTip="Save"/>
         
         
                 <!-- Change Password Modal -->
@@ -314,8 +315,6 @@
                             <div class="form-group row">
                                 <label for="staticEmail" class="col-sm-5 col-form-label">New Password</label>
                                     <div class="col-sm-12">
-                                        <!-- <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com"> -->
-                                        <!-- <input type="password" class="form-control" id="inputPassword"> -->
                                         <asp:TextBox ID="txtPword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
                                     </div>
                             </div>
@@ -326,12 +325,11 @@
                                         <asp:TextBox ID="txtCPword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
                                     </div>
                             </div>
-
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-info" data-dismiss="modal" title="Close">Close</button>
                                 <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                                <asp:Button ID="btnCP" class="btn btn-primary" runat="server" Text="Save" OnClick="btnCP_Click"/>
+                                <asp:Button ID="btnCP" class="btn btn-primary" runat="server" Text="Save" OnClick="btnCP_Click" ToolTip="Save"/>
                             </div>
                         </div>
                     </div>
@@ -358,13 +356,13 @@
                             </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <asp:Button ID="btnImage" class="btn btn-primary" runat="server" Text="Save" OnClick="btnImage_Click"/>                
+                                <button type="button" class="btn btn-info" data-dismiss="modal" title="Close">Close</button>
+                                <asp:Button ID="btnImage" class="btn btn-primary" runat="server" Text="Save" OnClick="btnImage_Click" ToolTip="Save"/>                
                             </div>
                         </div>
                     </div>
                 </div>
-
+            
                 <!-- Logout Modal-->
                 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
                     aria-hidden="true">
@@ -385,8 +383,8 @@
                         </div>
                     </div>
                 </div>
+               <!-- </form> -->
                 </form>
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -413,8 +411,6 @@
                 <a class="scroll-to-top rounded" href="#page-top">
                     <i class="fas fa-angle-up"></i>
                 </a>
-
-        </form>
 
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>

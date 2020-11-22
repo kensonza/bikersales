@@ -156,7 +156,8 @@ public partial class _Default : System.Web.UI.Page {
             if (x > 0) {
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','Record " + randToken + " has been added','success')", true);
                 //GridViewUsers.EditIndex = +1;
-                GVbind();
+                //GVbind();
+                Response.Redirect("~/admin/users.aspx");
             }
 
         } else {

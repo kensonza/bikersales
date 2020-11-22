@@ -16,13 +16,17 @@ using System.Configuration;
 
 public partial class _Default : System.Web.UI.Page {
     protected void Page_Load(object sender, EventArgs e) {
+        
         // Session Check
         if (Session["User"] == null) {
             Response.Redirect("~/login.aspx");
         }
 
+        String getName = "";
+
         // Get Session Username
         getSession.Text = Session["User"].ToString();
+        getName = Session["Fname"].ToString();
 
 
         // Profile Module (Connect to DB)
@@ -44,8 +48,10 @@ public partial class _Default : System.Web.UI.Page {
             fname = reader["fname"].ToString();
             lname = reader["lname"].ToString();
             txtEmail.Text = reader["email"].ToString();
+            txtUsername.Text = reader["username"].ToString();
             txtPassword.Text = reader["password"].ToString();
             txtStatus.Text = reader["status"].ToString();
+            TxtRole.Text = reader["role"].ToString();
         }
 
         // View Profile Image
@@ -69,8 +75,9 @@ public partial class _Default : System.Web.UI.Page {
         //String mySession;
 
         //mySession = Session["User"].ToString();
-
+      
         String msg = "";
+
 
         // Change Password Modal (Connect to DB)
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
@@ -102,7 +109,7 @@ public partial class _Default : System.Web.UI.Page {
     }
 
 
-    protected void btnUpdateProfile_Click(object sender, EventArgs e) {
-    
+    protected void btnCancelProfile_Click(object sender, EventArgs e) {
+        Response.Redirect("~/admin/index.aspx");
     }
 }

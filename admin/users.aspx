@@ -267,13 +267,13 @@
                 <div class="input-group">
                     <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..."></asp:TextBox>
                         <div class="input-group-append">
-                            <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-secondary" OnClick="btnSearch_Click"><i class="fa fa-search"></i></asp:LinkButton>
+                            <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-secondary" OnClick="btnSearch_Click" ToolTip="Seach"><i class="fa fa-search"></i></asp:LinkButton>
                         </div>
                         <div>
                             &nbsp;
                         </div>  
                         <div class="col-xs-2">
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#adduserModal">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#adduserModal" title="New">
                                 New
                             </button>
                         </div>
@@ -288,52 +288,54 @@
                             <asp:GridView ID="GridViewUsers" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="token_id" OnSelectedIndexChanged="GridViewUsers_SelectedIndexChanged" OnRowDeleting="GridViewUsers_RowDeleting">
                                 <Columns>
                                     <asp:BoundField DataField="token_id" HeaderText="Token ID" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
-            <HeaderStyle CssClass="visible-lg"></HeaderStyle>
-
-            <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                        <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-lg"></ItemStyle>
                                     </asp:BoundField>
+                                    
                                     <asp:BoundField DataField="fname" HeaderText="First name" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
-            <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-
-            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
                                     </asp:BoundField>
+                                    
                                     <asp:BoundField DataField="lname" HeaderText="Last name" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-md">
-            <HeaderStyle CssClass="visible-md"></HeaderStyle>
-
-            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                        <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
                                     </asp:BoundField>
+                                    
                                     <asp:BoundField DataField="email" HeaderText="Email" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-lg">
-            <HeaderStyle CssClass="visible-lg"></HeaderStyle>
-
-            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                        <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
                                     </asp:BoundField>
+                                    
                                     <asp:BoundField DataField="username" HeaderText="Username" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
-            <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-
-            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
                                     </asp:BoundField>
+                                    
                                     <asp:BoundField DataField="status" HeaderText="Status" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-md">
-            <HeaderStyle CssClass="visible-md"></HeaderStyle>
-
-            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                        <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="role" HeaderText="Role" />
-                                    <asp:BoundField DataField="date_created" HeaderText="Date Created" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
-            <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-
-            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    
+                                    <asp:BoundField DataField="role" HeaderText="Role" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-lg">
+                                        <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:BoundField DataField="date_modify" HeaderText="Date Modified" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-md">
-            <HeaderStyle CssClass="visible-md"></HeaderStyle>
-            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    
+                                    <asp:BoundField DataField="date_created" HeaderText="Date Created" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs" DataFormatString="{0:MM/dd/yyyy}">
+                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
                                     </asp:BoundField>
-                                    <asp:CommandField ControlStyle-CssClass="btn btn-success" ShowSelectButton="True" SelectText="Edit" >
-                                    <ControlStyle CssClass="btn btn-success"></ControlStyle>
-                                    </asp:CommandField>
-                        
+                                    
+                                    <asp:BoundField DataField="date_modify" HeaderText="Date Modified" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-md" DataFormatString="{0:MM/dd/yyyy}">
+                                        <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
+                                    
                                     <asp:TemplateField>
 	                                <ItemTemplate>
-                                        <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Remove" ControlStyle-CssClass="btn btn-success" ShowDeleteButton="True" OnClientClick="return confirmDelete(this);" />
+                                        <asp:Button ID="btnEdit" runat="server" CommandName="Select" Text="Edit" ControlStyle-CssClass="btn btn-success" ShowSelectButton="True" ToolTip="Edit"/>
+                                        <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Delete" ControlStyle-CssClass="btn btn-danger" ShowDeleteButton="True" OnClientClick="return confirmDelete(this);"  ToolTip="Delete"/>
 	                                </ItemTemplate>
                                     </asp:TemplateField>
                         
@@ -447,8 +449,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                     <asp:Button ID="btnAddUser" class="btn btn-primary" runat="server" Text="Save" OnClick="btnAddUser_Click"/>
                 </div>
             </div>
@@ -522,7 +523,7 @@
             id = temp.value;
 
             if (id == "") {
-                return ("*Please Enter First Name" + "\n");
+                return ("*First Name is required" + "\n");
             } else {
                 return "";
             }
@@ -534,7 +535,7 @@
              id = temp.value;
 
              if (id == "") {
-                 return ("*Please Enter Last Name" + "\n");
+                 return ("*Last Name is required" + "\n");
              } else {
                  return "";
              }
@@ -547,7 +548,7 @@
 
              var re = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
              if (id == "") {
-                return ("*Please Enter Email" + "\n");
+                 return ("*Email is required" + "\n");
              }
              else if (re.test(id)) {
                 return "";
@@ -562,7 +563,7 @@
              id = temp.value;
 
              if (id == "") {
-                 return ("*Please Enter Role" + "\n");
+                 return ("*Role is required" + "\n");
              } else {
                  return "";
              }
@@ -586,7 +587,7 @@
              id = temp.value;
 
              if (id == "") {
-                 return ("*Please Enter Username" + "\n");
+                 return ("*Username is required" + "\n");
              } else {
                  return "";
              }
@@ -598,7 +599,7 @@
              id = temp.value;
 
              if (id == "") {
-                 return ("*Please Enter Password" + "\n");
+                 return ("*Password is required" + "\n");
              } else {
                  return "";
              }
@@ -612,13 +613,15 @@
              var temppwd = document.getElementById("<%=txtPassword.ClientID %>");
              uidpwd = temppwd.value;
 
-             if (uidcnmpwd == "" || uidcnmpwd != uidpwd) {
-                 return ("*Please Re-enter Password to confirm" + "\n");
+             if (uidcnmpwd == "") {
+                 return ("*Confirm Password is required" + "\n");
+             }else if (uidcnmpwd == "" || uidcnmpwd != uidpwd) {
+                 return ("*Password not match!" + "\n");
              } else {
                  return "";
              }
          }
-    </script>
+     </script>
 
 </body>
 

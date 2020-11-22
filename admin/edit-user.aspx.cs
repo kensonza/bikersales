@@ -100,10 +100,15 @@ public partial class _Default : System.Web.UI.Page {
         String cpassword = txtCPword.Text;
 
         if (String.IsNullOrEmpty(password) && String.IsNullOrEmpty(cpassword)) {
-            Response.Write("<script>alert('Please fill all the fields')</script>");
+        
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('','Please fill all the fields','error')", true);
+        
         } else if (password != cpassword) {
-            Response.Write("<script>alert('Password not match!')</script>");
-        } else {
+            
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('','Password not match!','error')", true);
+        
+        }
+        else {
             // set password to md5() Encrypted data
             String encrptPassword = txtPword.Text;
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
@@ -148,7 +153,6 @@ public partial class _Default : System.Web.UI.Page {
         Response.Redirect("~/admin/users.aspx");
     }
 
-    
 
     // Update User Image
     protected void btnImage_Click(object sender, EventArgs e) {

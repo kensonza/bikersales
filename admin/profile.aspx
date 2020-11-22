@@ -230,8 +230,18 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800"><span class="fas fa-user-alt">&nbsp;</span>Profile</h1>
+                    
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4 dropdown">
+                    <!-- <h1 class="h3 mb-4 text-gray-800"><span class="fas fa-user-alt">&nbsp;</span>Edit User</h1> -->
+                    <h1 class="h3 mb-0 text-gray-800"><span class="fas fa-user-alt">&nbsp;</span>Profile</h1>
+                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Options">
+                        <span class="fa fa-cogs"></span>
+                     </button>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal" title="Change Password">Change Password</a>
+                     </div>
+                </div>
 
 
 
@@ -239,7 +249,7 @@
                 <div class="form-row">
                     <div class="col-md-2 mb-2">
                         <!-- <img src="../img/users/ken_2x2.jpg" alt="user-image" class="img-thumbnail" width="300"> -->
-                        <asp:Image ID="Image1" runat="server" alt="user-image" class="img-thumbnail" width="300"/>
+                        <asp:Image ID="Image1" runat="server" alt="user-image" class="img-thumbnail" width="250"/>
                         
                             <div class="valid-feedback">
                                 Looks good!
@@ -248,26 +258,35 @@
     
                     <div class="col-md-10 mb-2">
                         <label for="validationCustom01">Name</label>
-                        <asp:TextBox ID="txtFName" ReadOnly="true" class="form-control" runat="server" ToolTip="Name"></asp:TextBox>
+                        <asp:TextBox ID="txtFName" ReadOnly="true" class="form-control" runat="server"></asp:TextBox>
       
-                        <br />
+                        <hr />
       
                         <label for="validationCustom02">Email</label>
-                        <asp:TextBox ID="txtEmail" ReadOnly="true" class="form-control" runat="server" ToolTip="Email"></asp:TextBox>
+                        <asp:TextBox ID="txtEmail" ReadOnly="true" class="form-control" runat="server"></asp:TextBox>
         
-                        <br />
+                        <hr />
+
+                        <label for="validationCustom03">Username</label>
+                        <asp:TextBox ID="txtUsername" ReadOnly="true" class="form-control" runat="server"></asp:TextBox>
+
+                        <hr />
         
                         <label for="validationCustom03">Password</label>
-                        <asp:TextBox ID="txtPassword" ReadOnly="true" class="form-control" runat="server" ToolTip="Password" TextMode="Password"></asp:TextBox>
+                        <asp:TextBox ID="txtPassword" ReadOnly="true" class="form-control" runat="server" TextMode="Password"></asp:TextBox>
                         
-                        <br />
+                        <hr />
 
                         <label for="validationCustom03">Status</label>
-                        <asp:TextBox ID="txtStatus" ReadOnly="true" class="form-control" runat="server" ToolTip="Status"></asp:TextBox>
+                        <asp:TextBox ID="txtStatus" ReadOnly="true" class="form-control" runat="server"></asp:TextBox>
 
-                        <br />
+                        <hr />
+                        <label for="validationCustom03">Role</label>
+                        <asp:TextBox ID="TxtRole" ReadOnly="true" class="form-control" runat="server"></asp:TextBox>
 
-                        <asp:Button ID="btnUpdateProfile" class="btn btn-success" runat="server" Text="Update Profile" OnClick="btnUpdateProfile_Click" /> <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Change Password</button>
+                        <hr />
+
+                        <asp:Button ID="btnCancelProfile" class="btn btn-info" runat="server" Text="Cancel" OnClick="btnCancelProfile_Click" ToolTip="Cancel"/> 
                     </div>
                 </div>
 
