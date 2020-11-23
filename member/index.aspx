@@ -55,7 +55,7 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Interface
+                    BS Tools
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -74,7 +74,7 @@
                     </div>
                 </li> -->
 
-                <!-- Nav Item - Settings/Utilities Collapse Menu -->
+                <!-- Nav Item - Biker Sales Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                        aria-expanded="true" aria-controls="collapseUtilities">
@@ -102,10 +102,10 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Addons
+                    BS Reports
                 </div>
 
-                <!-- Nav Item - Pages Collapse Menu -->
+                <!-- Nav Item - Reports Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                        aria-expanded="true" aria-controls="collapsePages">
@@ -126,11 +126,20 @@
                     </div>
                 </li>
 
-                <!-- Nav Item - Charts -->
+                <!-- Divider -->
+                <!-- <hr class="sidebar-divider"> -->
+
+                <!-- Heading -->
+                <!-- <div class="sidebar-heading">
+                    BS Settings
+                </div> -->
+
+                <!-- Nav Item - Users -->
                 <!-- <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Charts</span></a>
+                    <a class="nav-link" href="users.aspx">
+                        <i class="fas fa-fw fa fa-users"></i>
+                        <span>Users</span>
+                    </a>
                 </li> -->
                 <!-- Nav Item - Tables -->
                 <!-- <li class="nav-item">
@@ -167,6 +176,30 @@
 
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
+
+                             <!-- Nav Item - (Mobile) User Information Dropdown (Visible Only XS) -->
+                             <li class="nav-item dropdown no-arrow d-sm-none">
+                                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa fa-ellipsis-v"></i>
+                                </a>
+                             <!-- Dropdown - (Mobile) User Information -->
+                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="profile.aspx">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
+                                    
+                                    <div class="dropdown-divider"></div>
+                                    
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
+                                    </a>
+                             </div>
+                             </li>
+
                             <div class="topbar-divider d-none d-sm-block"></div>
 
                             <!-- Nav Item - User Information -->
@@ -183,11 +216,9 @@
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>
-                                    <a class="dropdown-item" href="users.aspx">
-                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Settings
-                                    </a>
+                                    
                                     <div class="dropdown-divider"></div>
+                                    
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout

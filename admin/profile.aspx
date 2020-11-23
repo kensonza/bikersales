@@ -22,6 +22,10 @@
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- Sweet alert bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js" type="text/javascript"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css" rel="stylesheet" />
+    
 </head>
 
 <body id="page-top">
@@ -58,7 +62,7 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Interface
+                    BS Tools
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
@@ -77,7 +81,7 @@
                     </div>
                 </li> -->
 
-                <!-- Nav Item - Settings/Utilities Collapse Menu -->
+                <!-- Nav Item - Biker Sales Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                        aria-expanded="true" aria-controls="collapseUtilities">
@@ -105,10 +109,10 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Addons
+                    BS Reports
                 </div>
 
-                <!-- Nav Item - Pages Collapse Menu -->
+                <!-- Nav Item - Reports Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                        aria-expanded="true" aria-controls="collapsePages">
@@ -129,12 +133,21 @@
                     </div>
                 </li>
 
-                <!-- Nav Item - Charts -->
-                <!-- <li class="nav-item">
-                    <a class="nav-link" href="charts.html">
-                        <i class="fas fa-fw fa-chart-area"></i>
-                        <span>Charts</span></a>
-                </li> -->
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    BS Settings
+                </div>
+
+                <!-- Nav Item - Users -->
+                <li class="nav-item">
+                    <a class="nav-link" href="users.aspx">
+                        <i class="fas fa-fw fa fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
                 <!-- Nav Item - Tables -->
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="tables.html">
@@ -170,27 +183,26 @@
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <!-- Nav Item - (Mobile) User Information Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
+                                <i class="fas fa fa-ellipsis-v"></i>
                             </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
+                            <!-- Dropdown - (Mobile) User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="profile.aspx">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                
+                                <div class="dropdown-divider"></div>
+                                
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
                             </div>
                         </li>
 
@@ -210,11 +222,9 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="users.aspx">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
+                                
                                 <div class="dropdown-divider"></div>
+                                
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -239,7 +249,7 @@
                         <span class="fa fa-cogs"></span>
                      </button>
                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal" title="Change Password">Change Password</a>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCP" title="Change Password">Change Password</a>
                      </div>
                 </div>
 
@@ -273,7 +283,7 @@
                         <hr />
         
                         <label for="validationCustom03">Password</label>
-                        <asp:TextBox ID="txtPassword" ReadOnly="true" class="form-control" runat="server" TextMode="Password"></asp:TextBox>
+                        <asp:TextBox ID="txtPassword" ReadOnly="true" class="form-control" runat="server"></asp:TextBox>
                         
                         <hr />
 
@@ -298,7 +308,7 @@
 
 
 
-
+        
 
 
 
@@ -337,42 +347,38 @@
     </a>
 
     <!-- Change Password Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+                <div class="modal fade" id="exampleModalCP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
                 
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-5 col-form-label">New Password</label>
-                        <div class="col-sm-12">
-                            <!-- <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com"> -->
-                            <!-- <input type="password" class="form-control" id="inputPassword"> -->
-                            <asp:TextBox ID="txtPword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-5 col-form-label">New Password</label>
+                                    <div class="col-sm-12">
+                                        <asp:TextBox ID="txtPword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
+                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword" class="col-sm-5 col-form-label">Confrim Password</label>
+                                    <div class="col-sm-12">
+                                        <!-- <input type="password" class="form-control" id="inputPassword"> -->
+                                        <asp:TextBox ID="txtCPword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
+                                    </div>
+                            </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-info" data-dismiss="modal" title="Close">Close</button>
+                                <asp:Button ID="btnCP" class="btn btn-primary" runat="server" Text="Save" ToolTip="Save" OnClick="btnCP_Click"/>
+                            </div>
                         </div>
+                    </div>
                 </div>
-                <div class="form-group row">
-                    <label for="inputPassword" class="col-sm-5 col-form-label">Confrim Password</label>
-                        <div class="col-sm-12">
-                            <!-- <input type="password" class="form-control" id="inputPassword"> -->
-                            <asp:TextBox ID="txtCPword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
-                        </div>
-                </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                    <asp:Button ID="btnCP" class="btn btn-primary" runat="server" Text="Save changes" />
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -413,49 +419,6 @@
     <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>
   
-
-    <!-- Change Password Script -->
-    <script type="text/javascript">  
-        $(function () {
-
-            $('#btnCP').click(function () {
-                var pword = $('#txtPword').val();
-                var cpword = $('#txtCPword').val();
-                //var getsession = $('#getSession').val();
-                if (pword != '' && cpword != '' && pword == cpword) {
-                    $.ajax
-
-                        ({
-
-                            type: 'POST',
-                            url: 'profile.aspx/changepassword',
-                            async: false,
-                            //data: "{'password':'" + pword + "', 'session':'" + getsession + "'}",
-                            data: "{'password':'" + pword + "'}",
-                            contentType: 'application/json; charset =utf-8',
-                            success: function (data) {
-
-                                var obj = data.d;
-                                if (obj == 'true') {
-                                    $('#txtPword').val('');
-                                    //$('#getSession').val('');
-                                    alert("Data Saved Successfully");
-
-                                }
-                            },
-
-                            error: function (result) {
-                                alert("Error Occured, Try Again");
-                            }
-                        });
-                } else {
-                    alert("Pleae Fill all the Fields");
-                    return false;
-                }
-            })
-        });
-    </script>  
-
 </body>
 
 </html>

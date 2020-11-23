@@ -107,8 +107,7 @@ public partial class _Default : System.Web.UI.Page {
             
             ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('','Password not match!','error')", true);
         
-        }
-        else {
+        } else {
             // set password to md5() Encrypted data
             String encrptPassword = txtPword.Text;
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
