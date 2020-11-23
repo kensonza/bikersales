@@ -110,16 +110,18 @@ public partial class _Default : System.Web.UI.Page {
             
             // Image Details
             String imageName = fileUploadImageUser.PostedFile.FileName;
-            //String imageType = fileUploadImageUser.PostedFile.ContentType;
             String imageSize = fileUploadImageUser.PostedFile.ContentLength.ToString();
+            String imageType = fileUploadImageUser.PostedFile.ContentType;
+            
 
             // Insert User Image
-            String queryImage = "INSERT INTO bs_users_image (token_id, image, size, date_created) VALUES(@tokenID, @image, @Size, getdate())";
+            String queryImage = "INSERT INTO bs_users_image (token_id, image, size, type, date_created) VALUES(@tokenID, @image, @size, @type, getdate())";
             SqlCommand cmdUsersImage = new SqlCommand(queryImage, con);
 
             cmdUsersImage.Parameters.AddWithValue("@tokenID", randToken);
             cmdUsersImage.Parameters.AddWithValue("@image", imageName);
             cmdUsersImage.Parameters.AddWithValue("@size", imageSize);
+            cmdUsersImage.Parameters.AddWithValue("@type", imageType);
 
             int y = cmdUsersImage.ExecuteNonQuery();
             if (y > 0) {

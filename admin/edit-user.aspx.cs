@@ -167,15 +167,16 @@ public partial class _Default : System.Web.UI.Page {
 
             // Image Details
             String imageName = FileUploadImage.PostedFile.FileName;
-            //String imageType = FileUploadImage.PostedFile.ContentType;
             String imageSize = FileUploadImage.PostedFile.ContentLength.ToString();
+            String imageType = FileUploadImage.PostedFile.ContentType;
 
             // Update user image
-            String query = "UPDATE bs_users_image SET image = @image, size = @size, date_modify = getdate() WHERE token_id =" + Request.QueryString["tokenid"];
+            String query = "UPDATE bs_users_image SET image = @image, size = @size, type = @type, date_modify = getdate() WHERE token_id =" + Request.QueryString["tokenid"];
             SqlCommand cmd = new SqlCommand(query, con);
 
             cmd.Parameters.AddWithValue("@image", imageName);
             cmd.Parameters.AddWithValue("@size", imageSize);
+            cmd.Parameters.AddWithValue("@type", imageType);
 
             int y = cmd.ExecuteNonQuery();
             if (y > 0) {
