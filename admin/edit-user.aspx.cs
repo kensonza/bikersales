@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Services;
 using System.Web.SessionState;
+// Adding Image
+using System.IO;
 // Adding for Password Encrypt
 using System.Security.Cryptography;
 using System.Text;
@@ -156,10 +158,30 @@ public partial class _Default : System.Web.UI.Page {
     // Update User Image
     protected void btnImage_Click(object sender, EventArgs e) {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
-        con.Open();
-
 
         if (FileUploadImage.PostedFile.ContentType == "image/jpeg" || FileUploadImage.PostedFile.ContentType == "image/png") {
+
+            con.Open();
+
+            // DELETE user image on path folder
+            String queryImagePath = "SELECT image FROM bs_users_image WHERE token_id =" + Request.QueryString["tokenid"];
+            SqlCommand cmdImagePath = new SqlCommand(queryImagePath, con);
+
+            String delImgPath = "";
+
+            SqlDataReader reader = cmdImagePath.ExecuteReader();
+            while (reader.Read()) {
+                delImgPath = reader["image"].ToString();
+            }
+
+            String imagePath = Server.MapPath("~/img/users/" + delImgPath);
+            if (File.Exists(imagePath)) {
+                File.Delete(imagePath);
+            }
+
+            con.Close();
+
+            con.Open();
 
             //Image Path
             String imagepath = "~/img/users/" + FileUploadImage.PostedFile.FileName;
@@ -191,10 +213,12 @@ public partial class _Default : System.Web.UI.Page {
 
             }
 
+            con.Close();
+
         } else {
             ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Cancelled','Invalid image file.','error')", true);
             //Response.Write("<script>alert('Invalid Image file')</script>");
         }
-        con.Close();
+        
     }
 }

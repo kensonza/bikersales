@@ -289,9 +289,14 @@
                 
                 <br />
 
-                <asp:GridView ID="GridViewBrand" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="brand_id">
+                <asp:GridView ID="GridViewBrand" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="brand_id">
                     <Columns>
-                        <asp:ImageField></asp:ImageField>
+                        
+                        
+                        
+                        <asp:ImageField DataImageUrlField="brand_image"></asp:ImageField>
+                        
+                        
                         
                         <asp:BoundField DataField="brand_name" HeaderText="Brand Name" />
                         

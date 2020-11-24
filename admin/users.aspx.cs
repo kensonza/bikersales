@@ -158,8 +158,7 @@ public partial class _Default : System.Web.UI.Page {
             if (x > 0) {
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','Record " + randToken + " has been added','success')", true);
                 //GridViewUsers.EditIndex = +1;
-                //GVbind();
-                Response.Redirect("~/admin/users.aspx");
+                GVbind();
             }
 
         } else {
@@ -182,8 +181,32 @@ public partial class _Default : System.Web.UI.Page {
         int token_id = Convert.ToInt32(GridViewUsers.DataKeys[e.RowIndex].Value.ToString());
 
         using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString())) {
+            // Open connection for image path delete
             con.Open();
 
+            // DELETE user image on path folder
+            String queryImagePath = "SELECT image FROM bs_users_image WHERE token_id = '" + token_id + "'";
+            SqlCommand cmdImagePath = new SqlCommand(queryImagePath, con);
+
+            String delImgPath = "";
+
+            SqlDataReader reader = cmdImagePath.ExecuteReader();
+            while (reader.Read()) {
+                delImgPath = reader["image"].ToString();
+            }
+
+            String imagePath = Server.MapPath("~/img/users/" + delImgPath);
+            if (File.Exists(imagePath)) {
+                File.Delete(imagePath);
+            }
+            
+            con.Close();
+
+            
+            // Open connection for user/image db delete
+            con.Open();
+
+            // DELETE user
             String query = "DELETE FROM bs_users WHERE token_id = '" + token_id + "'";
             SqlCommand cmd = new SqlCommand(query, con);
 
@@ -194,7 +217,7 @@ public partial class _Default : System.Web.UI.Page {
                 GVbind();
             }
 
-
+            // DELETE user image
             String queryImage = "DELETE FROM bs_users_image WHERE token_id = '" + token_id + "'";
             SqlCommand cmdImage = new SqlCommand(queryImage, con);
 
@@ -202,6 +225,9 @@ public partial class _Default : System.Web.UI.Page {
             if (q > 0) {
                 //Response.Write("<script>alert('" + id + "')</script>");
             }
+
+            con.Close();
+
         }
 
     }    
