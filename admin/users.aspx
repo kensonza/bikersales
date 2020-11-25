@@ -113,8 +113,9 @@
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Customer</h6>
-                            <a class="collapse-item" href="blank.html">Blank Page</a>
+                            <h6 class="collapse-header">Brand</h6>
+                            <a class="collapse-item" href="brand.aspx">Name</a>
+                            <a class="collapse-item" href="#">Categories</a>
                             <h6 class="collapse-header">Orders</h6>
                             <a class="collapse-item" href="blank.html">Blank Page</a>
                             <h6 class="collapse-header">Brand</h6>

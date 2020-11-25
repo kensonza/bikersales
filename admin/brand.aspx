@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="brand-name.aspx.cs" Inherits="admin_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="brand.aspx.cs" Inherits="admin_Default" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Biker Sales :: Users</title>
+    <title>Biker Sales :: Brand</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -114,7 +114,7 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Product</h6>
-                            <a class="collapse-item active" href="brand-name.aspx">Brand</a>
+                            <a class="collapse-item active" href="brand.aspx">Brand</a>
                             <a class="collapse-item" href="#">Brand Categories</a>
                             <h6 class="collapse-header">Customer</h6>
                             <a class="collapse-item" href="blank.html">Name</a>
@@ -289,13 +289,16 @@
                 
                 <br />
 
-                <asp:GridView ID="GridViewBrand" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="brand_id">
+                <asp:GridView ID="GridViewBrand" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="brand_id" OnSelectedIndexChanged="GridViewBrand_SelectedIndexChanged">
                     <Columns>
                         
+                        <asp:BoundField DataField="brand_id" HeaderText="Id" />
                         
-                        
-                        <asp:ImageField DataImageUrlField="brand_image"></asp:ImageField>
-                        
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <asp:Image ID="img" runat="server" Width="40px" Height="40px" ImageUrl='<%#Eval("brand_image","~/img/brand/{0}") %>' />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         
                         
                         <asp:BoundField DataField="brand_name" HeaderText="Brand Name" />
@@ -311,11 +314,6 @@
                     </Columns>
                 </asp:GridView>
 
-
-
-
-
-               
             </div>
             <!-- /.container-fluid -->
 
@@ -342,6 +340,26 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <asp:Button ID="btnLogout" class="btn btn-primary" runat="server" Text="Logout" OnClick="btnLogout_Click" />
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Add Brand Modal Modal -->
     <div class="modal fade" id="addbrandModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -375,27 +393,6 @@
         </div>
     </div>
     
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel2">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <!-- <a class="btn btn-primary" href="login.html">Logout</a> -->
-                    <asp:Button ID="btnLogout" class="btn btn-primary" runat="server" Text="Logout" OnClick="btnLogout_Click" />
-                </div>
-            </div>
-        </div>
-    </div>
     </form>
 
     <!-- Bootstrap core JavaScript-->

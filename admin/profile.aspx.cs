@@ -64,8 +64,8 @@ public partial class _Default : System.Web.UI.Page {
 
     }
 
-    protected void btnCP_Click(object sender, EventArgs e)
-    {
+    //Profile Change Password
+    protected void btnCP_Click(object sender, EventArgs e) {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
         con.Open();
 
@@ -119,12 +119,13 @@ public partial class _Default : System.Web.UI.Page {
         }
     }
 
+    // Logout
     protected void btnLogout_Click(object sender, EventArgs e) {
         Session.Remove("User");
         Response.Redirect("~/login.aspx");
     }
 
-
+    //Profile Cancel Btn
     protected void btnCancelProfile_Click(object sender, EventArgs e) {
         Response.Redirect("~/admin/index.aspx");
     }

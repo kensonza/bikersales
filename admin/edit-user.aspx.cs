@@ -42,7 +42,7 @@ public partial class _Default : System.Web.UI.Page {
 
 
     protected void viewEdit() {
-        // Profile Module (Connect to DB)
+        
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
         con.Open();
 

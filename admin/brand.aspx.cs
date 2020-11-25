@@ -46,19 +46,13 @@ public partial class admin_Default : System.Web.UI.Page {
             con.Open();
             String query = "SELECT * FROM production.brands";
             SqlCommand cmd = new SqlCommand(query, con);
-            SqlDataReader dr = cmd.ExecuteReader();
-
-            //String image = "";
             
-            //while (reader.Read()) {
-            //    image = reader["image"].ToString();
-            //}
-
-            // View Profile Image
-            //Image1.ImageUrl = "~/img/brand/" + image;
-
-            if (dr.HasRows == true) {
-                GridViewBrand.DataSource = dr;
+            DataSet ds = new DataSet();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            sda.Fill(ds);
+            
+            if (ds.Tables[0].Rows.Count >0) {
+                GridViewBrand.DataSource = ds;
                 GridViewBrand.DataBind();
             }
         }
@@ -72,7 +66,13 @@ public partial class admin_Default : System.Web.UI.Page {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
         con.Open();
 
-        if (fileUploadImageBrand.PostedFile.ContentType == "image/jpeg" || fileUploadImageBrand.PostedFile.ContentType == "image/png") {
+        String brand = txtBrand.Text;
+
+        if (String.IsNullOrEmpty(brand)) {
+
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('','Brand Name is required!','error')", true);
+
+        } else if (fileUploadImageBrand.PostedFile.ContentType == "image/jpeg" || fileUploadImageBrand.PostedFile.ContentType == "image/png") {
 
             //Image Path
             String imagepath = "~/img/brand/" + fileUploadImageBrand.PostedFile.FileName;
@@ -96,11 +96,31 @@ public partial class admin_Default : System.Web.UI.Page {
                 //Response.Write('<script>alert("Save Successfully")</script>');
                 ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','" + txtBrand.Text + " has been added','success')", true);
                 GVbind();
+                //Response.Redirect("~/admin/brand.aspx");
             }
         
+        } else {
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Cancelled','Invalid image file.','error')", true);
+            //Response.Write("<script>alert('Invalid Image file')</script>"); 
         }
 
         con.Close();
+    }
+
+    //Edit User
+    protected void GridViewBrand_SelectedIndexChanged(object sender, EventArgs e) {
+        String bid = GridViewBrand.SelectedRow.Cells[0].Text;
+
+        //Response.Redirect("edit-brand.aspx?id=" + bid);
+        //Response.Write("<script type='text/javascript>window.open('google.com');</script>");
+        //Response.Write("<script>alert('" + id + "')</script>");
+        String strRedirectURL = "";
+        strRedirectURL = "edit-brand.aspx?bid=" + bid;
+        Response.Write("<script>");
+        Response.Write("window.open('" + strRedirectURL + "','mywindow','width=900,height=625 resizable=yes')");
+        Response.Write("</script>");
+
+
     }
 
 
