@@ -123,7 +123,51 @@ public partial class admin_Default : System.Web.UI.Page {
 
     }
 
+    // Delete Brand
+    protected void GridViewBrand_RowDeleting(object sender, GridViewDeleteEventArgs e) {
 
+        int bid = Convert.ToInt32(GridViewBrand.DataKeys[e.RowIndex].Value.ToString());
+
+        using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString())) {
+            // Open connection for image path delete
+            con.Open();
+
+            // DELETE brand image on path folder
+            String queryImagePath = "SELECT brand_image FROM production.brands WHERE brand_id = '" + bid + "'";
+            SqlCommand cmdImagePath = new SqlCommand(queryImagePath, con);
+
+            String delImgPath = "";
+
+            SqlDataReader reader = cmdImagePath.ExecuteReader();
+            while (reader.Read()) {
+                delImgPath = reader["brand_image"].ToString();
+            }
+
+            String imagePath = Server.MapPath("~/img/brand/" + delImgPath);
+            if (File.Exists(imagePath)) {
+                File.Delete(imagePath);
+            }
+
+            con.Close();
+
+            // Open connection for brand db delete
+            con.Open();
+
+            // DELETE user
+            String query = "DELETE FROM production.brands WHERE brand_id = '" + bid + "'";
+            SqlCommand cmd = new SqlCommand(query, con);
+
+            int t = cmd.ExecuteNonQuery();
+            if (t > 0) {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Deleted!','Record " + bid + " has been deleted','success')", true);
+                //GridViewUsers.EditIndex = -1;
+                GVbind();
+            }
+            con.Close();
+
+        }
+
+    }
 
 
 

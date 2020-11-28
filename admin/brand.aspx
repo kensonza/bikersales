@@ -289,7 +289,7 @@
                 
                 <br />
 
-                <asp:GridView ID="GridViewBrand" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="brand_id" OnSelectedIndexChanged="GridViewBrand_SelectedIndexChanged">
+                <asp:GridView ID="GridViewBrand" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="brand_id" OnSelectedIndexChanged="GridViewBrand_SelectedIndexChanged" OnRowDeleting="GridViewBrand_RowDeleting">
                     <Columns>
                         
                         <asp:BoundField DataField="brand_id" HeaderText="Id" />

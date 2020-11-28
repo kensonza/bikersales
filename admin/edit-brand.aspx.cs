@@ -54,21 +54,75 @@ public partial class admin_Default : System.Web.UI.Page {
     // Save Edit Brand
     protected void btnEditBrandSave_Click(object sender, EventArgs e) {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
-        con.Open();
-
-        String queryUpdate = "UPDATE production.brands SET brand_name = @brand, date_modify = getdate() WHERE brand_id =" + Request.QueryString["bid"];
-        SqlCommand cmdUpdate = new SqlCommand(queryUpdate, con);
-
-        String brand = txtBrand.Text;
         
-        cmdUpdate.Parameters.AddWithValue("@brand", brand);
-        
+        if(FileUploadImageBrand.PostedFile.FileName == "") {
+            con.Open();
 
-        int y = cmdUpdate.ExecuteNonQuery();
-        if (y > 0) {
-            //Response.Write("<script>alert('Success!')</script>");
-            ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','Record " + Request.QueryString["tokenid"] + " has been updated successfully','success')", true);
+            String queryUpdate = "UPDATE production.brands SET brand_name = @brand, date_modify = getdate() WHERE brand_id =" + Request.QueryString["bid"];
+            SqlCommand cmdUpdate = new SqlCommand(queryUpdate, con);
+
+            String brand = txtBrand.Text;
+
+            cmdUpdate.Parameters.AddWithValue("@brand", brand);
+
+
+            int y = cmdUpdate.ExecuteNonQuery();
+            if (y > 0) {
+                //Response.Write("<script>alert('Success!')</script>");
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','Record " + Request.QueryString["tokenid"] + " has been updated successfully','success')", true);
+            }
+            
+            con.Close();
+        } else if (FileUploadImageBrand.PostedFile.ContentType == "image/jpeg" || FileUploadImageBrand.PostedFile.ContentType == "image/png") {
+            con.Open();
+
+            // DELETE user image on path folder
+            String queryImagePath = "SELECT brand_image FROM production.brands WHERE brand_id =" + Request.QueryString["bid"];
+            SqlCommand cmdImagePath = new SqlCommand(queryImagePath, con);
+
+            String delImgPath = "";
+
+            SqlDataReader reader = cmdImagePath.ExecuteReader();
+            while (reader.Read()) {
+                delImgPath = reader["brand_image"].ToString();
+            }
+
+            String imagePath = Server.MapPath("~/img/brand/" + delImgPath);
+            if (File.Exists(imagePath)) {
+                File.Delete(imagePath);
+            }
+
+            con.Close();
+
+            con.Open();
+
+            //Image Path
+            String imagepath = "~/img/brand/" + FileUploadImageBrand.PostedFile.FileName;
+            FileUploadImageBrand.SaveAs(Server.MapPath(imagepath));
+
+            // Image Details
+            String imageName = FileUploadImageBrand.PostedFile.FileName;
+            String imageSize = FileUploadImageBrand.PostedFile.ContentLength.ToString();
+            String imageType = FileUploadImageBrand.PostedFile.ContentType;
+
+            String brand = txtBrand.Text;
+
+            // Update user image
+            String query = "UPDATE production.brands SET brand_name = @name, brand_image = @image, brand_image_size = @size, brand_image_type = @type, date_modify = getdate() WHERE brand_id =" + Request.QueryString["bid"];
+            SqlCommand cmd = new SqlCommand(query, con);
+
+            cmd.Parameters.AddWithValue("@name", brand);
+            cmd.Parameters.AddWithValue("@image", imageName);
+            cmd.Parameters.AddWithValue("@size", imageSize);
+            cmd.Parameters.AddWithValue("@type", imageType);
+
+            int y = cmd.ExecuteNonQuery();
+            if (y > 0) {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','Record " + Request.QueryString["bid"] + " has been updated successfully','success')", true);
+            }
+
+            con.Close();
         }
-        con.Close();
+        
     }
 }
