@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="brand.aspx.cs" Inherits="admin_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="brand-categories.aspx.cs" Inherits="admin_Default" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Biker Sales :: Brand</title>
+    <title>Biker Sales :: Brand Categories</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -48,7 +48,7 @@
                     });
             return false;
         }
-    </script>
+</script>
 
 </head>
 
@@ -115,7 +115,7 @@
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Product</h6>
                             <a class="collapse-item active" href="brand.aspx">Brand</a>
-                            <a class="collapse-item" href="brand-categories.aspx">Brand Categories</a>
+                            <a class="collapse-item" href="#">Brand Categories</a>
                             <h6 class="collapse-header">Customer</h6>
                             <a class="collapse-item" href="blank.html">Name</a>
                             <a class="collapse-item" href="blank.html">Order</a>
@@ -266,7 +266,7 @@
 
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800"><span class="fa fa-bicycle">&nbsp;</span>Brand</h1>
+                <h1 class="h3 mb-4 text-gray-800"><span class="fa fa-bicycle">&nbsp;</span>Brand Categories</h1>
                 
                 
     <form id="form1" runat="server">
@@ -275,7 +275,7 @@
                 <div class="input-group">
                     <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..."></asp:TextBox>
                         <div class="input-group-append">
-                            <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-secondary" OnClick="btnSearch_Click" ToolTip="Seach"><i class="fa fa-search"></i></asp:LinkButton>
+                            <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-secondary" ToolTip="Seach"><i class="fa fa-search"></i></asp:LinkButton>
                         </div>
                         <div>
                             &nbsp;
@@ -289,7 +289,7 @@
                 
                 <br />
 
-                <asp:GridView ID="GridViewBrand" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="brand_id" OnSelectedIndexChanged="GridViewBrand_SelectedIndexChanged" OnRowDeleting="GridViewBrand_RowDeleting">
+                <asp:GridView ID="GridViewBrand" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server">
                     <Columns>
                         
                         <asp:BoundField DataField="brand_id" HeaderText="Id" />
@@ -309,8 +309,8 @@
                         
                         <asp:TemplateField>
 	                        <ItemTemplate>
-                                <asp:Button ID="btnEdit" runat="server" CommandName="Select" Text="Edit" ControlStyle-CssClass="btn btn-success" ShowSelectButton="True" ToolTip="Edit"/>
-                                <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Delete" ControlStyle-CssClass="btn btn-danger" ShowDeleteButton="True" OnClientClick="return confirmDelete(this);"  ToolTip="Delete"/>
+                                <asp:Button ID="btnEdit" runat="server" CommandName="Select" Text="Edit" ControlStyle-CssClass="btn btn-success" ToolTip="Edit"/>
+                                <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Delete" ControlStyle-CssClass="btn btn-danger" OnClientClick="return confirmDelete(this);"  ToolTip="Delete"/>
 	                        </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
@@ -369,7 +369,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Brand</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Brand Category</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -390,7 +390,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-                    <asp:Button ID="btnAddBrand" class="btn btn-primary" runat="server" Text="Save" OnClick="btnAddBrand_Click"/>
+                    <asp:Button ID="btnAddBrand" class="btn btn-primary" runat="server" Text="Save"/>
                 </div>
             </div>
         </div>

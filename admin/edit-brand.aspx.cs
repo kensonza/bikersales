@@ -46,9 +46,9 @@ public partial class admin_Default : System.Web.UI.Page {
 
     // Edit Brand Cancel
     protected void btnEditBrandCancel_Click(object sender, EventArgs e) {
-        Response.Write("<script>");
-        Response.Write("window.close()");
-        Response.Write("</script>");
+        Response.Write("<script>window.close()</script>");
+        //Response.Write("window.close()");
+        //Response.Write("</script>");
     }
 
     // Save Edit Brand
