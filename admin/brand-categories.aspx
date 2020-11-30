@@ -114,8 +114,8 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Product</h6>
-                            <a class="collapse-item active" href="brand.aspx">Brand</a>
-                            <a class="collapse-item" href="#">Brand Categories</a>
+                            <a class="collapse-item" href="brand.aspx">Brand</a>
+                            <a class="collapse-item active" href="brand-categories.aspx">Brand Categories</a>
                             <h6 class="collapse-header">Customer</h6>
                             <a class="collapse-item" href="blank.html">Name</a>
                             <a class="collapse-item" href="blank.html">Order</a>
@@ -275,7 +275,7 @@
                 <div class="input-group">
                     <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..."></asp:TextBox>
                         <div class="input-group-append">
-                            <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-secondary" ToolTip="Seach"><i class="fa fa-search"></i></asp:LinkButton>
+                            <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-secondary" OnClick="btnSearch_Click" ToolTip="Seach"><i class="fa fa-search"></i></asp:LinkButton>
                         </div>
                         <div>
                             &nbsp;
@@ -289,32 +289,50 @@
                 
                 <br />
 
-                <asp:GridView ID="GridViewBrand" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server">
-                    <Columns>
+                <!-- table grid views -->
+                <div class="row">  
+                    <div class="col-lg-12 ">  
+                        <div class="table-responsive">
+                            <asp:GridView ID="GridViewBrandCat" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="category_id" OnSelectedIndexChanged="GridViewBrandCat_SelectedIndexChanged" OnRowDeleting="GridViewBrandCat_RowDeleting">
+                                <Columns>
                         
-                        <asp:BoundField DataField="brand_id" HeaderText="Id" />
+                                    <asp:BoundField DataField="category_id" HeaderText="Category Name" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                                        <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                    </asp:BoundField>
                         
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:Image ID="img" runat="server" Width="40px" Height="40px" ImageUrl='<%#Eval("brand_image","~/img/brand/{0}") %>' />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        
-                        
-                        <asp:BoundField DataField="brand_name" HeaderText="Brand Name" />
-                        
-                        <asp:BoundField DataField="date_created" HeaderText="Date Created" DataFormatString="{0:MM/dd/yyyy}"/>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:Image ID="img" runat="server" Width="40px" Height="40px" ImageUrl='<%#Eval("category_image","~/img/brand_categories/{0}") %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
 
-                        <asp:BoundField DataField="date_modify" HeaderText="Date Modify" DataFormatString="{0:MM/dd/yyyy}"/>
+                                    <asp:BoundField DataField="category_name" HeaderText="Category Name" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
                         
-                        <asp:TemplateField>
-	                        <ItemTemplate>
-                                <asp:Button ID="btnEdit" runat="server" CommandName="Select" Text="Edit" ControlStyle-CssClass="btn btn-success" ToolTip="Edit"/>
-                                <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Delete" ControlStyle-CssClass="btn btn-danger" OnClientClick="return confirmDelete(this);"  ToolTip="Delete"/>
-	                        </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
+                                    <asp:BoundField DataField="date_created" HeaderText="Date Created" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-md" HeaderStyle-CssClass="visible-md">
+                                        <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-md"></ItemStyle>
+                                    </asp:BoundField>
+                                    
+                                    <asp:BoundField DataField="date_modify" HeaderText="Date Modify" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-lg" HeaderStyle-CssClass="visible-lg">
+                                        <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                    </asp:BoundField>
+
+                                    <asp:TemplateField>
+	                                    <ItemTemplate>
+                                            <asp:Button ID="btnEdit" runat="server" CommandName="Select" Text="Edit" ControlStyle-CssClass="btn btn-success" ShowSelectButton="True" ToolTip="Edit"/>
+                                            <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Delete" ControlStyle-CssClass="btn btn-danger" ShowDeleteButton="True" OnClientClick="return confirmDelete(this);"  ToolTip="Delete"/>
+	                                    </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </div>
+                    </div>
+                </div>
                 
 
             </div>
@@ -378,19 +396,19 @@
                 <div class="form-group row">
                     <label for="inputUsername" class="col-sm-5 col-form-label">Brand Name</label>
                         <div class="col-sm-12">
-                            <asp:TextBox ID="txtBrand" class="form-control" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtBrandCat" class="form-control" runat="server"></asp:TextBox>
                         </div>
                 </div>
                 
                 <div class="form-group row">
                     <label for="inputImage" class="col-sm-5 col-form-label">Image</label>
                         <div class="col-sm-12">
-                            <asp:FileUpload ID="fileUploadImageBrand" runat="server" />
+                            <asp:FileUpload ID="fileUploadImageBrandCat" runat="server" />
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-                    <asp:Button ID="btnAddBrand" class="btn btn-primary" runat="server" Text="Save"/>
+                    <asp:Button ID="btnAddBrandCat" class="btn btn-primary" runat="server" Text="Save" OnClick="btnAddBrandCat_Click"/>
                 </div>
             </div>
         </div>

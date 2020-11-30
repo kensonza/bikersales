@@ -288,34 +288,51 @@
                 </div>
                 
                 <br />
+               
+                <!-- table grid views -->
+                <div class="row">  
+                    <div class="col-lg-12 ">  
+                        <div class="table-responsive">
+                            <asp:GridView ID="GridViewBrand" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="brand_id" OnSelectedIndexChanged="GridViewBrand_SelectedIndexChanged" OnRowDeleting="GridViewBrand_RowDeleting">
+                                <Columns>
+                        
+                                    <asp:BoundField DataField="brand_id" HeaderText="Id" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                                        <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                    </asp:BoundField>
 
-                <asp:GridView ID="GridViewBrand" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="brand_id" OnSelectedIndexChanged="GridViewBrand_SelectedIndexChanged" OnRowDeleting="GridViewBrand_RowDeleting">
-                    <Columns>
-                        
-                        <asp:BoundField DataField="brand_id" HeaderText="Id" />
-                        
-                        <asp:TemplateField>
-                            <ItemTemplate>
-                                <asp:Image ID="img" runat="server" Width="40px" Height="40px" ImageUrl='<%#Eval("brand_image","~/img/brand/{0}") %>' />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        
-                        
-                        <asp:BoundField DataField="brand_name" HeaderText="Brand Name" />
-                        
-                        <asp:BoundField DataField="date_created" HeaderText="Date Created" DataFormatString="{0:MM/dd/yyyy}"/>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:Image ID="img" runat="server" Width="40px" Height="40px" ImageUrl='<%#Eval("brand_image","~/img/brand/{0}") %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
 
-                        <asp:BoundField DataField="date_modify" HeaderText="Date Modify" DataFormatString="{0:MM/dd/yyyy}"/>
+                                    <asp:BoundField DataField="brand_name" HeaderText="Brand Name" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
                         
-                        <asp:TemplateField>
-	                        <ItemTemplate>
-                                <asp:Button ID="btnEdit" runat="server" CommandName="Select" Text="Edit" ControlStyle-CssClass="btn btn-success" ShowSelectButton="True" ToolTip="Edit"/>
-                                <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Delete" ControlStyle-CssClass="btn btn-danger" ShowDeleteButton="True" OnClientClick="return confirmDelete(this);"  ToolTip="Delete"/>
-	                        </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
-                
+                                    <asp:BoundField DataField="date_created" HeaderText="Date Created" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-md" HeaderStyle-CssClass="visible-md">
+                                        <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-md"></ItemStyle>
+                                    </asp:BoundField>
+                                    
+                                    <asp:BoundField DataField="date_modify" HeaderText="Date Modify" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-lg" HeaderStyle-CssClass="visible-lg">
+                                        <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                    </asp:BoundField>
+
+                                    <asp:TemplateField>
+	                                    <ItemTemplate>
+                                            <asp:Button ID="btnEdit" runat="server" CommandName="Select" Text="Edit" ControlStyle-CssClass="btn btn-success" ShowSelectButton="True" ToolTip="Edit"/>
+                                            <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Delete" ControlStyle-CssClass="btn btn-danger" ShowDeleteButton="True" OnClientClick="return confirmDelete(this);"  ToolTip="Delete"/>
+	                                    </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <!-- /.container-fluid -->
