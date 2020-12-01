@@ -80,11 +80,15 @@ public partial class _Default : System.Web.UI.Page {
             con.Open();
             String query = "SELECT * FROM bs_users ORDER BY role ASC ";
             SqlCommand cmd = new SqlCommand(query, con);
-            SqlDataReader dr = cmd.ExecuteReader();
-                if (dr.HasRows == true) {
-                    GridViewUsers.DataSource = dr;
-                    GridViewUsers.DataBind();
-                }
+
+            DataSet ds = new DataSet();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            sda.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count > 0) {
+                GridViewUsers.DataSource = ds;
+                GridViewUsers.DataBind();
+            }
         }
 
 
@@ -230,5 +234,13 @@ public partial class _Default : System.Web.UI.Page {
 
         }
 
-    }    
+    }
+
+    // Pagination
+    protected void GridViewUsers_PageIndexChanging(object sender, GridViewPageEventArgs e) {
+        GridViewUsers.PageIndex = e.NewPageIndex;
+        GVbind();
+    }
+
+
 }

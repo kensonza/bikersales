@@ -293,7 +293,7 @@
                 <div class="row">  
                     <div class="col-lg-12 ">  
                         <div class="table-responsive">
-                            <asp:GridView ID="GridViewBrand" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="brand_id" OnSelectedIndexChanged="GridViewBrand_SelectedIndexChanged" OnRowDeleting="GridViewBrand_RowDeleting">
+                            <asp:GridView ID="GridViewBrand" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="brand_id" OnSelectedIndexChanged="GridViewBrand_SelectedIndexChanged" OnRowDeleting="GridViewBrand_RowDeleting" AllowPaging="true" PageSize="10" OnPageIndexChanging="GridViewBrand_PageIndexChanging">
                                 <Columns>
                         
                                     <asp:BoundField DataField="brand_id" HeaderText="Id" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
@@ -328,8 +328,10 @@
                                             <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Delete" ControlStyle-CssClass="btn btn-danger" ShowDeleteButton="True" OnClientClick="return confirmDelete(this);"  ToolTip="Delete"/>
 	                                    </ItemTemplate>
                                     </asp:TemplateField>
+
                                 </Columns>
-                            </asp:GridView>
+                                <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
+                            </asp:GridView> 
                         </div>
                     </div>
                 </div>

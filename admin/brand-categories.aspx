@@ -293,7 +293,7 @@
                 <div class="row">  
                     <div class="col-lg-12 ">  
                         <div class="table-responsive">
-                            <asp:GridView ID="GridViewBrandCat" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="category_id" OnSelectedIndexChanged="GridViewBrandCat_SelectedIndexChanged" OnRowDeleting="GridViewBrandCat_RowDeleting">
+                            <asp:GridView ID="GridViewBrandCat" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="category_id" OnSelectedIndexChanged="GridViewBrandCat_SelectedIndexChanged" OnRowDeleting="GridViewBrandCat_RowDeleting" AllowPaging="true" PageSize="10" OnPageIndexChanging="GridViewBrandCat_PageIndexChanging">
                                 <Columns>
                         
                                     <asp:BoundField DataField="category_id" HeaderText="Category Name" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
@@ -329,6 +329,7 @@
 	                                    </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
+                                <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
                             </asp:GridView>
                         </div>
                     </div>

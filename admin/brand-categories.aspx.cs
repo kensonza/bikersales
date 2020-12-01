@@ -201,54 +201,10 @@ public partial class admin_Default : System.Web.UI.Page
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // Pagination
+    protected void GridViewBrandCat_PageIndexChanging(object sender, GridViewPageEventArgs e) {
+        GridViewBrandCat.PageIndex = e.NewPageIndex;
+        GVbind();
+    }
 
 }

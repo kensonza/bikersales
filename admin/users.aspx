@@ -291,7 +291,7 @@
                 <div class="row">  
                     <div class="col-lg-12 ">  
                         <div class="table-responsive">
-                            <asp:GridView ID="GridViewUsers" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="token_id" OnSelectedIndexChanged="GridViewUsers_SelectedIndexChanged" OnRowDeleting="GridViewUsers_RowDeleting">
+                            <asp:GridView ID="GridViewUsers" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="token_id" OnSelectedIndexChanged="GridViewUsers_SelectedIndexChanged" OnRowDeleting="GridViewUsers_RowDeleting" AllowPaging="true" PageSize="10" OnPageIndexChanging="GridViewUsers_PageIndexChanging">
                                 <Columns>
                                     <asp:BoundField DataField="token_id" HeaderText="Token ID" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
                                         <HeaderStyle CssClass="visible-lg"></HeaderStyle>
@@ -346,7 +346,8 @@
                                     </asp:TemplateField>
                         
                                 </Columns>
-                                <HeaderStyle CssClass="table table-hover" />
+                                <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
+                                
                             </asp:GridView>
                         </div>
                     </div>
