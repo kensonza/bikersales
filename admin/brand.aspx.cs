@@ -151,8 +151,6 @@ public partial class admin_Default : System.Web.UI.Page {
         Response.Write("<script>");
         Response.Write("window.open('" + strRedirectURL + "','mywindow','width=900,height=625 resizable=yes')");
         Response.Write("</script>");
-
-
     }
 
     // Delete Brand
