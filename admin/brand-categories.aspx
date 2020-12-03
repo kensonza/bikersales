@@ -72,7 +72,7 @@
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="index.aspx">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span>
@@ -113,17 +113,19 @@
                     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Product</h6>
+                            <h6 class="collapse-header">Bikes</h6>
                             <a class="collapse-item" href="brand.aspx">Brand</a>
-                            <a class="collapse-item active" href="brand-categories.aspx">Brand Categories</a>
-                            <h6 class="collapse-header">Customer</h6>
-                            <a class="collapse-item" href="blank.html">Name</a>
-                            <a class="collapse-item" href="blank.html">Order</a>
-                            <h6 class="collapse-header">Staff</h6>
-                            <a class="collapse-item" href="blank.html">Name</a>
+                            <a class="collapse-item active" href="brand-categories.aspx">Categories</a>
+                            <h6 class="collapse-header">Sales</h6>
+                            <a class="collapse-item" href="customer.aspx">Customer</a>
+                            <a class="collapse-item" href="orders.aspx">Orders</a>
                             <h6 class="collapse-header">Inventory</h6>
-                            <a class="collapse-item" href="blank.html">Product</a>
-                            <a class="collapse-item" href="blank.html">Stocks</a>
+                            <a class="collapse-item" href="products.aspx">Products</a>
+                            <a class="collapse-item" href="stocks.aspx">Stocks</a>
+                            <h6 class="collapse-header">Settings</h6>
+                            <a class="collapse-item" href="customer-account.aspx">Customer Account</a>
+                            <a class="collapse-item" href="staff-account.aspx">Staff Account</a>
+                            <a class="collapse-item" href="stores.aspx">Stores</a>
                         </div>
                         
                     </div>
