@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Biker Sales :: Customer</title>
+    <title>Biker Sales :: Orders</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -307,40 +307,26 @@
                 <div class="row">  
                     <div class="col-lg-12 ">  
                         <div class="table-responsive">
-                            <asp:GridView ID="GridViewOrder" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="true" PageSize="10" OnPageIndexChanging="GridViewOrder_PageIndexChanging">
+                            <asp:GridView ID="GridViewOrder" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GridViewOrder_PageIndexChanging">
                                 <Columns>
                         
-                                    <asp:BoundField DataField="order_id" HeaderText="Order ID" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
-                                        <HeaderStyle CssClass="visible-lg"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-lg"></ItemStyle>
-                                    </asp:BoundField>
-                        
-                                    <asp:BoundField DataField="brand" HeaderText="Brand" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                    <asp:TemplateField HeaderText="Order ID" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                        <ItemTemplate>
+                                            <a href="#" onclick="window.open('order-view.aspx?ordid=<%#Eval("order_id") %> ', 'PrintMe', 'height=850px, width=1100px, scrollbars=1');"><%#Eval("order_id") %></a>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
+                                    <asp:BoundField DataField="name" HeaderText="Name" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
                                         <HeaderStyle CssClass="visible-xs"></HeaderStyle>
                                         <ItemStyle CssClass="visible-xs"></ItemStyle>
                                     </asp:BoundField>
 
-                                    <asp:BoundField DataField="product" HeaderText="Product" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                    <asp:BoundField DataField="quantity" HeaderText="Quantity" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
                                         <HeaderStyle CssClass="visible-xs"></HeaderStyle>
                                         <ItemStyle CssClass="visible-xs"></ItemStyle>
                                     </asp:BoundField>
 
-                                    <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                                    </asp:BoundField>
-
-                                    <asp:BoundField DataField="price" HeaderText="Price" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                                    </asp:BoundField>
-                        
-                                    <asp:BoundField DataField="qty" HeaderText="Quantity" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                                    </asp:BoundField>
-
-                                    <asp:BoundField DataField="total" HeaderText="Total Price" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                    <asp:BoundField DataField="total_price" HeaderText="Total Price" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
                                         <HeaderStyle CssClass="visible-xs"></HeaderStyle>
                                         <ItemStyle CssClass="visible-xs"></ItemStyle>
                                     </asp:BoundField>

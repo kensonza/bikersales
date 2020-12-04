@@ -299,7 +299,7 @@
                         <div class="table-responsive">
                             <asp:GridView ID="GridViewCustomer" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="customer_id" AllowPaging="true" PageSize="10" OnPageIndexChanging="GridViewCustomer_PageIndexChanging">
                                 <Columns>
-                        
+
                                     <asp:BoundField DataField="customer_id" HeaderText="Cust ID" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
                                         <HeaderStyle CssClass="visible-lg"></HeaderStyle>
                                         <ItemStyle CssClass="visible-lg"></ItemStyle>
