@@ -38,6 +38,52 @@ public partial class admin_Default : System.Web.UI.Page {
         Response.Redirect("~/login.aspx");
     }
 
+    //Search Users   
+    protected void btnSearch_Click(object sender, EventArgs e) {
+
+        if (txtSearch.Text == "") {
+            GVbind();
+        } else {
+            // SQL Connection
+            SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
+            con.Open();
+
+            SqlCommand sqlcomm = new SqlCommand();
+
+            // Search User Query
+            //String query = "SELECT * FROM production.brands WHERE brand_name LIKE '%" + txtSearch.Text + "%'";
+            String query = "SELECT so.order_id AS order_id, CONCAT(sc.first_name, ' ', sc.last_name) AS name, SUM(soi.quantity) AS quantity, SUM(soi.quantity * soi.list_price) AS total_price, " +
+                            "CASE " +
+                                "WHEN so.order_status = 1 THEN 'New' " +
+                                "WHEN so.order_status = 2 THEN 'Pending' " +
+                                "WHEN so.order_status = 3 THEN 'Cancelled' " +
+                                "WHEN so.order_status = 4 THEN 'Delivered' " +
+                            "END AS Order_Status, " +
+                            "so.order_date AS order_date, so.required_date AS approved_date, so.shipped_date AS shipping_date " +
+                            "FROM sales.orders so " +
+                            "INNER JOIN sales.order_items soi ON so.order_id = soi.order_id " +
+                            "LEFT JOIN sales.customers sc ON so.customer_id = sc.customer_id " +
+                            "WHERE so.order_id LIKE '%" + txtSearch.Text + "%' OR sc.first_name LIKE '%" + txtSearch.Text + "%' OR sc.last_name LIKE '%" + txtSearch.Text + "%' " +
+                            "GROUP BY so.order_id, sc.first_name, sc.last_name, so.order_status, " +
+                            "so.order_date, so.required_date, so.shipped_date";
+            SqlCommand cmd = new SqlCommand(query, con);
+
+            DataTable dt = new DataTable();
+
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            sda.Fill(dt);
+            GridViewOrder.DataSource = dt;
+            GridViewOrder.DataBind();
+
+            if (dt.Rows.Count == 0) {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Warning','No Data found','error')", true);
+                GVbind();
+            }
+
+            con.Close();
+        }
+    }
+
     // View Gridview (Table)
     protected void GVbind() {
         using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString())) {

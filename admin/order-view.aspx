@@ -71,53 +71,298 @@
                         </div>
                 </div>
             </fieldset>
-        
-        <!-- table grid views -->
-        <div class="table-responsive">
-            <asp:GridView ID="GVOrders" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVOrders_PageIndexChanging">
-                <Columns>
+
+        <!-- Status Navigation -->
+        <section>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item waves-effect waves-light">
+                    <a class="nav-link active" id="new-tab" data-toggle="tab" href="#new" role="tab" aria-controls="new" aria-selected="true">New</a>
+                </li>
+                
+                <li class="nav-item waves-effect waves-light">
+                    <a class="nav-link" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="false">Pending</a>
+                </li>
+                
+                <li class="nav-item waves-effect waves-light">
+                    <a class="nav-link" id="cancel-tab" data-toggle="tab" href="#cancel" role="tab" aria-controls="cancel" aria-selected="false">Cancelled</a>
+                </li>
+
+                <li class="nav-item waves-effect waves-light">
+                    <a class="nav-link" id="delivered-tab" data-toggle="tab" href="#delivered" role="tab" aria-controls="delivered" aria-selected="false">Delivered <span class="badge bg-light text-dark">4</span></a>
+                </li>
+            </ul>
+            
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade active show" id="new" role="tabpanel" aria-labelledby="new-tab">
+
+                    <br />
+
+                    <!-- table grid views (New Order) -->
+                    <div class="table-responsive">
+                        <asp:GridView ID="GVOrdNew" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVNewOrders_PageIndexChanging">
+                            <Columns>
                         
-                    <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                    </asp:BoundField>
+                                <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
 
-                    <asp:BoundField DataField="brand" HeaderText="Brand" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                    </asp:BoundField>
+                                <asp:BoundField DataField="brand" HeaderText="Brand" HeaderStyle-CssClass="visible-md" ItemStyle-CssClass="visible-md">
+                                    <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-md"></ItemStyle>
+                                </asp:BoundField>
 
-                    <asp:BoundField DataField="model" HeaderText="Model" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                    </asp:BoundField>
+                                <asp:BoundField DataField="model" HeaderText="Model" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                                    <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                </asp:BoundField>
 
-                    <asp:BoundField DataField="price" HeaderText="Price" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                    </asp:BoundField>
+                                <asp:BoundField DataField="price" HeaderText="Price" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
 
-                    <asp:BoundField DataField="total_price" HeaderText="Total Price" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                    </asp:BoundField>
+                                <asp:BoundField DataField="quantity" HeaderText="Quantity" HeaderStyle-CssClass="visible-md" ItemStyle-CssClass="visible-md">
+                                    <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-md"></ItemStyle>
+                                </asp:BoundField>
 
-                    <asp:BoundField DataField="order_status" HeaderText="Status" ItemStyle-CssClass="visible-md" HeaderStyle-CssClass="visible-md">
-                        <HeaderStyle CssClass="visible-md"></HeaderStyle>
-                        <ItemStyle CssClass="visible-md"></ItemStyle>
-                    </asp:BoundField>
+                                <asp:BoundField DataField="total_price" HeaderText="Total Price" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                                    <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="order_status" HeaderText="Status" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
                                     
-                    <asp:BoundField DataField="order_date" HeaderText="Order Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-lg" HeaderStyle-CssClass="visible-lg">
-                        <HeaderStyle CssClass="visible-lg"></HeaderStyle>
-                        <ItemStyle CssClass="visible-lg"></ItemStyle>
-                    </asp:BoundField>
+                                <asp:BoundField DataField="order_date" HeaderText="Order Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-md" HeaderStyle-CssClass="visible-md">
+                                    <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-md"></ItemStyle>
+                                </asp:BoundField>
 
-                </Columns>
-                <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
-            </asp:GridView>
-        </div>
-                    
-        </div>
+                                <asp:BoundField DataField="approved_date" HeaderText="Approved Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-lg" HeaderStyle-CssClass="visible-lg">
+                                    <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="shipping_date" HeaderText="Shipping Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+
+                            </Columns>
+                            <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
+                        </asp:GridView>
+                    </div>
+
+                </div>
+                
+                <div class="tab-pane fade" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+
+                    <br />
+
+                    <!-- table grid views (Pending Order) -->
+                    <div class="table-responsive">
+                        <asp:GridView ID="GVOrdPending" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVPendingOrders_PageIndexChanging">
+                            <Columns>
+                        
+                                <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="brand" HeaderText="Brand" HeaderStyle-CssClass="visible-md" ItemStyle-CssClass="visible-md">
+                                    <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-md"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="model" HeaderText="Model" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                                    <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="price" HeaderText="Price" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="quantity" HeaderText="Quantity" HeaderStyle-CssClass="visible-md" ItemStyle-CssClass="visible-md">
+                                    <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-md"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="total_price" HeaderText="Total Price" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                                    <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="order_status" HeaderText="Status" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+                                    
+                                <asp:BoundField DataField="order_date" HeaderText="Order Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-md" HeaderStyle-CssClass="visible-md">
+                                    <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-md"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="approved_date" HeaderText="Approved Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-lg" HeaderStyle-CssClass="visible-lg">
+                                    <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="shipping_date" HeaderText="Shipping Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+
+                            </Columns>
+                            <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
+                        </asp:GridView>
+                    </div>
+
+                </div>
+
+                <div class="tab-pane fade" id="cancel" role="tabpanel" aria-labelledby="cancel-tab">
+
+                    <br />
+
+                    <!-- table grid views (Pending Order) -->
+                    <div class="table-responsive">
+                        <asp:GridView ID="GVOrdCancelled" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVCancelledOrders_PageIndexChanging">
+                            <Columns>
+                        
+                                <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="brand" HeaderText="Brand" HeaderStyle-CssClass="visible-md" ItemStyle-CssClass="visible-md">
+                                    <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-md"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="model" HeaderText="Model" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                                    <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="price" HeaderText="Price" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="quantity" HeaderText="Quantity" HeaderStyle-CssClass="visible-md" ItemStyle-CssClass="visible-md">
+                                    <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-md"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="total_price" HeaderText="Total Price" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                                    <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="order_status" HeaderText="Status" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+                                    
+                                <asp:BoundField DataField="order_date" HeaderText="Order Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-md" HeaderStyle-CssClass="visible-md">
+                                    <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-md"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="approved_date" HeaderText="Approved Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-lg" HeaderStyle-CssClass="visible-lg">
+                                    <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="shipping_date" HeaderText="Shipping Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+
+                            </Columns>
+                            <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
+                        </asp:GridView>
+                    </div>
+
+                </div>
+
+                <div class="tab-pane fade" id="delivered" role="tabpanel" aria-labelledby="delivered-tab">
+
+                    <br />
+
+                    <!-- table grid views (Delivered Order) -->
+                    <div class="table-responsive">
+                        <asp:GridView ID="GVOrdersDel" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVOrdersDel_PageIndexChanging">
+                            <Columns>
+                        
+                                <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="brand" HeaderText="Brand" HeaderStyle-CssClass="visible-md" ItemStyle-CssClass="visible-md">
+                                    <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-md"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="model" HeaderText="Model" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                                    <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="price" HeaderText="Price" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="quantity" HeaderText="Quantity" HeaderStyle-CssClass="visible-md" ItemStyle-CssClass="visible-md">
+                                    <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-md"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="total_price" HeaderText="Total Price" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                                    <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="order_status" HeaderText="Status" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+                                    
+                                <asp:BoundField DataField="order_date" HeaderText="Order Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-md" HeaderStyle-CssClass="visible-md">
+                                    <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-md"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="approved_date" HeaderText="Approved Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-lg" HeaderStyle-CssClass="visible-lg">
+                                    <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                </asp:BoundField>
+
+                                <asp:BoundField DataField="shipping_date" HeaderText="Shipping Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+
+                            </Columns>
+                            <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
+                        </asp:GridView>
+                    </div>
+
+                </div>
+            </div>
+      
+        </section>
+        
+       <br />
+        
+       </div>
     </main>
 
 </form>
@@ -131,5 +376,23 @@
         </div>
     </footer>
     <!-- End of Footer -->
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="../js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="../vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="../js/demo/chart-area-demo.js"></script>
+    <script src="../js/demo/chart-pie-demo.js"></script>
+
 </body>
 </html>
