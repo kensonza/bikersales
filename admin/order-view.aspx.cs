@@ -18,6 +18,9 @@ using System.Configuration;
 
 public partial class admin_Default : System.Web.UI.Page {
     protected void Page_Load(object sender, EventArgs e) {
+        // Connection
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
+
         if (Session["User"] == null) {
             Response.Redirect("~/login.aspx");
         }
@@ -29,6 +32,105 @@ public partial class admin_Default : System.Web.UI.Page {
             GVbindCancelled();
             GVbindDel();
         }
+ 
+        // New Count
+        con.Open();
+
+        string queryNew = "SELECT COUNT(*) AS Bilang " +
+                       "FROM sales.orders so " +
+                       "INNER JOIN sales.order_items soi ON so.order_id = soi.order_id " +
+                       "LEFT JOIN sales.customers sc ON so.customer_id = sc.customer_id " +
+                       "LEFT JOIN production.products pp ON soi.product_id = pp.product_id " +
+                       "LEFT JOIN production.categories pc ON pp.category_id = pc.category_id " +
+                       "LEFT JOIN production.brands pb ON pp.brand_id = pb.brand_id " +
+                       "WHERE so.order_status = '1' AND so.order_id =" + Request.QueryString["ordid"];
+
+        using (SqlCommand cmd = new SqlCommand(queryNew)) {
+            using (SqlDataAdapter sda = new SqlDataAdapter()) {
+                cmd.Connection = con;
+                sda.SelectCommand = cmd;
+                using (DataSet ds = new DataSet()) {
+                    sda.Fill(ds);
+                    countNew.Text = ds.Tables[0].Rows[0][0].ToString();
+                }
+            }
+        }
+        con.Close();
+
+        // Pending Count
+        con.Open();
+
+        string queryPending = "SELECT COUNT(*) AS Bilang " +
+                       "FROM sales.orders so " +
+                       "INNER JOIN sales.order_items soi ON so.order_id = soi.order_id " +
+                       "LEFT JOIN sales.customers sc ON so.customer_id = sc.customer_id " +
+                       "LEFT JOIN production.products pp ON soi.product_id = pp.product_id " +
+                       "LEFT JOIN production.categories pc ON pp.category_id = pc.category_id " +
+                       "LEFT JOIN production.brands pb ON pp.brand_id = pb.brand_id " +
+                       "WHERE so.order_status = '2' AND so.order_id =" + Request.QueryString["ordid"];
+
+        using (SqlCommand cmd = new SqlCommand(queryPending)) {
+            using (SqlDataAdapter sda = new SqlDataAdapter()) {
+                cmd.Connection = con;
+                sda.SelectCommand = cmd;
+                using (DataSet ds = new DataSet()) {
+                    sda.Fill(ds);
+                    countPending.Text = ds.Tables[0].Rows[0][0].ToString();
+                }
+            }
+        }
+
+        con.Close();
+
+        // Cancelled Count
+        con.Open();
+
+        string queryCancelled = "SELECT COUNT(*) AS Bilang " +
+                       "FROM sales.orders so " +
+                       "INNER JOIN sales.order_items soi ON so.order_id = soi.order_id " +
+                       "LEFT JOIN sales.customers sc ON so.customer_id = sc.customer_id " +
+                       "LEFT JOIN production.products pp ON soi.product_id = pp.product_id " +
+                       "LEFT JOIN production.categories pc ON pp.category_id = pc.category_id " +
+                       "LEFT JOIN production.brands pb ON pp.brand_id = pb.brand_id " +
+                       "WHERE so.order_status = '3' AND so.order_id =" + Request.QueryString["ordid"];
+
+        using (SqlCommand cmd = new SqlCommand(queryCancelled)) {
+            using (SqlDataAdapter sda = new SqlDataAdapter()) {
+                cmd.Connection = con;
+                sda.SelectCommand = cmd;
+                using (DataSet ds = new DataSet()) {
+                    sda.Fill(ds);
+                    countCancelled.Text = ds.Tables[0].Rows[0][0].ToString();
+                }
+            }
+        }
+
+        con.Close();
+
+        // Delivered Count
+        con.Open();
+        
+            string queryDelivered = "SELECT COUNT(*) AS Bilang " +
+                           "FROM sales.orders so " +
+                           "INNER JOIN sales.order_items soi ON so.order_id = soi.order_id " +
+                           "LEFT JOIN sales.customers sc ON so.customer_id = sc.customer_id " +
+                           "LEFT JOIN production.products pp ON soi.product_id = pp.product_id " +
+                           "LEFT JOIN production.categories pc ON pp.category_id = pc.category_id " +
+                           "LEFT JOIN production.brands pb ON pp.brand_id = pb.brand_id " +
+                           "WHERE so.order_status = '4' AND so.order_id =" + Request.QueryString["ordid"];
+        
+            using (SqlCommand cmd = new SqlCommand(queryDelivered)) {
+                using (SqlDataAdapter sda = new SqlDataAdapter()) {
+                    cmd.Connection = con;
+                    sda.SelectCommand = cmd;
+                    using (DataSet ds = new DataSet()) {
+                        sda.Fill(ds);
+                        countDelivered.Text = ds.Tables[0].Rows[0][0].ToString();
+                    }
+                }
+            }
+        
+        con.Close();
 
     }
 
@@ -268,6 +370,9 @@ public partial class admin_Default : System.Web.UI.Page {
 
     }
 
+    
+
+
     // Pagination New
     protected void GVNewOrders_PageIndexChanging(object sender, GridViewPageEventArgs e) {
         GVOrdNew.PageIndex = e.NewPageIndex;
@@ -294,4 +399,8 @@ public partial class admin_Default : System.Web.UI.Page {
 
 
 
+
+
+
+    
 }

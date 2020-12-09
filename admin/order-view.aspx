@@ -76,19 +76,19 @@
         <section>
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item waves-effect waves-light">
-                    <a class="nav-link active" id="new-tab" data-toggle="tab" href="#new" role="tab" aria-controls="new" aria-selected="true">New</a>
+                    <a class="nav-link active" id="new-tab" data-toggle="tab" href="#new" role="tab" aria-controls="new" aria-selected="true">New <asp:Label ID="countNew" CssClass="badge bg-light text-dark" runat="server"></asp:Label></a>
                 </li>
                 
                 <li class="nav-item waves-effect waves-light">
-                    <a class="nav-link" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="false">Pending</a>
+                    <a class="nav-link" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="false">Pending <asp:Label ID="countPending" CssClass="badge bg-light text-dark" runat="server"></asp:Label></a>
                 </li>
                 
                 <li class="nav-item waves-effect waves-light">
-                    <a class="nav-link" id="cancel-tab" data-toggle="tab" href="#cancel" role="tab" aria-controls="cancel" aria-selected="false">Cancelled</a>
+                    <a class="nav-link" id="cancel-tab" data-toggle="tab" href="#cancel" role="tab" aria-controls="cancel" aria-selected="false">Cancelled <asp:Label ID="countCancelled" CssClass="badge bg-light text-dark" runat="server"></asp:Label></a>
                 </li>
 
                 <li class="nav-item waves-effect waves-light">
-                    <a class="nav-link" id="delivered-tab" data-toggle="tab" href="#delivered" role="tab" aria-controls="delivered" aria-selected="false">Delivered <span class="badge bg-light text-dark">4</span></a>
+                    <a class="nav-link" id="delivered-tab" data-toggle="tab" href="#delivered" role="tab" aria-controls="delivered" aria-selected="false">Delivered <asp:Label ID="countDelivered" CssClass="badge bg-light text-dark" runat="server"></asp:Label></a>
                 </li>
             </ul>
             
@@ -99,7 +99,7 @@
 
                     <!-- table grid views (New Order) -->
                     <div class="table-responsive">
-                        <asp:GridView ID="GVOrdNew" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVNewOrders_PageIndexChanging">
+                        <asp:GridView ID="GVOrdNew" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVNewOrders_PageIndexChanging" ShowFooter="True">
                             <Columns>
                         
                                 <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
@@ -297,7 +297,7 @@
 
                     <!-- table grid views (Delivered Order) -->
                     <div class="table-responsive">
-                        <asp:GridView ID="GVOrdersDel" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVOrdersDel_PageIndexChanging">
+                        <asp:GridView ID="GVOrdersDel" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVOrdersDel_PageIndexChanging" ShowFooter="True">
                             <Columns>
                         
                                 <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
@@ -366,16 +366,6 @@
     </main>
 
 </form>
-    
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright &copy; Biker Sales 2020</span>
-            </div>
-        </div>
-    </footer>
-    <!-- End of Footer -->
 
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>
