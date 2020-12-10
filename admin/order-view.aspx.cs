@@ -188,7 +188,7 @@ public partial class admin_Default : System.Web.UI.Page {
     protected void GVbindNew() {
         using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString())) {
             con.Open();
-            //String query = "SELECT * FROM sales.customers";
+            
             String query = "SELECT so.order_id AS order_id, " +
                            "CONCAT(sc.first_name, ' ', sc.last_name) AS name, " +
                            "CONCAT(sc.street, ' ', sc.city, ' ', sc.state) AS address, " +
@@ -225,23 +225,22 @@ public partial class admin_Default : System.Web.UI.Page {
             if (ds.Tables[0].Rows.Count > 0) {
                 GVOrdNew.DataSource = ds;
 
-                // Total Quantity
+                // Total of Quantity and Total Price
                 int totalQty = 0;
+                double totalPrice = 0;
+
                 foreach (DataRow dr in ds.Tables[0].Rows) {
                     totalQty += Convert.ToInt32(dr["quantity"]);
-                }
-                GVOrdNew.Columns[4].FooterText = totalQty.ToString();
-
-                // Total Price
-                double totalPrice = 0;
-                foreach (DataRow dr in ds.Tables[0].Rows) {
                     totalPrice += Convert.ToDouble(dr["total_price"]);
                 }
                 GVOrdNew.Columns[0].FooterText = "Total:";
+                GVOrdNew.Columns[4].FooterText = totalQty.ToString();
                 GVOrdNew.Columns[5].FooterText = String.Format("{0, 0:C2}", totalPrice);
 
                 GVOrdNew.DataBind();
             }
+
+            con.Close();
         }
 
 
@@ -288,23 +287,22 @@ public partial class admin_Default : System.Web.UI.Page {
             if (ds.Tables[0].Rows.Count > 0) {
                 GVOrdPending.DataSource = ds;
 
-                // Total Quantity
+                // Total of Quantity and Total Price
                 int totalQty = 0;
+                double totalPrice = 0;
+
                 foreach (DataRow dr in ds.Tables[0].Rows) {
                     totalQty += Convert.ToInt32(dr["quantity"]);
-                }
-                GVOrdPending.Columns[4].FooterText = totalQty.ToString();
-
-                // Total Price
-                double totalPrice = 0;
-                foreach (DataRow dr in ds.Tables[0].Rows) {
                     totalPrice += Convert.ToDouble(dr["total_price"]);
                 }
                 GVOrdPending.Columns[0].FooterText = "Total:";
+                GVOrdPending.Columns[4].FooterText = totalQty.ToString();
                 GVOrdPending.Columns[5].FooterText = String.Format("{0, 0:C2}", totalPrice);
 
                 GVOrdPending.DataBind();
             }
+
+            con.Close();
         }
 
 
@@ -351,23 +349,22 @@ public partial class admin_Default : System.Web.UI.Page {
             if (ds.Tables[0].Rows.Count > 0) {
                 GVOrdCancelled.DataSource = ds;
 
-                // Total Quantity
+                // Total of Quantity and Total Price 
                 int totalQty = 0;
+                double totalPrice = 0;
+
                 foreach (DataRow dr in ds.Tables[0].Rows) {
                     totalQty += Convert.ToInt32(dr["quantity"]);
-                }
-                GVOrdCancelled.Columns[4].FooterText = totalQty.ToString();
-
-                // Total Price
-                double totalPrice = 0;
-                foreach (DataRow dr in ds.Tables[0].Rows) {
                     totalPrice += Convert.ToDouble(dr["total_price"]);
                 }
                 GVOrdCancelled.Columns[0].FooterText = "Total:";
+                GVOrdCancelled.Columns[4].FooterText = totalQty.ToString();
                 GVOrdCancelled.Columns[5].FooterText = String.Format("{0, 0:C2}", totalPrice);
-
+                
                 GVOrdCancelled.DataBind();
             }
+
+            con.Close();
         }
 
 
@@ -414,23 +411,22 @@ public partial class admin_Default : System.Web.UI.Page {
             if (ds.Tables[0].Rows.Count > 0) {
                 GVOrdersDel.DataSource = ds;
 
-                // Total Quantity
+                // Total of Quantity and Total Price
                 int totalQty = 0;
+                double totalPrice = 0;
+
                 foreach (DataRow dr in ds.Tables[0].Rows) {
                     totalQty += Convert.ToInt32(dr["quantity"]);
-                }
-                GVOrdersDel.Columns[4].FooterText = totalQty.ToString();
-
-                // Total Price
-                double totalPrice = 0;
-                foreach (DataRow dr in ds.Tables[0].Rows) {
                     totalPrice += Convert.ToDouble(dr["total_price"]);
                 }
+
                 GVOrdersDel.Columns[0].FooterText = "Total:";
+                GVOrdersDel.Columns[4].FooterText = totalQty.ToString();
                 GVOrdersDel.Columns[5].FooterText = String.Format("{0, 0:C2}", totalPrice);
-                
+
                 GVOrdersDel.DataBind();
             }
+
             con.Close();
         }
 

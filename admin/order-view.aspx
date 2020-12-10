@@ -351,6 +351,7 @@
                                 </asp:BoundField>
 
                             </Columns>
+                            <FooterStyle BackColor="White" />
                             <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
                         </asp:GridView>
                     </div>

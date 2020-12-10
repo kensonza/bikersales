@@ -307,7 +307,7 @@
                 <div class="row">  
                     <div class="col-lg-12 ">  
                         <div class="table-responsive">
-                            <asp:GridView ID="GridViewOrder" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GridViewOrder_PageIndexChanging">
+                            <asp:GridView ID="GridViewOrder" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GridViewOrder_PageIndexChanging" ShowFooter="True" FooterStyle-BackColor="White">
                                 <Columns>
                         
                                     <asp:TemplateField HeaderText="Order ID" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">

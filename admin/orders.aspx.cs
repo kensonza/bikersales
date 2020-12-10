@@ -109,6 +109,20 @@ public partial class admin_Default : System.Web.UI.Page {
 
             if (ds.Tables[0].Rows.Count > 0) {
                 GridViewOrder.DataSource = ds;
+
+                // Total of Quantity and Total Price
+                int totalQty = 0;
+                double totalPrice = 0;
+
+                foreach (DataRow dr in ds.Tables[0].Rows) {
+                    totalQty += Convert.ToInt32(dr["quantity"]);
+                    totalPrice += Convert.ToDouble(dr["total_price"]);
+                }
+
+                GridViewOrder.Columns[0].FooterText = "Total:";
+                GridViewOrder.Columns[2].FooterText = totalQty.ToString();
+                GridViewOrder.Columns[3].FooterText = String.Format("{0, 0:C2}", totalPrice);
+
                 GridViewOrder.DataBind();
             }
         }
