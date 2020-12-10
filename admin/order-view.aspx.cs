@@ -17,6 +17,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 
 public partial class admin_Default : System.Web.UI.Page {
+
     protected void Page_Load(object sender, EventArgs e) {
         // Connection
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
@@ -134,6 +135,7 @@ public partial class admin_Default : System.Web.UI.Page {
 
     }
 
+
     protected void viewOrders() {
 
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
@@ -222,6 +224,22 @@ public partial class admin_Default : System.Web.UI.Page {
 
             if (ds.Tables[0].Rows.Count > 0) {
                 GVOrdNew.DataSource = ds;
+
+                // Total Quantity
+                int totalQty = 0;
+                foreach (DataRow dr in ds.Tables[0].Rows) {
+                    totalQty += Convert.ToInt32(dr["quantity"]);
+                }
+                GVOrdNew.Columns[4].FooterText = totalQty.ToString();
+
+                // Total Price
+                double totalPrice = 0;
+                foreach (DataRow dr in ds.Tables[0].Rows) {
+                    totalPrice += Convert.ToDouble(dr["total_price"]);
+                }
+                GVOrdNew.Columns[0].FooterText = "Total:";
+                GVOrdNew.Columns[5].FooterText = String.Format("{0, 0:C2}", totalPrice);
+
                 GVOrdNew.DataBind();
             }
         }
@@ -269,6 +287,22 @@ public partial class admin_Default : System.Web.UI.Page {
 
             if (ds.Tables[0].Rows.Count > 0) {
                 GVOrdPending.DataSource = ds;
+
+                // Total Quantity
+                int totalQty = 0;
+                foreach (DataRow dr in ds.Tables[0].Rows) {
+                    totalQty += Convert.ToInt32(dr["quantity"]);
+                }
+                GVOrdPending.Columns[4].FooterText = totalQty.ToString();
+
+                // Total Price
+                double totalPrice = 0;
+                foreach (DataRow dr in ds.Tables[0].Rows) {
+                    totalPrice += Convert.ToDouble(dr["total_price"]);
+                }
+                GVOrdPending.Columns[0].FooterText = "Total:";
+                GVOrdPending.Columns[5].FooterText = String.Format("{0, 0:C2}", totalPrice);
+
                 GVOrdPending.DataBind();
             }
         }
@@ -316,6 +350,22 @@ public partial class admin_Default : System.Web.UI.Page {
 
             if (ds.Tables[0].Rows.Count > 0) {
                 GVOrdCancelled.DataSource = ds;
+
+                // Total Quantity
+                int totalQty = 0;
+                foreach (DataRow dr in ds.Tables[0].Rows) {
+                    totalQty += Convert.ToInt32(dr["quantity"]);
+                }
+                GVOrdCancelled.Columns[4].FooterText = totalQty.ToString();
+
+                // Total Price
+                double totalPrice = 0;
+                foreach (DataRow dr in ds.Tables[0].Rows) {
+                    totalPrice += Convert.ToDouble(dr["total_price"]);
+                }
+                GVOrdCancelled.Columns[0].FooterText = "Total:";
+                GVOrdCancelled.Columns[5].FooterText = String.Format("{0, 0:C2}", totalPrice);
+
                 GVOrdCancelled.DataBind();
             }
         }
@@ -363,8 +413,25 @@ public partial class admin_Default : System.Web.UI.Page {
 
             if (ds.Tables[0].Rows.Count > 0) {
                 GVOrdersDel.DataSource = ds;
+
+                // Total Quantity
+                int totalQty = 0;
+                foreach (DataRow dr in ds.Tables[0].Rows) {
+                    totalQty += Convert.ToInt32(dr["quantity"]);
+                }
+                GVOrdersDel.Columns[4].FooterText = totalQty.ToString();
+
+                // Total Price
+                double totalPrice = 0;
+                foreach (DataRow dr in ds.Tables[0].Rows) {
+                    totalPrice += Convert.ToDouble(dr["total_price"]);
+                }
+                GVOrdersDel.Columns[0].FooterText = "Total:";
+                GVOrdersDel.Columns[5].FooterText = String.Format("{0, 0:C2}", totalPrice);
+                
                 GVOrdersDel.DataBind();
             }
+            con.Close();
         }
 
 
@@ -396,10 +463,6 @@ public partial class admin_Default : System.Web.UI.Page {
         GVOrdersDel.PageIndex = e.NewPageIndex;
         GVbindDel();
     }
-
-
-
-
 
 
     

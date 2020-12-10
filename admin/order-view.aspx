@@ -99,7 +99,7 @@
 
                     <!-- table grid views (New Order) -->
                     <div class="table-responsive">
-                        <asp:GridView ID="GVOrdNew" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVNewOrders_PageIndexChanging" ShowFooter="True">
+                        <asp:GridView ID="GVOrdNew" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVNewOrders_PageIndexChanging" ShowFooter="True" FooterStyle-BackColor="White">
                             <Columns>
                         
                                 <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
@@ -165,7 +165,7 @@
 
                     <!-- table grid views (Pending Order) -->
                     <div class="table-responsive">
-                        <asp:GridView ID="GVOrdPending" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVPendingOrders_PageIndexChanging">
+                        <asp:GridView ID="GVOrdPending" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVPendingOrders_PageIndexChanging" ShowFooter="True" FooterStyle-BackColor="White">
                             <Columns>
                         
                                 <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
@@ -231,7 +231,7 @@
 
                     <!-- table grid views (Pending Order) -->
                     <div class="table-responsive">
-                        <asp:GridView ID="GVOrdCancelled" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVCancelledOrders_PageIndexChanging">
+                        <asp:GridView ID="GVOrdCancelled" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVCancelledOrders_PageIndexChanging" ShowFooter="True" FooterStyle-BackColor="White">
                             <Columns>
                         
                                 <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
@@ -297,7 +297,7 @@
 
                     <!-- table grid views (Delivered Order) -->
                     <div class="table-responsive">
-                        <asp:GridView ID="GVOrdersDel" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVOrdersDel_PageIndexChanging" ShowFooter="True">
+                        <asp:GridView ID="GVOrdersDel" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVOrdersDel_PageIndexChanging" ShowFooter="True" FooterStyle-BackColor="White">
                             <Columns>
                         
                                 <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
