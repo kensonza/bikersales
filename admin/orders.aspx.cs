@@ -18,8 +18,7 @@ using System.Configuration;
 
 public partial class admin_Default : System.Web.UI.Page {
     protected void Page_Load(object sender, EventArgs e) {
-        if (Session["User"] == null)
-        {
+        if (Session["User"] == null) {
             Response.Redirect("~/login.aspx");
         }
 
