@@ -152,6 +152,12 @@
                                     <ItemStyle CssClass="visible-xs"></ItemStyle>
                                 </asp:BoundField>
 
+                                <asp:TemplateField>
+	                                <ItemTemplate>
+                                        <asp:Button ID="BtnNewModify" runat="server" Text="Modify" ControlStyle-CssClass="btn btn-success" ToolTip="Modify" />
+	                                </ItemTemplate>
+                                </asp:TemplateField>
+
                             </Columns>
                             <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
                         </asp:GridView>
@@ -217,6 +223,12 @@
                                     <HeaderStyle CssClass="visible-xs"></HeaderStyle>
                                     <ItemStyle CssClass="visible-xs"></ItemStyle>
                                 </asp:BoundField>
+
+                                <asp:TemplateField>
+	                                <ItemTemplate>
+                                        <asp:Button ID="BtnPendingModify" runat="server" Text="Modify" ControlStyle-CssClass="btn btn-success" ToolTip="Modify" />
+	                                </ItemTemplate>
+                                </asp:TemplateField>
 
                             </Columns>
                             <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
@@ -284,6 +296,12 @@
                                     <ItemStyle CssClass="visible-xs"></ItemStyle>
                                 </asp:BoundField>
 
+                                <asp:TemplateField>
+	                                <ItemTemplate>
+                                        <asp:Button ID="BtnCancelModify" runat="server" Text="Modify" ControlStyle-CssClass="btn btn-success" ToolTip="Modify" />
+	                                </ItemTemplate>
+                                </asp:TemplateField>
+
                             </Columns>
                             <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
                         </asp:GridView>
@@ -349,6 +367,12 @@
                                     <HeaderStyle CssClass="visible-xs"></HeaderStyle>
                                     <ItemStyle CssClass="visible-xs"></ItemStyle>
                                 </asp:BoundField>
+
+                                <asp:TemplateField>
+	                                <ItemTemplate>
+                                        <asp:Button ID="BtnDelModify" runat="server" Text="Modify" ControlStyle-CssClass="btn btn-success" ToolTip="Modify" />
+	                                </ItemTemplate>
+                                </asp:TemplateField>
 
                             </Columns>
                             <FooterStyle BackColor="White" />
