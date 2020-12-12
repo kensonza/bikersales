@@ -281,9 +281,6 @@
                      </div>
                 </div>
               
-                
-    
-
                 <!-- Search -->
                 <div class="input-group">
                     <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..." ToolTip="Search... using Order ID or First Name or Last Name"></asp:TextBox>
