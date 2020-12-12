@@ -283,7 +283,7 @@
                 
     <form id="form1" runat="server">
 
-                <!-- Search and Add Button -->
+                <!-- Search -->
                 <div class="input-group">
                     <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..." ToolTip="Search... using Order ID or First Name or Last Name"></asp:TextBox>
                         <div class="input-group-append">
@@ -297,8 +297,7 @@
                                 <asp:ListItem Text="Pending" Value="2" />
                                 <asp:ListItem Text="Cancelled" Value="3" />
                                 <asp:ListItem Text="Delivered" Value="4" />
-                            </asp:DropDownList>
-                            
+                            </asp:DropDownList>    
                         </div>
                 </div>
                 
