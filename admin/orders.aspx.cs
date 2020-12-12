@@ -84,13 +84,14 @@ public partial class admin_Default : System.Web.UI.Page {
     }
 
     //Search Status Dropdown
-    protected void DDLStatus_SelectedIndexChanged(object sender, EventArgs e) {
+    protected void DDLStatus_SelectedIndexChanged(object sender, EventArgs e)
+    {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
         con.Open();
-        
+
         if (DDLStatus.SelectedValue == "") {
             GVbind();
-        } else { 
+        } else {
             String query = "SELECT so.order_id AS order_id, CONCAT(sc.first_name, ' ', sc.last_name) AS name, SUM(soi.quantity) AS quantity, SUM(soi.quantity * soi.list_price) AS total_price, " +
                            "CASE " +
                            "WHEN so.order_status = 1 THEN 'New' " +
@@ -105,7 +106,7 @@ public partial class admin_Default : System.Web.UI.Page {
                            "WHERE so.order_status LIKE '%" + DDLStatus.SelectedValue + "%' " +
                            "GROUP BY so.order_id, sc.first_name, sc.last_name, so.order_status, " +
                            "so.order_date, so.required_date, so.shipped_date";
-            
+
             SqlCommand cmd = new SqlCommand(query, con);
 
             DataTable dt = new DataTable();
@@ -115,7 +116,7 @@ public partial class admin_Default : System.Web.UI.Page {
             GridViewOrder.DataSource = dt;
             GridViewOrder.DataBind();
 
-        con.Close();
+            con.Close();
 
         }
     }
@@ -124,14 +125,18 @@ public partial class admin_Default : System.Web.UI.Page {
     protected void GVbind() {
         using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString())) {
             con.Open();
-            String query = "SELECT so.order_id AS order_id, CONCAT(sc.first_name, ' ', sc.last_name) AS name, SUM(soi.quantity) AS quantity, SUM(soi.quantity * soi.list_price) AS total_price, " +
+            String query = "SELECT so.order_id AS order_id, CONCAT(sc.first_name, ' ', sc.last_name) AS name, " +
+                           "SUM(soi.quantity) AS quantity, " +
+                           "SUM(soi.quantity * soi.list_price) AS total_price, " +
                             "CASE " +
                                 "WHEN so.order_status = 1 THEN 'New' " +
                                 "WHEN so.order_status = 2 THEN 'Pending' " +
                                 "WHEN so.order_status = 3 THEN 'Cancelled' " +
                                 "WHEN so.order_status = 4 THEN 'Delivered' " +
                             "END AS Order_Status, " +
-                            "so.order_date AS order_date, so.required_date AS approved_date, so.shipped_date AS shipping_date " +
+                            "so.order_date AS order_date, " +
+                            "so.required_date AS approved_date, " +
+                            "so.shipped_date AS shipping_date " +
                             "FROM sales.orders so " +
                             "INNER JOIN sales.order_items soi ON so.order_id = soi.order_id " +
                             "LEFT JOIN sales.customers sc ON so.customer_id = sc.customer_id " +
@@ -171,6 +176,42 @@ public partial class admin_Default : System.Web.UI.Page {
         GVbind();
     }
 
+    // Export to Excel
+    protected void BtnExcel_Click(object sender, EventArgs e) {
+        Response.Clear();
+        Response.Buffer = true;
+        string filename = "Orders - " + DateTime.Now + ".xls";
+        Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+        Response.Charset = "";
+        Response.ContentType = "application/vnd.ms-excel";
 
-    
+        using (StringWriter sw = new StringWriter()) {
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+            //To Export all pages
+            GridViewOrder.AllowPaging = false;
+            this.GVbind();
+
+            GridViewOrder.GridLines = GridLines.Both;
+            GridViewOrder.HeaderStyle.Font.Bold = true;
+            GridViewOrder.RenderControl(hw);
+
+            //style to format numbers to string
+            string style = @"<style> .textmode { } </style>";
+            Response.Write(style);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+        }
+    }
+
+    public override void VerifyRenderingInServerForm(Control control) {
+        // used for Export RenderControl();
+    }
+
+
+
+
+
+
 }

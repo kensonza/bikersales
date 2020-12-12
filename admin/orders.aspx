@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="orders.aspx.cs" Inherits="admin_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="orders.aspx.cs" Inherits="admin_Default" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -266,7 +266,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-
+<form id="form1" runat="server">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4 dropdown">
                     <h1 class="h3 mb-0 text-gray-800"><span class="fas fa-shopping-cart">&nbsp;</span>Orders</h1>
@@ -274,14 +274,15 @@
                         <span class="fa fa-cogs"></span>
                      </button>
                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCP" title="Export to CSV">CSV</a>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCP" title="Export to Excel">Excel</a>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCP" title="Export to PDF">PDF</a>
+                        <!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCP" title="Export to CSV">CSV</a> -->
+                        <!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCP" title="Export to Excel">Excel</a> -->
+                        <!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCP" title="Export to PDF">PDF</a> -->
+                        <asp:Button ID="BtnExcel" runat="server" class="dropdown-item" data-toggle="modal" data-target="#exampleModalCP" title="Export" Text="Export" OnClick="BtnExcel_Click" />
                      </div>
                 </div>
+              
                 
-                
-    <form id="form1" runat="server">
+    
 
                 <!-- Search -->
                 <div class="input-group">
@@ -406,7 +407,7 @@
         </div>
     </div>
     
-    </form>
+</form>
 
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>
