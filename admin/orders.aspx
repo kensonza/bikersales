@@ -285,19 +285,20 @@
 
                 <!-- Search and Add Button -->
                 <div class="input-group">
-                    <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..." ToolTip="Search... using Order Id or First Name or Last Name"></asp:TextBox>
+                    <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..." ToolTip="Search... using Order ID or First Name or Last Name"></asp:TextBox>
                         <div class="input-group-append">
                             <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-secondary" OnClick="btnSearch_Click" ToolTip="Seach"><i class="fa fa-search"></i></asp:LinkButton>
                         </div>
                         &nbsp;
                         <div>
-                            <select class="form-control">
-                                <option>-- Please Select --</option>
-                                <option>New</option>
-                                <option>Pending</option>
-                                <option>Cancelled</option>
-                                <option>Delivered</option>
-                            </select>
+                            <asp:DropDownList ID="DDLStatus" CssClass="form-control" runat="server" ToolTip="Choose Status" AutoPostBack="True" onselectedindexchanged="DDLStatus_SelectedIndexChanged">
+                                <asp:ListItem Text="-- Choose Status --" Value="" />
+                                <asp:ListItem Text="New" Value="1" />
+                                <asp:ListItem Text="Pending" Value="2" />
+                                <asp:ListItem Text="Cancelled" Value="3" />
+                                <asp:ListItem Text="Delivered" Value="4" />
+                            </asp:DropDownList>
+                            
                         </div>
                 </div>
                 
