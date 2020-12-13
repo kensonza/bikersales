@@ -174,6 +174,8 @@ public partial class admin_Default : System.Web.UI.Page {
 
         SqlDataReader reader = cmd.ExecuteReader();
         while (reader.Read()) {
+            txtModOrdNum.Text = reader["order_id"].ToString(); // View Modify Order Number Modal
+            DropDownListStatus.Text = reader["order_status"].ToString();
             txtOrdNum.Text = reader["order_id"].ToString();
             txtCustName.Text = reader["name"].ToString();
             txtAddress.Text = reader["address"].ToString();
@@ -184,12 +186,14 @@ public partial class admin_Default : System.Web.UI.Page {
         con.Close();
     }
 
+
     // View Gridview New(Table)
     protected void GVbindNew() {
         using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString())) {
             con.Open();
             
             String query = "SELECT so.order_id AS order_id, " +
+                           "soi.item_id AS item_id, " +
                            "CONCAT(sc.first_name, ' ', sc.last_name) AS name, " +
                            "CONCAT(sc.street, ' ', sc.city, ' ', sc.state) AS address, " +
                            "sc.phone AS phone, " +
@@ -252,6 +256,7 @@ public partial class admin_Default : System.Web.UI.Page {
             con.Open();
             //String query = "SELECT * FROM sales.customers";
             String query = "SELECT so.order_id AS order_id, " +
+                           "soi.item_id AS item_id, " +
                            "CONCAT(sc.first_name, ' ', sc.last_name) AS name, " +
                            "CONCAT(sc.street, ' ', sc.city, ' ', sc.state) AS address, " +
                            "sc.phone AS phone, " +
@@ -314,6 +319,7 @@ public partial class admin_Default : System.Web.UI.Page {
             con.Open();
             //String query = "SELECT * FROM sales.customers";
             String query = "SELECT so.order_id AS order_id, " +
+                           "soi.item_id AS item_id, " +
                            "CONCAT(sc.first_name, ' ', sc.last_name) AS name, " +
                            "CONCAT(sc.street, ' ', sc.city, ' ', sc.state) AS address, " +
                            "sc.phone AS phone, " +
@@ -376,6 +382,7 @@ public partial class admin_Default : System.Web.UI.Page {
             con.Open();
             //String query = "SELECT * FROM sales.customers";
             String query = "SELECT so.order_id AS order_id, " +
+                           "soi.item_id AS item_id, " +
                            "CONCAT(sc.first_name, ' ', sc.last_name) AS name, " +
                            "CONCAT(sc.street, ' ', sc.city, ' ', sc.state) AS address, " +
                            "sc.phone AS phone, " +
@@ -460,6 +467,27 @@ public partial class admin_Default : System.Web.UI.Page {
         GVbindDel();
     }
 
+    // Modify Orders Status
+    protected void btnModifyOrder_Click(object sender, EventArgs e) {
+        SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
+        con.Open();
 
-    
+        String queryUpdate = "UPDATE sales.orders SET order_status = @status, required_date = getdate() WHERE order_id =" + Request.QueryString["ordid"];
+        SqlCommand cmdUpdate = new SqlCommand(queryUpdate, con);
+
+        String status = DropDownListStatus.Text;
+        
+        cmdUpdate.Parameters.AddWithValue("@status", status);
+        
+        int y = cmdUpdate.ExecuteNonQuery();
+        if (y > 0) {
+            //Response.Write("<script>alert('Success!')</script>");
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','Record " + Request.QueryString["ordid"] + " has been updated successfully','success')", true);
+        }
+        
+        con.Close();
+        //Response.Redirect("~/admin/order-view.aspx?ordid=" + Request.QueryString["ordid"]);
+    }
+
+
 }

@@ -31,7 +31,15 @@
     <!-- Begin page content -->
     <main role="main" class="flex-shrink-0">
         <div class="container">
-            <h1 class="mt-5"><span class="fas fa-shopping-cart">&nbsp;</span>Orders</h1>
+            <!-- <h1 class="mt-5"><span class="fas fa-shopping-cart">&nbsp;</span>Orders</h1> -->
+            <br />
+            <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4 dropdown">
+                    <h1 class="h3 mb-0 text-gray-800"><span class="fas fa-shopping-cart">&nbsp;</span>Orders</h1>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#adduserModal" title="Modify Orders">
+                        Modify
+                    </button>
+                </div>
 
             <hr />
 
@@ -132,11 +140,11 @@
                                     <ItemStyle CssClass="visible-lg"></ItemStyle>
                                 </asp:BoundField>
 
-                                <asp:BoundField DataField="order_status" HeaderText="Status" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
+                                <asp:BoundField DataField="order_status" HeaderText="Status" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
                                     <HeaderStyle CssClass="visible-xs"></HeaderStyle>
                                     <ItemStyle CssClass="visible-xs"></ItemStyle>
                                 </asp:BoundField>
-                                    
+
                                 <asp:BoundField DataField="order_date" HeaderText="Order Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-md" HeaderStyle-CssClass="visible-md">
                                     <HeaderStyle CssClass="visible-md"></HeaderStyle>
                                     <ItemStyle CssClass="visible-md"></ItemStyle>
@@ -147,18 +155,15 @@
                                     <ItemStyle CssClass="visible-lg"></ItemStyle>
                                 </asp:BoundField>
 
-                                <asp:BoundField DataField="shipping_date" HeaderText="Shipping Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs">
+                                <asp:BoundField DataField="shipping_date" HeaderText="Shipping Date" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-xs" HeaderStyle-CssClass="visible-xs" ReadOnly="true">
                                     <HeaderStyle CssClass="visible-xs"></HeaderStyle>
                                     <ItemStyle CssClass="visible-xs"></ItemStyle>
                                 </asp:BoundField>
 
-                                <asp:TemplateField>
-	                                <ItemTemplate>
-                                        <asp:Button ID="BtnNewModify" runat="server" Text="Modify" ControlStyle-CssClass="btn btn-success" ToolTip="Modify" />
-	                                </ItemTemplate>
-                                </asp:TemplateField>
-
                             </Columns>
+
+<FooterStyle BackColor="White"></FooterStyle>
+
                             <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
                         </asp:GridView>
                     </div>
@@ -173,7 +178,12 @@
                     <div class="table-responsive">
                         <asp:GridView ID="GVOrdPending" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVPendingOrders_PageIndexChanging" ShowFooter="True" FooterStyle-BackColor="White">
                             <Columns>
-                        
+                                
+                                <asp:BoundField DataField="item_id" HeaderText="Item ID" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+
                                 <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
                                     <HeaderStyle CssClass="visible-xs"></HeaderStyle>
                                     <ItemStyle CssClass="visible-xs"></ItemStyle>
@@ -223,12 +233,6 @@
                                     <HeaderStyle CssClass="visible-xs"></HeaderStyle>
                                     <ItemStyle CssClass="visible-xs"></ItemStyle>
                                 </asp:BoundField>
-
-                                <asp:TemplateField>
-	                                <ItemTemplate>
-                                        <asp:Button ID="BtnPendingModify" runat="server" Text="Modify" ControlStyle-CssClass="btn btn-success" ToolTip="Modify" />
-	                                </ItemTemplate>
-                                </asp:TemplateField>
 
                             </Columns>
                             <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
@@ -245,7 +249,12 @@
                     <div class="table-responsive">
                         <asp:GridView ID="GVOrdCancelled" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVCancelledOrders_PageIndexChanging" ShowFooter="True" FooterStyle-BackColor="White">
                             <Columns>
-                        
+                                
+                                <asp:BoundField DataField="item_id" HeaderText="Item ID" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+
                                 <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
                                     <HeaderStyle CssClass="visible-xs"></HeaderStyle>
                                     <ItemStyle CssClass="visible-xs"></ItemStyle>
@@ -295,12 +304,6 @@
                                     <HeaderStyle CssClass="visible-xs"></HeaderStyle>
                                     <ItemStyle CssClass="visible-xs"></ItemStyle>
                                 </asp:BoundField>
-
-                                <asp:TemplateField>
-	                                <ItemTemplate>
-                                        <asp:Button ID="BtnCancelModify" runat="server" Text="Modify" ControlStyle-CssClass="btn btn-success" ToolTip="Modify" />
-	                                </ItemTemplate>
-                                </asp:TemplateField>
 
                             </Columns>
                             <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
@@ -318,6 +321,11 @@
                         <asp:GridView ID="GVOrdersDel" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="order_id" AllowPaging="True" OnPageIndexChanging="GVOrdersDel_PageIndexChanging" ShowFooter="True" FooterStyle-BackColor="White">
                             <Columns>
                         
+                                <asp:BoundField DataField="item_id" HeaderText="Item ID" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                    <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                    <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                </asp:BoundField>
+
                                 <asp:BoundField DataField="category" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
                                     <HeaderStyle CssClass="visible-xs"></HeaderStyle>
                                     <ItemStyle CssClass="visible-xs"></ItemStyle>
@@ -368,12 +376,6 @@
                                     <ItemStyle CssClass="visible-xs"></ItemStyle>
                                 </asp:BoundField>
 
-                                <asp:TemplateField>
-	                                <ItemTemplate>
-                                        <asp:Button ID="BtnDelModify" runat="server" Text="Modify" ControlStyle-CssClass="btn btn-success" ToolTip="Modify" />
-	                                </ItemTemplate>
-                                </asp:TemplateField>
-
                             </Columns>
                             <FooterStyle BackColor="White" />
                             <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
@@ -389,6 +391,45 @@
         
        </div>
     </main>
+
+    <!-- Order Modify Modal -->
+    <div class="modal fade" id="adduserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modify Orders</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                
+               <div class="form-group row">
+                    <label class="col-sm-5 col-form-label">Order Number</label>
+                        <div class="col-sm-12">
+                            <asp:TextBox ID="txtModOrdNum" class="form-control" runat="server" ReadOnly="true"></asp:TextBox>
+                        </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label for="inputEmail" class="col-sm-5 col-form-label">Status</label>
+                        <div class="col-sm-12">
+                            <asp:DropDownList ID="DropDownListStatus" CssClass="form-control" runat="server" ToolTip="Choose Status">
+                                <asp:ListItem Value="1">New</asp:ListItem>
+                                <asp:ListItem Value="2">Pending</asp:ListItem>
+                                <asp:ListItem Value="3">Cancelled</asp:ListItem>
+                                <asp:ListItem Value="4">Delivered</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    <asp:Button ID="btnModifyOrder" class="btn btn-primary" runat="server" Text="Save" OnClick="btnModifyOrder_Click"/>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </form>
 
