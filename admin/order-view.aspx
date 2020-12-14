@@ -25,6 +25,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js" type="text/javascript"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css" rel="stylesheet" />
 
+    <!-- Modify Dropdown Validation -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function () {
+        $("#DropDownListStatus").change(function () {
+            if ($(this).val() == 4) {
+                $("#txtdelDate").removeAttr("disabled");
+                $("#txtdelDate").focus();
+            } else {
+                $("#txtdelDate").attr("disabled", "disabled");
+            }
+        });
+    });
+    </script>
+
 </head>
 <body class="d-flex flex-column h-100">
 <form id="form1" runat="server">
@@ -423,6 +438,13 @@
                         </div>
                 </div>
 
+                <div class="form-group row">
+                    <label class="col-sm-5 col-form-label">Delivery Date</label>
+                        <div class="col-sm-12">
+                            <asp:TextBox ID="txtdelDate" class="form-control datepicker" runat="server" disabled="disabled"></asp:TextBox>
+                        </div>
+                </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                     <asp:Button ID="btnModifyOrder" class="btn btn-primary" runat="server" Text="Save" OnClick="btnModifyOrder_Click"/>
@@ -449,6 +471,21 @@
     <!-- Page level custom scripts -->
     <script src="../js/demo/chart-area-demo.js"></script>
     <script src="../js/demo/chart-pie-demo.js"></script>
+
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  	<link rel="stylesheet" href="/resources/demos/style.css">
+  	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+    $(function () {
+        $.datepicker.setDefaults($.datepicker.regional['nl']);
+        $.datepicker.setDefaults({ dateFormat: 'yy-mm-dd' });
+        //Later..
+        $('.datepicker').datepicker();
+    });
+    </script>
 
 </body>
 </html>

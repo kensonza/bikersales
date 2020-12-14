@@ -472,19 +472,34 @@ public partial class admin_Default : System.Web.UI.Page {
         SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString());
         con.Open();
 
-        String queryUpdate = "UPDATE sales.orders SET order_status = @status, required_date = getdate() WHERE order_id =" + Request.QueryString["ordid"];
-        SqlCommand cmdUpdate = new SqlCommand(queryUpdate, con);
-
         String status = DropDownListStatus.Text;
+        String deldate = txtdelDate.Text;
+
+        if (status == "4") {
+            String queryUpdate = "UPDATE sales.orders SET order_status = @status, shipped_date = @deldate WHERE order_id =" + Request.QueryString["ordid"];
+            SqlCommand cmdUpdate = new SqlCommand(queryUpdate, con);
+            
+            cmdUpdate.Parameters.AddWithValue("@status", status);
+            cmdUpdate.Parameters.AddWithValue("@deldate", deldate);
+
+            int y = cmdUpdate.ExecuteNonQuery();
+            if (y > 0) {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','Record " + Request.QueryString["ordid"] + " has been updated successfully','success')", true);
+            }
         
-        cmdUpdate.Parameters.AddWithValue("@status", status);
-        
-        int y = cmdUpdate.ExecuteNonQuery();
-        if (y > 0) {
-            //Response.Write("<script>alert('Success!')</script>");
-            ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','Record " + Request.QueryString["ordid"] + " has been updated successfully','success')", true);
+        } else {
+            String queryUpdate = "UPDATE sales.orders SET order_status = @status, required_date = getdate(), shipped_date = NULL WHERE order_id =" + Request.QueryString["ordid"];
+            SqlCommand cmdUpdate = new SqlCommand(queryUpdate, con);
+
+            cmdUpdate.Parameters.AddWithValue("@status", status);
+
+            int y = cmdUpdate.ExecuteNonQuery();
+            if (y > 0) {
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('Success!','Record " + Request.QueryString["ordid"] + " has been updated successfully','success')", true);
+            }
+
         }
-        
+
         con.Close();
         //Response.Redirect("~/admin/order-view.aspx?ordid=" + Request.QueryString["ordid"]);
     }
