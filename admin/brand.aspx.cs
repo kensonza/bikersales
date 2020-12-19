@@ -40,7 +40,7 @@ public partial class admin_Default : System.Web.UI.Page {
         Response.Redirect("~/login.aspx");
     }
 
-    //Search Users   
+    //Search Brand   
     protected void btnSearch_Click(object sender, EventArgs e) {
 
         if (txtSearch.Text == "") {
@@ -183,7 +183,7 @@ public partial class admin_Default : System.Web.UI.Page {
             // Open connection for brand db delete
             con.Open();
 
-            // DELETE user
+            // DELETE brand
             String query = "DELETE FROM production.brands WHERE brand_id = '" + bid + "'";
             SqlCommand cmd = new SqlCommand(query, con);
 

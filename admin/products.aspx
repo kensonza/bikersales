@@ -48,7 +48,7 @@
                     });
             return false;
         }
-</script>
+    </script>
 
 </head>
 
@@ -277,7 +277,7 @@
                 <div class="input-group">
                     <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..."></asp:TextBox>
                         <div class="input-group-append">
-                            <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-secondary" ToolTip="Seach"><i class="fa fa-search"></i></asp:LinkButton>
+                            <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-secondary" OnClick="btnSearch_Click" ToolTip="Seach"><i class="fa fa-search"></i></asp:LinkButton>
                         </div>
                         <div>
                             &nbsp;
@@ -295,12 +295,17 @@
                 <div class="row">  
                     <div class="col-lg-12 ">  
                         <div class="table-responsive">
-                            <asp:GridView ID="GridViewProducts" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="product_id" AllowPaging="true" PageSize="10" OnPageIndexChanging="GridViewProducts_PageIndexChanging">
+                            <asp:GridView ID="GridViewProducts" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="product_id" OnRowDeleting="GridViewProducts_RowDeleting" AllowPaging="true" PageSize="10" OnPageIndexChanging="GridViewProducts_PageIndexChanging">
                                 <Columns>
                         
-                                    <asp:BoundField DataField="product_id" HeaderText="ID" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
-                                        <HeaderStyle CssClass="visible-lg"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                    <asp:BoundField DataField="product_id" HeaderText="ID" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
+
+                                    <asp:BoundField DataField="sku" HeaderText="SKU" HeaderStyle-CssClass="visible-md" ItemStyle-CssClass="visible-md">
+                                        <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-md"></ItemStyle>
                                     </asp:BoundField>
 
                                     <asp:TemplateField>
@@ -309,9 +314,9 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
-                                    <asp:BoundField DataField="cat_name" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    <asp:BoundField DataField="cat_name" HeaderText="Category" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                                        <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-lg"></ItemStyle>
                                     </asp:BoundField>
 
                                     <asp:BoundField DataField="brand_name" HeaderText="Brand" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
@@ -319,9 +324,14 @@
                                         <ItemStyle CssClass="visible-xs"></ItemStyle>
                                     </asp:BoundField>
 
-                                    <asp:BoundField DataField="prod_name" HeaderText="Product" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    <asp:BoundField DataField="prod_name" HeaderText="Product" HeaderStyle-CssClass="visible-md" ItemStyle-CssClass="visible-md">
+                                        <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-md"></ItemStyle>
+                                    </asp:BoundField>
+
+                                    <asp:BoundField DataField="price" HeaderText="Price" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                                        <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-lg"></ItemStyle>
                                     </asp:BoundField>
 
                                     <asp:BoundField DataField="model_year" HeaderText="Model Year" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
@@ -342,7 +352,7 @@
                                     <asp:TemplateField>
 	                                    <ItemTemplate>
                                             <asp:Button ID="btnEdit" runat="server" Text="Edit" ControlStyle-CssClass="btn btn-success" ToolTip="Edit"/>
-                                            <asp:Button ID="btnDelete" runat="server" Text="Delete" ControlStyle-CssClass="btn btn-danger" ToolTip="Delete"/>
+                                            <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Delete" ControlStyle-CssClass="btn btn-danger" ShowDeleteButton="True" OnClientClick="return confirmDelete(this);"  ToolTip="Delete"/>
 	                                    </ItemTemplate>
                                     </asp:TemplateField>
                                     
@@ -412,37 +422,39 @@
                 </div>
                 <div class="modal-body">
                 <div class="form-group row">
-                    <label for="inputUsername" class="col-sm-5 col-form-label">SKU</label>
+                    <label for="inputSKU" class="col-sm-5 col-form-label">SKU</label>
                         <div class="col-sm-12">
-                            <asp:TextBox ID="txtSKU" class="form-control" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="txtSKU" class="form-control" MaxLength="12" runat="server"></asp:TextBox>
                         </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputUsername" class="col-sm-5 col-form-label">Product Name</label>
+                    <label for="inputProdName" class="col-sm-5 col-form-label">Product Name</label>
                         <div class="col-sm-12">
                             <asp:TextBox ID="txtProdName" class="form-control" runat="server"></asp:TextBox>
                         </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputUsername" class="col-sm-5 col-form-label">Category</label>
+                    <label for="inputCategory" class="col-sm-5 col-form-label">Category</label>
                         <div class="col-sm-12">
                             <asp:DropDownList ID="DDLCategory" class="form-control" runat="server">
+                                <asp:ListItem></asp:ListItem>
                             </asp:DropDownList>
                         </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputUsername" class="col-sm-5 col-form-label">Brand</label>
+                    <label for="inputBrand" class="col-sm-5 col-form-label">Brand</label>
                         <div class="col-sm-12">
                             <asp:DropDownList ID="DDLBrand" class="form-control" runat="server">
+                                <asp:ListItem></asp:ListItem>
                             </asp:DropDownList>
                         </div>
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputUsername" class="col-sm-5 col-form-label">Model Year</label>
+                    <label for="inputModelYear" class="col-sm-5 col-form-label">Model Year</label>
                         <div class="col-sm-12">
                             <asp:TextBox ID="txtModelYear" class="form-control datepicker" runat="server"></asp:TextBox>
                         </div>
@@ -456,7 +468,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="inputUsername" class="col-sm-5 col-form-label">Price</label>
+                    <label for="inputPrice" class="col-sm-5 col-form-label">Price</label>
                         <div class="col-sm-12">
                             <asp:TextBox ID="txtPrice" class="form-control" runat="server"></asp:TextBox>
                         </div>
@@ -464,7 +476,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-                    <asp:Button ID="btnAddBrand" class="btn btn-primary" runat="server" Text="Save"/>
+                    <asp:Button ID="btnAddProd" class="btn btn-primary" runat="server" Text="Save" OnClick="btnAddProd_Click"/>
                 </div>
             </div>
         </div>
