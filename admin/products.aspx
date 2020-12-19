@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="customer.aspx.cs" Inherits="admin_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="products.aspx.cs" Inherits="admin_Default" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Biker Sales :: Customer</title>
+    <title>Biker Sales :: Products</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -117,10 +117,10 @@
                             <a class="collapse-item" href="brand.aspx">Brand</a>
                             <a class="collapse-item" href="brand-categories.aspx">Categories</a>
                             <h6 class="collapse-header">Sales</h6>
-                            <a class="collapse-item active" href="customer.aspx">Customer</a>
+                            <a class="collapse-item" href="customer.aspx">Customer</a>
                             <a class="collapse-item" href="orders.aspx">Orders</a>
                             <h6 class="collapse-header">Inventory</h6>
-                            <a class="collapse-item" href="products.aspx">Products</a>
+                            <a class="collapse-item active" href="products.aspx">Products</a>
                             <a class="collapse-item" href="stocks.aspx">Stocks</a>
                             <h6 class="collapse-header">Settings</h6>
                             <a class="collapse-item" href="customer-account.aspx">Customer Account</a>
@@ -266,83 +266,69 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-        <form id="form1" runat="server">
+
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4 dropdown">
-                    <h1 class="h3 mb-0 text-gray-800"><span class="fa fa-user">&nbsp;</span>Customer</h1>
-                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Options">
-                        <span class="fa fa-cogs"></span>
-                     </button>
-                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCP" title="Export to CSV">CSV</a> -->
-                        <!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCP" title="Export to Excel">Excel</a> -->
-                        <!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCP" title="Export to PDF">PDF</a> -->
-                        <asp:Button ID="BtnExcel" runat="server" class="dropdown-item" data-toggle="modal" data-target="#exampleModalCP" title="Export" Text="Export" OnClick="BtnExcel_Click" />
-                     </div>
-                </div>
+                <h1 class="h3 mb-4 text-gray-800"><span class="fa fa-bicycle">&nbsp;</span>Products</h1>
+                
+                
+    <form id="form1" runat="server">
 
                 <!-- Search and Add Button -->
                 <div class="input-group">
-                    <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..." ToolTip="Search... using First Name or Last Name"></asp:TextBox>
+                    <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..."></asp:TextBox>
                         <div class="input-group-append">
-                            <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-secondary" OnClick="btnSearch_Click" ToolTip="Seach"><i class="fa fa-search"></i></asp:LinkButton>
+                            <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-secondary" ToolTip="Seach"><i class="fa fa-search"></i></asp:LinkButton>
+                        </div>
+                        <div>
+                            &nbsp;
+                        </div>  
+                        <div class="col-xs-2">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addbrandModal" title="New">
+                                New
+                            </button>
                         </div>
                 </div>
                 
                 <br />
-
+               
                 <!-- table grid views -->
                 <div class="row">  
                     <div class="col-lg-12 ">  
                         <div class="table-responsive">
-                            <asp:GridView ID="GridViewCustomer" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="customer_id" AllowPaging="true" PageSize="10" OnPageIndexChanging="GridViewCustomer_PageIndexChanging">
+                            <asp:GridView ID="GridViewProducts" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="product_id" AllowPaging="true" PageSize="10" OnPageIndexChanging="GridViewProducts_PageIndexChanging">
                                 <Columns>
-
-                                    <asp:BoundField DataField="customer_id" HeaderText="Cust ID" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                        
+                                    <asp:BoundField DataField="product_id" HeaderText="ID" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
                                         <HeaderStyle CssClass="visible-lg"></HeaderStyle>
                                         <ItemStyle CssClass="visible-lg"></ItemStyle>
                                     </asp:BoundField>
+
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:Image ID="img" runat="server" Width="40px" Height="40px" ImageUrl='<%#Eval("prod_image","~/img/products/{0}") %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
+                                    <asp:BoundField DataField="cat_name" HeaderText="Category" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
+
+                                    <asp:BoundField DataField="brand_name" HeaderText="Brand" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
+
+                                    <asp:BoundField DataField="prod_name" HeaderText="Product" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
+
+                                    <asp:BoundField DataField="model_year" HeaderText="Model Year" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                    </asp:BoundField>
                         
-                                    <asp:BoundField DataField="first_name" HeaderText="First Name" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                                    </asp:BoundField>
-
-                                    <asp:BoundField DataField="last_name" HeaderText="Last Name" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                                    </asp:BoundField>
-
-                                    <asp:BoundField DataField="phone" HeaderText="Phone" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                                    </asp:BoundField>
-
-                                    <asp:BoundField DataField="email" HeaderText="Email" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                                    </asp:BoundField>
-                        
-                                    <asp:BoundField DataField="street" HeaderText="Street" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                                    </asp:BoundField>
-
-                                    <asp:BoundField DataField="city" HeaderText="City" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                                    </asp:BoundField>
-
-                                    <asp:BoundField DataField="state" HeaderText="State" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                                    </asp:BoundField>
-
-                                    <asp:BoundField DataField="zip_code" HeaderText="Zip Code" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
-                                        <HeaderStyle CssClass="visible-xs"></HeaderStyle>
-                                        <ItemStyle CssClass="visible-xs"></ItemStyle>
-                                    </asp:BoundField>
-
                                     <asp:BoundField DataField="date_created" HeaderText="Date Created" DataFormatString="{0:MM/dd/yyyy}" ItemStyle-CssClass="visible-md" HeaderStyle-CssClass="visible-md">
                                         <HeaderStyle CssClass="visible-md"></HeaderStyle>
                                         <ItemStyle CssClass="visible-md"></ItemStyle>
@@ -353,13 +339,19 @@
                                         <ItemStyle CssClass="visible-lg"></ItemStyle>
                                     </asp:BoundField>
 
+                                    <asp:TemplateField>
+	                                    <ItemTemplate>
+                                            <asp:Button ID="btnEdit" runat="server" Text="Edit" ControlStyle-CssClass="btn btn-success" ToolTip="Edit"/>
+                                            <asp:Button ID="btnDelete" runat="server" Text="Delete" ControlStyle-CssClass="btn btn-danger" ToolTip="Delete"/>
+	                                    </ItemTemplate>
+                                    </asp:TemplateField>
+                                    
                                 </Columns>
                                 <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
-                            </asp:GridView>
+                            </asp:GridView> 
                         </div>
                     </div>
                 </div>
-                
 
             </div>
             <!-- /.container-fluid -->
@@ -407,6 +399,80 @@
             </div>
         </div>
     </div>
+
+    <!-- Add Product Modal Modal -->
+    <div class="modal fade" id="addbrandModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <div class="form-group row">
+                    <label for="inputUsername" class="col-sm-5 col-form-label">SKU</label>
+                        <div class="col-sm-12">
+                            <asp:TextBox ID="txtSKU" class="form-control" runat="server"></asp:TextBox>
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputUsername" class="col-sm-5 col-form-label">Product Name</label>
+                        <div class="col-sm-12">
+                            <asp:TextBox ID="txtProdName" class="form-control" runat="server"></asp:TextBox>
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputUsername" class="col-sm-5 col-form-label">Category</label>
+                        <div class="col-sm-12">
+                            <asp:DropDownList ID="DDLCategory" class="form-control" runat="server">
+                                <asp:ListItem>admin</asp:ListItem>
+                                <asp:ListItem>member</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputUsername" class="col-sm-5 col-form-label">Brand</label>
+                        <div class="col-sm-12">
+                            <asp:DropDownList ID="DDLBrand" class="form-control" runat="server">
+                                <asp:ListItem>admin</asp:ListItem>
+                                <asp:ListItem>member</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputUsername" class="col-sm-5 col-form-label">Model Year</label>
+                        <div class="col-sm-12">
+                            <asp:TextBox ID="txtModelYear" class="form-control datepicker" runat="server"></asp:TextBox>
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputImage" class="col-sm-5 col-form-label">Image</label>
+                        <div class="col-sm-12">
+                            <asp:FileUpload ID="fileUploadImageProd" runat="server" />
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputUsername" class="col-sm-5 col-form-label">Price</label>
+                        <div class="col-sm-12">
+                            <asp:TextBox ID="txtPrice" class="form-control" runat="server"></asp:TextBox>
+                        </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    <asp:Button ID="btnAddBrand" class="btn btn-primary" runat="server" Text="Save"/>
+                </div>
+            </div>
+        </div>
+    </div>
     
     </form>
 
@@ -428,7 +494,18 @@
     <script src="../js/demo/chart-pie-demo.js"></script>
 
      
+    <!-- Datepicker Year Only -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
+    
+    <script>
+        $(".datepicker").datepicker({
+            format: " yyyy",
+            viewMode: "years",
+            minViewMode: "years"
+        });
+    </script>
 
 </body>
-
 </html>

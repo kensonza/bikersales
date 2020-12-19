@@ -95,5 +95,43 @@ public partial class admin_Default : System.Web.UI.Page {
         GVbind();
     }
 
+    // Export to Excel
+    protected void BtnExcel_Click(object sender, EventArgs e) {
+        
+        Response.Clear();
+        Response.Buffer = true;
+        string filename = "Customers - " + DateTime.Now + ".xls";
+        Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+        Response.Charset = "";
+        Response.ContentType = "application/vnd.ms-excel";
+
+        using (StringWriter sw = new StringWriter()) {
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+            //To Export all pages
+            GridViewCustomer.AllowPaging = false;
+            this.GVbind();
+
+            GridViewCustomer.GridLines = GridLines.Both;
+            GridViewCustomer.HeaderStyle.Font.Bold = true;
+            GridViewCustomer.RenderControl(hw);
+
+            //style to format numbers to string
+            string style = @"<style> .textmode { } </style>";
+            Response.Write(style);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+        }
+    }
+
+    public override void VerifyRenderingInServerForm(Control control) {
+        // used for Export RenderControl();
+    }
+
+
+
+
+
 
 }
