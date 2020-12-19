@@ -29,6 +29,48 @@ public partial class admin_Default : System.Web.UI.Page {
         // Post GridVIew
         if (!IsPostBack) {
             GVbind();
+
+
+            // Add Product, Categories DropDownList
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString())) {
+                string queryCat = "SELECT category_id, category_name FROM production.categories";
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(queryCat)) {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = con;
+                    using (SqlDataReader sdr = cmd.ExecuteReader()) {
+                        while (sdr.Read()) {
+                            ListItem item = new ListItem();
+                            item.Text = sdr["category_name"].ToString();
+                            item.Value = sdr["category_id"].ToString();
+                            //item.Selected = Convert.ToBoolean(sdr["IsSelected"]);
+                            DDLCategory.Items.Add(item);
+                        }
+                    }
+                }
+                //con.Close();
+            
+            // Add Product, Brand DropDownList
+                string queryBrand = "SELECT brand_id, brand_name FROM production.brands";
+                //con.Open();
+                using (SqlCommand cmd = new SqlCommand(queryBrand)) {
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = con;
+                    using (SqlDataReader sdr = cmd.ExecuteReader()) {
+                        while (sdr.Read()) {
+                            ListItem item = new ListItem();
+                            item.Text = sdr["brand_name"].ToString();
+                            item.Value = sdr["brand_id"].ToString();
+                            //item.Selected = Convert.ToBoolean(sdr["IsSelected"]);
+                            DDLBrand.Items.Add(item);
+                        }
+                    }
+                }
+                con.Close();
+            }
+
+            DDLCategory.Items.Insert(0, new ListItem("-- Select Categories --", "0"));
+            DDLBrand.Items.Insert(0, new ListItem("-- Select Brand --", "0"));
         }
 
     }
@@ -39,8 +81,6 @@ public partial class admin_Default : System.Web.UI.Page {
         Session.Remove("User");
         Response.Redirect("~/login.aspx");
     }
-
-    
 
     // View Products Gridview (Table)
     protected void GVbind() {

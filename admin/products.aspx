@@ -429,8 +429,6 @@
                     <label for="inputUsername" class="col-sm-5 col-form-label">Category</label>
                         <div class="col-sm-12">
                             <asp:DropDownList ID="DDLCategory" class="form-control" runat="server">
-                                <asp:ListItem>admin</asp:ListItem>
-                                <asp:ListItem>member</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                 </div>
@@ -439,8 +437,6 @@
                     <label for="inputUsername" class="col-sm-5 col-form-label">Brand</label>
                         <div class="col-sm-12">
                             <asp:DropDownList ID="DDLBrand" class="form-control" runat="server">
-                                <asp:ListItem>admin</asp:ListItem>
-                                <asp:ListItem>member</asp:ListItem>
                             </asp:DropDownList>
                         </div>
                 </div>
