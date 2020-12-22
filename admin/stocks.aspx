@@ -120,8 +120,8 @@
                             <a class="collapse-item" href="customer.aspx">Customer</a>
                             <a class="collapse-item" href="orders.aspx">Orders</a>
                             <h6 class="collapse-header">Inventory</h6>
-                            <a class="collapse-item active" href="products.aspx">Products</a>
-                            <a class="collapse-item" href="stocks.aspx">Stocks</a>
+                            <a class="collapse-item" href="products.aspx">Products</a>
+                            <a class="collapse-item active" href="stocks.aspx">Stocks</a>
                             <h6 class="collapse-header">Settings</h6>
                             <a class="collapse-item" href="customer-account.aspx">Customer Account</a>
                             <a class="collapse-item" href="staff-account.aspx">Staff Account</a>
@@ -283,19 +283,86 @@
                      </div>
                 </div>
                 
-                <!-- Search and Add Button -->
-                <div class="input-group">
-                    <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..."></asp:TextBox>
-                        <div class="input-group-append">
-                            <asp:LinkButton ID="btnSearch" runat="server" class="btn btn-secondary" ToolTip="Seach"><i class="fa fa-search"></i></asp:LinkButton>
+                <!-- Content Row -->
+                <div class="row">
+
+                     <!-- Total Products Card -->
+                     <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Total Products
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">321</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fa fa-bicycle fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                      </div>
+
+                     <!-- Low Stock Products Card -->
+                     <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Low Stock Products
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">2</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-box-open fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                     </div>                
+                
+                     <!-- Out of Stock Products Card -->
+                     <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-danger shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Out of Stock Products
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">6</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-box-open fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+
+                    <!-- Restock Products Card -->
+                     <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Restock Products
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">50</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-box-open fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     </div>   
+                
                 </div>
-                
-                <br />
-                
-                
-
-
 
                
                 
