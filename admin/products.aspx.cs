@@ -215,7 +215,7 @@ public partial class admin_Default : System.Web.UI.Page {
             String imageSize = fileUploadImageProd.PostedFile.ContentLength.ToString();
             String imageType = fileUploadImageProd.PostedFile.ContentType;
 
-            // Insert Brand Image
+            // Insert Product Image
             String query = "INSERT INTO production.products (sku, product_name, brand_id, category_id, model_year, list_price, product_image, product_image_size, product_image_type, date_created) " +
                            "VALUES('" + txtSKU.Text + "', '" + txtProdName.Text + "', '" + DDLBrand.Text + "', '" + DDLCategory.Text + "', '" + txtModelYear.Text + "', '" + txtPrice.Text + "', @image, @size, @type, getdate())";
             SqlCommand cmd = new SqlCommand(query, con);
@@ -239,6 +239,16 @@ public partial class admin_Default : System.Web.UI.Page {
         con.Close();
     }
 
+    //Edit User
+    protected void GridViewProducts_SelectedIndexChanged(object sender, EventArgs e) {
+        
+        String pid = GridViewProducts.SelectedRow.Cells[0].Text;
+        String strRedirectURL = "";
+        strRedirectURL = "edit-products.aspx?pid=" + pid;
+        Response.Write("<script>");
+        Response.Write("window.open('" + strRedirectURL + "','mywindow','width=900,height=625 resizable=yes')");
+        Response.Write("</script>");
+    }
 
     // Delete Brand
     protected void GridViewProducts_RowDeleting(object sender, GridViewDeleteEventArgs e) {
@@ -246,6 +256,7 @@ public partial class admin_Default : System.Web.UI.Page {
         int pid = Convert.ToInt32(GridViewProducts.DataKeys[e.RowIndex].Value.ToString());
 
         using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString())) {
+            
             // Open connection for image path delete
             con.Open();
 
@@ -285,19 +296,61 @@ public partial class admin_Default : System.Web.UI.Page {
 
     }
 
-
-
-
-
-
-
     // Pagination
     protected void GridViewProducts_PageIndexChanging(object sender, GridViewPageEventArgs e) {
         GridViewProducts.PageIndex = e.NewPageIndex;
         GVbind();
     }
 
+    // Export to Excel
+    protected void BtnExcel_Click(object sender, EventArgs e) {
+        Response.Clear();
+        Response.Buffer = true;
+        string filename = "Products - " + DateTime.Now + ".xls";
+        Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+        Response.Charset = "";
+        Response.ContentType = "application/vnd.ms-excel";
 
+        using (StringWriter sw = new StringWriter()) {
+            HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+            //To Export all pages
+            GridViewProducts.AllowPaging = false;
+            this.GVbind();
+
+            // Hide Header the first column in the grid (zero-based index)
+            GridViewProducts.HeaderRow.Cells[2].Visible = false; // image header
+            GridViewProducts.HeaderRow.Cells[10].Visible = false; // edit/delete button header
+
+            // Hide Footer the first column in the grid (zero-based index)
+            GridViewProducts.FooterRow.Cells[2].Visible = false;
+            GridViewProducts.FooterRow.Cells[10].Visible = false;
+
+            // Loop through the rows and hide the cell in the first column
+            for (int i = 0; i < GridViewProducts.Rows.Count; i++) {
+                GridViewRow row = GridViewProducts.Rows[i];
+                // Hide Image cell
+                row.Cells[2].Visible = false;
+                // Hide Edit/Delete button cell
+                row.Cells[10].Visible = false;
+            }
+
+            GridViewProducts.GridLines = GridLines.Both;
+            GridViewProducts.HeaderStyle.Font.Bold = true;
+            GridViewProducts.RenderControl(hw);
+
+            //style to format numbers to string
+            string style = @"<style> .textmode { } </style>";
+            Response.Write(style);
+            Response.Output.Write(sw.ToString());
+            Response.Flush();
+            Response.End();
+        }
+    }
+
+    public override void VerifyRenderingInServerForm(Control control) {
+        // used for Export RenderControl();
+    }
 
 
 

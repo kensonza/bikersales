@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="products.aspx.cs" Inherits="admin_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="products.aspx.cs" Inherits="admin_Default" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -266,12 +266,23 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-
-                <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800"><span class="fa fa-bicycle">&nbsp;</span>Products</h1>
-                
-                
     <form id="form1" runat="server">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4 dropdown">
+                    <h1 class="h3 mb-0 text-gray-800"><span class="fa fa-bicycle">&nbsp;</span>Products</h1>
+                    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Options">
+                        <span class="fa fa-cogs"></span>
+                     </button>
+                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCP" title="Export to CSV">CSV</a> -->
+                        <!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCP" title="Export to Excel">Excel</a> -->
+                        <!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCP" title="Export to PDF">PDF</a> -->
+                        <asp:Button ID="BtnExcel" runat="server" class="dropdown-item" data-toggle="modal" data-target="#exampleModalCP" title="Export" Text="Export" OnClick="BtnExcel_Click" />
+                     </div>
+                </div>
+                
+                
+    
 
                 <!-- Search and Add Button -->
                 <div class="input-group">
@@ -295,7 +306,7 @@
                 <div class="row">  
                     <div class="col-lg-12 ">  
                         <div class="table-responsive">
-                            <asp:GridView ID="GridViewProducts" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="product_id" OnRowDeleting="GridViewProducts_RowDeleting" AllowPaging="true" PageSize="10" OnPageIndexChanging="GridViewProducts_PageIndexChanging">
+                            <asp:GridView ID="GridViewProducts" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="true" AutoGenerateColumns="False" DataKeyNames="product_id" OnSelectedIndexChanged="GridViewProducts_SelectedIndexChanged" OnRowDeleting="GridViewProducts_RowDeleting" AllowPaging="true" OnPageIndexChanging="GridViewProducts_PageIndexChanging" ShowFooter="True" FooterStyle-BackColor="White">
                                 <Columns>
                         
                                     <asp:BoundField DataField="product_id" HeaderText="ID" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
@@ -351,7 +362,7 @@
 
                                     <asp:TemplateField>
 	                                    <ItemTemplate>
-                                            <asp:Button ID="btnEdit" runat="server" Text="Edit" ControlStyle-CssClass="btn btn-success" ToolTip="Edit"/>
+                                            <asp:Button ID="btnEdit" runat="server" CommandName="Select" Text="Edit" ControlStyle-CssClass="btn btn-success" ShowSelectButton="True" ToolTip="Edit"/>
                                             <asp:Button ID="btnDelete" runat="server" CommandName="Delete" Text="Delete" ControlStyle-CssClass="btn btn-danger" ShowDeleteButton="True" OnClientClick="return confirmDelete(this);"  ToolTip="Delete"/>
 	                                    </ItemTemplate>
                                     </asp:TemplateField>
@@ -503,7 +514,6 @@
 
      
     <!-- Datepicker Year Only -->
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet"/>
     

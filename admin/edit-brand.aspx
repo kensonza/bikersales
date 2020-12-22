@@ -25,7 +25,7 @@
     <!-- Begin page content -->
     <main role="main" class="flex-shrink-0">
         <div class="container">
-            <h1 class="mt-5"><span class="fas fa-user-alt">&nbsp;</span>Edit Brand</h1>
+            <h1 class="mt-5"><span class="fa fa-bicycle">&nbsp;</span>Edit Brand</h1>
 
             <fieldset>
                 <div class="form-group">
