@@ -25,6 +25,31 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js" type="text/javascript"></script>
    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css" rel="stylesheet" />
 
+    <!-- PWR JScript Login CSS -->
+    <style>
+        .overlay {
+            display: none;
+            height: 100%;
+            width: 100%;
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            background-color: rgb(0,0,0); /* Black fallback color */
+            background-color: rgba(0,0,0, 0.7); /* Black w/opacity */
+            overflow-x: hidden; /* Disable horizontal scroll */
+            transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+        }
+
+        .overlay-content {
+            position: relative;
+            top: 25%; /* 25% from the top */
+            width: 100%; /* 100% width */
+            text-align: center; /* Centered text/links */
+            margin-top: 30px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+        }
+    </style>
+
 </head>
 
 <body class="bg-gradient-primary">
@@ -46,12 +71,14 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Biker Sales</h1>
                                     </div>
-                                    <form id="form1" class="user" runat="server">
+                                    <form id="form1" class="user loginForm" runat="server">
+                                        
                                         <div class="form-group">
+                                            
                                             <asp:TextBox ID="txtUsername" class="form-control form-control-user" placeholder="Username" runat="server"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
-                                            <asp:RequiredFieldValidator ID="rfvUser" ControlToValidate="txtUsername" runat="server" Display="Dynamic" CssClass="form-control is-invalid" Text="*Username is required." BorderStyle="None" forecolor="Red"/>
+                                            <!-- <asp:RequiredFieldValidator ID="rfvUser" ControlToValidate="txtUsername" runat="server" Display="Dynamic" CssClass="form-control is-invalid" Text="*Username is required." BorderStyle="None" forecolor="Red"/> -->
                                         </div>
                                        
 
@@ -59,7 +86,7 @@
                                             <asp:TextBox ID="txtPassword" TextMode="Password" class="form-control form-control-user" placeholder="Password" runat="server"></asp:TextBox>
                                         </div>
                                         <div class="form-group">
-                                            <asp:RequiredFieldValidator ID="rfvPword" ControlToValidate="txtPassword" runat="server" Display="Dynamic" CssClass="form-control is-invalid" Text="*Password is required." BorderStyle="None" forecolor="Red"/>
+                                            <!-- <asp:RequiredFieldValidator ID="rfvPword" ControlToValidate="txtPassword" runat="server" Display="Dynamic" CssClass="form-control is-invalid" Text="*Password is required." BorderStyle="None" forecolor="Red"/> -->
                                         </div>
                                         
                                         <div class="form-group">
@@ -68,7 +95,9 @@
                                                 <label class="custom-control-label" for="customCheck">Remember Me</label>
                                             </div>
                                         </div>
-                                        <asp:Button ID="btnLogin" class="btn btn-primary btn-user btn-block" runat="server" Text="Login" OnClick="btnLogin_Click" />
+                                        
+                                        <asp:Button ID="btnLogin" class="btn btn-primary btn-user btn-block" runat="server" Text="Login" CausesValidation="true" OnClientClick="PWRLoginClicked();" OnClick="btnLogin_Click" />
+                                        
                                     </form>
                                     <hr>
                                     <div class="text-center">
@@ -83,11 +112,41 @@
                     </div>
                 </div>
 
+                <!-- pwr div login -->
+                <div id="pwrOverlay" class="overlay">
+                    <div class="overlay-content">
+                        <div style="display: inline-block; width: 200px">
+                            <div style="font-size: 20px; font-weight: bold; text-align: center; width: 100%; color: white">Logging In...</div>
+                            <img src="img/bike_login.gif" style="width: 180px" />
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
 
     </div>
+
+    <!-- pwr jscript login -->
+    <script id="LoginJavascript" type="text/javascript">
+
+        $(function () {
+            $("#dxLoginButton").dxButton({
+                type: "default",
+                height: "35px",
+                width: "100%",
+                onClick: function (data) {
+                    $("#btnLogin").click();
+                }
+            });
+        });
+
+        function PWRLoginClicked() {
+            $("#pwrOverlay").css("display", "block");
+            return true;
+        }
+     </script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -99,6 +158,7 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-</body>
+    
 
+</body>
 </html>

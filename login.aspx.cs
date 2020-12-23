@@ -84,8 +84,7 @@ public partial class _Default : System.Web.UI.Page {
             Response.Redirect("~/admin/index.aspx?tokid=" + tokid);
             //Response.Write("<script>alert('" + role + "')</script>");
         
-        }
-        else if (txtUsername.Text == uname && pw == pword && status == "active" && role == "member") {
+        } else if (txtUsername.Text == uname && pw == pword && status == "active" && role == "member") {
             
             //Set Session for Member
             Session["TokId"] = tokid;
@@ -95,6 +94,10 @@ public partial class _Default : System.Web.UI.Page {
             Response.Redirect("~/member/index.aspx?tokid=" + tokid);
         
         } else if (txtUsername.Text != uname && pw != pword) {
+
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('','Invalid Username or Password!','error')", true);
+
+        } else if(txtUsername.Text == "" && txtPassword.Text == "") {
 
             ClientScript.RegisterClientScriptBlock(this.GetType(), "K", "swal('','Invalid Username or Password!','error')", true);
 
