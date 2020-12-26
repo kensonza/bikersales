@@ -83,6 +83,7 @@ public partial class admin_Default : System.Web.UI.Page {
                        "pc.category_name AS cat_name, " +
                        "pb.brand_name AS brand_name, " +
                        "pp.product_name AS prod_name, " +
+                       "pp.product_description AS prod_desc, " +
                        "pp.model_year AS model_year, " +
                        "pp.list_price AS price, " +
                        "pp.date_created AS date_created, " +
@@ -98,6 +99,7 @@ public partial class admin_Default : System.Web.UI.Page {
         while (reader.Read()) {
             txtSKU.Text = reader["sku"].ToString();
             txtProdName.Text = reader["prod_name"].ToString();
+            txtDesc.Text = reader["prod_desc"].ToString();
             txtModelYear.Text = reader["model_year"].ToString();
             txtPrice.Text = reader["price"].ToString();
 
@@ -132,7 +134,7 @@ public partial class admin_Default : System.Web.UI.Page {
         if (FileUploadImageProduct.PostedFile.FileName == "") {
             con.Open();
 
-            String queryUpdate = "UPDATE production.products SET sku = '" + txtSKU.Text + "', product_name = '" + txtProdName.Text + "', brand_id = '" + DDLBrand.Text + "', category_id = '" + DDLCategory.Text + "', model_year = '" + txtModelYear.Text + "', list_price = '" + txtPrice.Text + "', date_modify = getdate() WHERE product_id =" + Request.QueryString["pid"];
+            String queryUpdate = "UPDATE production.products SET sku = '" + txtSKU.Text + "', product_name = '" + txtProdName.Text + "', product_description = '" + txtDesc.Text + "', brand_id = '" + DDLBrand.Text + "', category_id = '" + DDLCategory.Text + "', model_year = '" + txtModelYear.Text + "', list_price = '" + txtPrice.Text + "', date_modify = getdate() WHERE product_id =" + Request.QueryString["pid"];
             SqlCommand cmdUpdate = new SqlCommand(queryUpdate, con);
 
             int y = cmdUpdate.ExecuteNonQuery();
@@ -174,7 +176,7 @@ public partial class admin_Default : System.Web.UI.Page {
             String imageType = FileUploadImageProduct.PostedFile.ContentType;
 
             // Update product image
-            String query = "UPDATE production.products SET sku = '" + txtSKU.Text + "', product_name = '" + txtProdName.Text + "', brand_id = '" + DDLBrand.Text + "', category_id = '" + DDLCategory.Text + "', model_year = '" + txtModelYear.Text + "', list_price = '" + txtPrice.Text + "', product_image = @image, product_image_size = @size, product_image_type = @type, date_modify = getdate() WHERE product_id =" + Request.QueryString["pid"];
+            String query = "UPDATE production.products SET sku = '" + txtSKU.Text + "', product_name = '" + txtProdName.Text + "', product_description = '" + txtDesc.Text + "', brand_id = '" + DDLBrand.Text + "', category_id = '" + DDLCategory.Text + "', model_year = '" + txtModelYear.Text + "', list_price = '" + txtPrice.Text + "', product_image = @image, product_image_size = @size, product_image_type = @type, date_modify = getdate() WHERE product_id =" + Request.QueryString["pid"];
             SqlCommand cmd = new SqlCommand(query, con);
 
             cmd.Parameters.AddWithValue("@image", imageName);

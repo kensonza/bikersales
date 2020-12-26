@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="products.aspx.cs" Inherits="admin_Default" EnableEventValidation="false" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="products.aspx.cs" Inherits="admin_Default" ValidateRequest="false" EnableEventValidation="false" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +22,23 @@
 
     <!-- Bikersales CSS customize template -->
     <link href="../css/bikersales.css" rel="stylesheet">
+
+    <!-- wysiwyg JScript -->
+    <script type="text/javascript" src="../tiny_mce/tiny_mce.js"></script>
+    <script type="text/javascript" language="javascript">
+        tinyMCE.init({
+            // General options
+            mode: "textareas",
+            theme: "advanced",
+            plugins: "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups",
+
+        });
+    </script>
+    <style type="text/css">
+        .auto-style1 {
+            width: 59px;
+        }
+    </style>
 
    <!-- Sweet alert bootstrap -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js" type="text/javascript"></script>
@@ -340,6 +357,12 @@
                                         <ItemStyle CssClass="visible-md"></ItemStyle>
                                     </asp:BoundField>
 
+                                    <asp:TemplateField HeaderText="Description">
+                                        <ItemTemplate>
+                                            <asp:Label runat="server" Text='<%# Eval("prod_desc") %>' TextMode="MultiLine" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
                                     <asp:BoundField DataField="price" HeaderText="Price" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
                                         <HeaderStyle CssClass="visible-lg"></HeaderStyle>
                                         <ItemStyle CssClass="visible-lg"></ItemStyle>
@@ -443,6 +466,13 @@
                     <label for="inputProdName" class="col-sm-5 col-form-label">Product Name</label>
                         <div class="col-sm-12">
                             <asp:TextBox ID="txtProdName" class="form-control" runat="server"></asp:TextBox>
+                        </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="inputProdName" class="col-sm-5 col-form-label">Description</label>
+                        <div class="col-sm-12">
+                            <asp:TextBox ID="txtDesc" runat="server" TextMode="MultiLine" Height="327px" Width="465px"></asp:TextBox>
                         </div>
                 </div>
 

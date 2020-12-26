@@ -82,7 +82,7 @@ public partial class admin_Default : System.Web.UI.Page {
         Response.Redirect("~/login.aspx");
     }
 
-    //Search Brand   
+    //Search Products
     protected void btnSearch_Click(object sender, EventArgs e) {
 
         if (txtSearch.Text == "") {
@@ -145,6 +145,7 @@ public partial class admin_Default : System.Web.UI.Page {
                            "pc.category_name AS cat_name, " +
                            "pb.brand_name AS brand_name, " +
                            "pp.product_name AS prod_name, " +
+                           "pp.product_description AS prod_desc, " +
                            "pp.model_year AS model_year, " +
                            "pp.list_price AS price, " +
                            "pp.date_created AS date_created, " +
@@ -216,8 +217,8 @@ public partial class admin_Default : System.Web.UI.Page {
             String imageType = fileUploadImageProd.PostedFile.ContentType;
 
             // Insert Product Image
-            String query = "INSERT INTO production.products (sku, product_name, brand_id, category_id, model_year, list_price, product_image, product_image_size, product_image_type, date_created) " +
-                           "VALUES('" + txtSKU.Text + "', '" + txtProdName.Text + "', '" + DDLBrand.Text + "', '" + DDLCategory.Text + "', '" + txtModelYear.Text + "', '" + txtPrice.Text + "', @image, @size, @type, getdate())";
+            String query = "INSERT INTO production.products (sku, product_name, product_description, brand_id, category_id, model_year, list_price, product_image, product_image_size, product_image_type, date_created) " +
+                           "VALUES('" + txtSKU.Text + "', '" + txtProdName.Text + "', '" + txtDesc.Text + "', '" + DDLBrand.Text + "', '" + DDLCategory.Text + "', '" + txtModelYear.Text + "', '" + txtPrice.Text + "', @image, @size, @type, getdate())";
             SqlCommand cmd = new SqlCommand(query, con);
 
             cmd.Parameters.AddWithValue("@image", imageName);
@@ -320,11 +321,11 @@ public partial class admin_Default : System.Web.UI.Page {
 
             // Hide Header the first column in the grid (zero-based index)
             GridViewProducts.HeaderRow.Cells[2].Visible = false; // image header
-            GridViewProducts.HeaderRow.Cells[10].Visible = false; // edit/delete button header
+            GridViewProducts.HeaderRow.Cells[11].Visible = false; // edit/delete button header
 
             // Hide Footer the first column in the grid (zero-based index)
             GridViewProducts.FooterRow.Cells[2].Visible = false;
-            GridViewProducts.FooterRow.Cells[10].Visible = false;
+            GridViewProducts.FooterRow.Cells[11].Visible = false;
 
             // Loop through the rows and hide the cell in the first column
             for (int i = 0; i < GridViewProducts.Rows.Count; i++) {
@@ -332,7 +333,7 @@ public partial class admin_Default : System.Web.UI.Page {
                 // Hide Image cell
                 row.Cells[2].Visible = false;
                 // Hide Edit/Delete button cell
-                row.Cells[10].Visible = false;
+                row.Cells[11].Visible = false;
             }
 
             GridViewProducts.GridLines = GridLines.Both;

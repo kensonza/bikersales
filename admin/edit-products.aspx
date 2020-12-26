@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="edit-products.aspx.cs" Inherits="admin_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="edit-products.aspx.cs" Inherits="admin_Default" ValidateRequest="false" %>
 
 <!DOCTYPE html>
 
@@ -18,6 +18,23 @@
     <!-- Sweet alert bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js" type="text/javascript"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css" rel="stylesheet" />
+
+    <!-- wysiwyg JScript -->
+    <script type="text/javascript" src="../tiny_mce/tiny_mce.js"></script>
+    <script type="text/javascript" language="javascript">
+        tinyMCE.init({
+            // General options
+            mode: "textareas",
+            theme: "advanced",
+            plugins: "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups",
+
+        });
+    </script>
+    <style type="text/css">
+        .auto-style1 {
+            width: 59px;
+        }
+    </style>
 
 </head>
 <body class="d-flex flex-column h-100">
@@ -39,14 +56,19 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Product Name</label>
+                    <label>Description</label>
+                    <asp:TextBox ID="txtDesc" runat="server" TextMode="MultiLine" Height="327px" Width="670px"></asp:TextBox>
+                </div>
+
+                <div class="form-group">
+                    <label>Category</label>
                     <asp:DropDownList ID="DDLCategory" class="form-control" runat="server">
                         <asp:ListItem></asp:ListItem>
                     </asp:DropDownList>
                 </div>
 
                 <div class="form-group">
-                    <label>Product Name</label>
+                    <label>Brand</label>
                     <asp:DropDownList ID="DDLBrand" class="form-control" runat="server">
                         <asp:ListItem></asp:ListItem>
                     </asp:DropDownList>
