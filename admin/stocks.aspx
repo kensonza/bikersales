@@ -295,7 +295,7 @@
                                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                             Total Products
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">321</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><asp:Label ID="totalProducts" runat="server"></asp:Label></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fa fa-bicycle fa-2x text-gray-300"></i>
@@ -314,7 +314,7 @@
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             Low Stock Products
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">2</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><asp:Label ID="lowstockProd" runat="server"></asp:Label></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-box-open fa-2x text-gray-300"></i>
@@ -333,7 +333,7 @@
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             Out of Stock Products
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">6</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><asp:Label ID="outofstockProd" runat="server"></asp:Label></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-box-open fa-2x text-gray-300"></i>
@@ -352,7 +352,7 @@
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             Restock Products
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">50</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><asp:Label ID="restockProd" runat="server"></asp:Label></div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-box-open fa-2x text-gray-300"></i>

@@ -145,7 +145,7 @@ public partial class admin_Default : System.Web.UI.Page {
                            "pc.category_name AS cat_name, " +
                            "pb.brand_name AS brand_name, " +
                            "pp.product_name AS prod_name, " +
-                           "pp.product_description AS prod_desc, " +
+                           "substring(pp.product_description,1,50) + '...' AS prod_desc, " +
                            "pp.model_year AS model_year, " +
                            "pp.list_price AS price, " +
                            "pp.date_created AS date_created, " +

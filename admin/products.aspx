@@ -38,6 +38,12 @@
         .auto-style1 {
             width: 59px;
         }
+
+        <!-- label short description-->
+        .ShortDesc {
+            height:10px;
+            Overflow:hidden;
+        }
     </style>
 
    <!-- Sweet alert bootstrap -->
@@ -298,9 +304,6 @@
                      </div>
                 </div>
                 
-                
-    
-
                 <!-- Search and Add Button -->
                 <div class="input-group">
                     <asp:TextBox ID="txtSearch" class="form-control col-3" runat="server" placeholder="Seach..."></asp:TextBox>
@@ -359,7 +362,7 @@
 
                                     <asp:TemplateField HeaderText="Description">
                                         <ItemTemplate>
-                                            <asp:Label runat="server" Text='<%# Eval("prod_desc") %>' TextMode="MultiLine" />
+                                            <asp:Label runat="server" Text='<%# Eval("prod_desc") %>' TextMode="MultiLine" CssClass="ShortDesc"/>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
