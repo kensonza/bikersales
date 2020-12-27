@@ -30,7 +30,7 @@ public partial class admin_Default : System.Web.UI.Page {
 
         // Post GridVIew
         if (!IsPostBack) {
-            
+            GVBindBSeller();
         }
 
         // Total Products
@@ -117,7 +117,50 @@ public partial class admin_Default : System.Web.UI.Page {
         Response.Redirect("~/login.aspx");
     }
 
-    
+    protected void GVBindBSeller() {
+        using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["BikerSalesConnection"].ToString())) {
+            con.Open();
+            String query = "SELECT TOP 10 " +
+                           "pp.product_id as prod_id, " +
+                           "pp.sku as sku, " +
+                           "pp.product_name as prod_name, " +
+                           "pp.model_year as model_year, " +
+                           "sum(soi.quantity) as quantity, " +
+                           "sum(soi.list_price) as price " +
+                           "FROM production.products pp " +
+                           "INNER JOIN sales.order_items soi ON pp.product_id = soi.product_id " +
+                           "LEFT JOIN sales.orders so ON soi.order_id = so.order_id " +
+                           "WHERE so.order_status = 4 " +
+                           "GROUP BY " +
+                           "pp.product_id, " +
+                           "pp.sku, " +
+                           "pp.product_name, " +
+                           "pp.model_year, " +
+                           "soi.list_price " +
+                           "order by 6 desc";
+            SqlCommand cmd = new SqlCommand(query, con);
+
+            DataSet ds = new DataSet();
+            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+            sda.Fill(ds);
+
+            if (ds.Tables[0].Rows.Count > 0) {
+                GVBSeller.DataSource = ds;
+                GVBSeller.DataBind();
+            }
+        }
+    }
+
+        // Pagination New
+        protected void GVBSeller_PageIndexChanging(object sender, GridViewPageEventArgs e) {
+            GVBSeller.PageIndex = e.NewPageIndex;
+            GVBindBSeller();
+        }
+
+
+
+
+
 
 
 

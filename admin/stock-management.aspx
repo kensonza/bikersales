@@ -1,8 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="stocks.aspx.cs" Inherits="admin_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="stock-management.aspx.cs" Inherits="admin_Default" %>
 
 <!DOCTYPE html>
-<html lang="en">
 
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
     <meta charset="utf-8">
@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Biker Sales :: Stocks</title>
+    <title>Biker Sales :: Stock Management</title>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -26,6 +26,8 @@
    <!-- Sweet alert bootstrap -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.js" type="text/javascript"></script>
    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css" rel="stylesheet" />
+
+    
 
     <script>
         var object = { status: false, ele: null };
@@ -121,7 +123,7 @@
                             <a class="collapse-item" href="orders.aspx">Orders</a>
                             <h6 class="collapse-header">Inventory</h6>
                             <a class="collapse-item" href="products.aspx">Products</a>
-                            <a class="collapse-item active" href="stocks.aspx">Stocks</a>
+                            <a class="collapse-item active" href="stock-management.aspx">Stock Management</a>
                             <h6 class="collapse-header">Settings</h6>
                             <a class="collapse-item" href="customer-account.aspx">Customer Account</a>
                             <a class="collapse-item" href="staff-account.aspx">Staff Account</a>
@@ -271,7 +273,7 @@
         
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4 dropdown">
-                    <h1 class="h3 mb-0 text-gray-800"><span class="fa fa-bicycle">&nbsp;</span>Stocks</h1>
+                    <h1 class="h3 mb-0 text-gray-800"><span class="fa fa-bicycle">&nbsp;</span>Stock Management</h1>
                     <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Options">
                         <span class="fa fa-cogs"></span>
                      </button>
@@ -352,7 +354,7 @@
                                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                             Restock Products
                                         </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800"><asp:Label ID="restockProd" runat="server"></asp:Label></div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
                                     </div>
                                     <div class="col-auto">
                                         <i class="fas fa-box-open fa-2x text-gray-300"></i>
@@ -364,7 +366,129 @@
                 
                 </div>
 
-               
+                <!-- Recent Stats Alert -->
+                <div class="alert alert-danger" role="alert">
+                    Recent Stats
+                </div>              
+
+                <!-- Recent Stats Navigation -->
+                <section>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item waves-effect waves-light">
+                            <a class="nav-link active" id="new-tab" data-toggle="tab" href="#new" role="tab" aria-controls="new" aria-selected="true">Best Seller</a>
+                        </li>
+                
+                        <li class="nav-item waves-effect waves-light">
+                            <a class="nav-link" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="false">Recent P.O</a>
+                        </li>
+                
+                        <li class="nav-item waves-effect waves-light">
+                            <a class="nav-link" id="cancel-tab" data-toggle="tab" href="#cancel" role="tab" aria-controls="cancel" aria-selected="false">New Products</a>
+                        </li>
+
+                        <li class="nav-item waves-effect waves-light">
+                            <a class="nav-link" id="delivered-tab" data-toggle="tab" href="#delivered" role="tab" aria-controls="delivered" aria-selected="false">Stock Updates</a>
+                        </li>
+                     </ul>
+            
+                     <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade active show" id="new" role="tabpanel" aria-labelledby="new-tab">
+                        <br />
+
+                            <!-- table grid views (New Order) -->
+                            <div class="table-responsive">
+                                <asp:GridView ID="GVBSeller" Width="100%" CssClass="table table-striped table-bordered table-hover" runat="server" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" DataKeyNames="prod_id" AllowPaging="True" OnPageIndexChanging="GVBSeller_PageIndexChanging" ShowFooter="True" FooterStyle-BackColor="White">
+                                    <Columns>
+                        
+                                        <asp:BoundField DataField="prod_id" HeaderText="Product ID" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                            <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                        </asp:BoundField>
+
+                                        <asp:BoundField DataField="sku" HeaderText="SKU" HeaderStyle-CssClass="visible-md" ItemStyle-CssClass="visible-md">
+                                            <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                            <ItemStyle CssClass="visible-md"></ItemStyle>
+                                        </asp:BoundField>
+
+                                        <asp:BoundField DataField="prod_name" HeaderText="Product Name" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                                            <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                            <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                        </asp:BoundField>
+
+                                        <asp:BoundField DataField="model_year" HeaderText="Model Year" HeaderStyle-CssClass="visible-xs" ItemStyle-CssClass="visible-xs">
+                                            <HeaderStyle CssClass="visible-xs"></HeaderStyle>
+                                            <ItemStyle CssClass="visible-xs"></ItemStyle>
+                                        </asp:BoundField>
+
+                                        <asp:BoundField DataField="quantity" HeaderText="Quantity" HeaderStyle-CssClass="visible-md" ItemStyle-CssClass="visible-md">
+                                            <HeaderStyle CssClass="visible-md"></HeaderStyle>
+                                            <ItemStyle CssClass="visible-md"></ItemStyle>
+                                        </asp:BoundField>
+
+                                        <asp:BoundField DataField="price" HeaderText="Sales" HeaderStyle-CssClass="visible-lg" ItemStyle-CssClass="visible-lg">
+                                            <HeaderStyle CssClass="visible-lg"></HeaderStyle>
+                                            <ItemStyle CssClass="visible-lg"></ItemStyle>
+                                        </asp:BoundField>
+
+                                    </Columns>
+
+                                <FooterStyle BackColor="White"></FooterStyle>
+
+                            <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
+                        </asp:GridView>
+                        </div>
+
+                        </div>
+                
+                        <div class="tab-pane fade" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+                        <br />
+
+                            <!-- table grid views (Pending Order) -->
+                            <h1>TEST 2</h1>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="cancel" role="tabpanel" aria-labelledby="cancel-tab">
+                        <br />
+
+                            <!-- table grid views (Pending Order) -->
+                            <h1>TEST 3</h1>
+
+                         </div>
+
+                         <div class="tab-pane fade" id="delivered" role="tabpanel" aria-labelledby="delivered-tab">
+                         <br />
+
+                            <!-- table grid views (Delivered Order) -->
+                            <h1>TEST 4</h1>
+
+                          </div>
+                      </div>
+      
+                </section>
+                
+                        
+                        
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 
 
                 </div>

@@ -99,7 +99,7 @@
                             <a class="collapse-item" href="orders.aspx">Orders</a>
                             <h6 class="collapse-header">Inventory</h6>
                             <a class="collapse-item" href="products.aspx">Products</a>
-                            <a class="collapse-item" href="stocks.aspx">Stocks</a>
+                            <a class="collapse-item" href="stock-management.aspx">Stock Management</a>
                             <h6 class="collapse-header">Settings</h6>
                             <a class="collapse-item" href="customer-account.aspx">Customer Account</a>
                             <a class="collapse-item" href="staff-account.aspx">Staff Account</a>

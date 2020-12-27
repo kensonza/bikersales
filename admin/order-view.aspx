@@ -177,7 +177,7 @@
 
                             </Columns>
 
-<FooterStyle BackColor="White"></FooterStyle>
+                            <FooterStyle BackColor="White"></FooterStyle>
 
                             <PagerSettings Mode="NumericFirstLast" PageButtonCount="4" FirstPageText="First" LastPageText="Last"/>
                         </asp:GridView>
